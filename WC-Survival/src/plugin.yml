@@ -1,0 +1,9 @@
+name: ${project.artifactId}
+main: es.projectalpha.wc.survival.WCSurvival
+authors: [cadox8, Wikijito7]
+version: ${project.version}
+depend: [WC-Core]
+
+commands:
+  game:
+    description: wcc

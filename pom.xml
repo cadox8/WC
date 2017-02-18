@@ -2,13 +2,16 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>es.projectalpha</groupId>
-    <artifactId>WCC</artifactId>
-    <version>0.2</version>
+    <artifactId>WC</artifactId>
+    <version>1.7.3</version>
     <packaging>pom</packaging>
     <modules>
 
-        <!-- Modulos globales -->
-        <module>WCC-Core</module>
+        <!-- Globales -->
+        <module>WC-Core</module>
+
+        <!-- Survival-->
+        <module>WC-Survival</module>
 
     </modules>
     <properties>

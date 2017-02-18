@@ -1,4 +1,4 @@
 name: ${project.artifactId}
-main: es.projectalpha.wcc.core.WCCCore
+main: es.projectalpha.wc.core.WCCore
 version: ${project.version}
 authors: [cadox8, Wikijito7]

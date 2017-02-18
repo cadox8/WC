@@ -3,10 +3,10 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>es.projectalpha</groupId>
-        <artifactId>WCC</artifactId>
-        <version>0.2</version>
+        <artifactId>WC</artifactId>
+        <version>1.7.3</version>
     </parent>
-    <artifactId>WCC-Core</artifactId>
+    <artifactId>WC-Core</artifactId>
     <packaging>jar</packaging>
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
