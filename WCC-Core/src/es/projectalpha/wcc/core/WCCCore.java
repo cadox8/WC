@@ -35,7 +35,7 @@ public class WCCCore extends JavaPlugin{
         debugLog("Cargando comandos...");
         WCCCommands.load();
 
-        log("FEMCore v" + getDescription().getVersion() + " ha sido cargado completamente!");
+        log("WCCCore v" + getDescription().getVersion() + " ha sido cargado completamente!");
         } catch (Throwable t) {
             log("No se ha podido cargar WCCCore v" + getDescription().getVersion());
             debugLog("Causa: " + t.toString());

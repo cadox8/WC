@@ -1,4 +1,4 @@
 name: ${project.artifactId}
-main: com.cadiducho.fem.core.FEMCore
+main: es.projectalpha.wcc.core.WCCCore
 version: ${project.version}
 authors: [cadox8, Wikijito7]

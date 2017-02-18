@@ -3,6 +3,7 @@ package es.projectalpha.wcc.core;
 import es.projectalpha.wcc.core.api.WCCServer;
 import es.projectalpha.wcc.core.api.WCCUser;
 import es.projectalpha.wcc.core.cmd.AdminChatCMD;
+import es.projectalpha.wcc.core.cmd.PingCMD;
 import es.projectalpha.wcc.core.cmd.WCCCmd;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
@@ -25,6 +26,7 @@ public class WCCCommands implements TabCompleter {
 
     public static void load() {
         cmds.add(new AdminChatCMD());
+        cmds.add(new PingCMD());
         //
         ucmds = new WCCCommands();
         //

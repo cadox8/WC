@@ -47,6 +47,10 @@ public class WCCUser {
         return getPlayer().hasPermission(permission);
     }
 
+    public void sendDiv(){
+        getPlayer().sendMessage(Utils.colorize("&e====================="));
+    }
+
     public void sendMessage(String str) {
         getPlayer().sendMessage(Utils.colorize(str));
     }
