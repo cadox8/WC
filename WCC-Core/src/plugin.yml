@@ -1,0 +1,4 @@
+name: ${project.artifactId}
+main: com.cadiducho.fem.core.FEMCore
+version: ${project.version}
+authors: [cadox8, Wikijito7]
