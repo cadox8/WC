@@ -1,0 +1,9 @@
+main: Main
+name: pvpmanager
+version: 1.2.2
+authors: [Wikijito7, cadox8]
+depend: [Vault]
+
+commands: 
+    pvp:
+      description: Comando PvP
