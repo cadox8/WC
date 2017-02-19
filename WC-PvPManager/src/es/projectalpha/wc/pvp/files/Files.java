@@ -1,4 +1,4 @@
-package es.projectalpha.wc.pvp;
+package es.projectalpha.wc.pvp.files;
 
 import java.io.File;
 import java.io.IOException;
@@ -8,8 +8,8 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 public class Files {
 	
-	public static File lang = new File("plugins/PvPManager/lang", "lang.yml");
-	public static File users = new File("plugins/PvPManager/users", "users.yml");
+	public static File lang = new File("plugins/PvPManager/", "lang.yml");
+	public static File users = new File("plugins/PvPManager/", "users.yml");
 	public static YamlConfiguration clang = YamlConfiguration.loadConfiguration(lang);
 	public static YamlConfiguration user = YamlConfiguration.loadConfiguration(users);
 	private Lang slang = new Lang();
