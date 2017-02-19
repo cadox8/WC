@@ -1,10 +1,14 @@
 package es.projectalpha.wc.pvp.manager;
 
-import es.projectalpha.wc.pvp.WCPvP;
+import es.projectalpha.wc.core.utils.Cooldown;
 import es.projectalpha.wc.pvp.files.Files;
 import org.bukkit.entity.Player;
 
+
 public class Manager {
+	private Cooldown cmdc = new Cooldown(20);
+	private Cooldown pvpc = new Cooldown(25);
+	private Cooldown noobc = new Cooldown(1800);
 
 	public void setPvPState(Player p, boolean pvp){
 		if(checkStatus(p, pvp)) return;
@@ -33,36 +37,30 @@ public class Manager {
     }
 
 	public void addCooldown(Player p){
-		if(isInCooldown(p)) return;
-		
-		WCPvP.getInstance().cooldown.put(p, 20); //Tiempo en segundos
+		if(cmdc.isCoolingDown(p)) return;
+		cmdc.setOnCooldown(p);
 	}
 
 	public boolean isInCooldown(Player p){
-		return WCPvP.getInstance().cooldown.containsKey(p);
+		return cmdc.isCoolingDown(p);
 	}
 	
 	public void addPvp(Player p){
-		if(isInPvP(p)) return;
-		
-		WCPvP.getInstance().pvpCooldown.put(p, 15);
-		
+		if(pvpc.isCoolingDown(p)) return;
+		pvpc.setOnCooldown(p);
+
 	}
 	
 	public boolean isInPvP(Player p){
-		return WCPvP.getInstance().pvpCooldown.containsKey(p);
-		
+		return pvpc.isCoolingDown(p);
 	}
 	
 	public void addNewbie(Player p){
-		if(isInPvP(p)) return;
-		
-		WCPvP.getInstance().newbieCooldown.put(p, 600);
-		
+		if(noobc.isCoolingDown(p)) return;
+		noobc.setOnCooldown(p);
 	}
 	
 	public boolean isNewbie(Player p){
-		return WCPvP.getInstance().newbieCooldown.containsKey(p);
-		
+		return noobc.isCoolingDown(p);
 	}
 }
