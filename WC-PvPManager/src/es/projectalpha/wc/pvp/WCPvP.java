@@ -40,7 +40,7 @@ public class WCPvP extends JavaPlugin {
 		files.setupFiles();
 		lang.setupLang();
 
-		startCooldowns();
+		//startCooldowns();
 		registerEvents();
 		registerCommands();
 
@@ -73,7 +73,7 @@ public class WCPvP extends JavaPlugin {
 	    return vault;
     }
 
-	private void startCooldowns(){
+	/*private void startCooldowns(){
 
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable(){
 
@@ -120,7 +120,7 @@ public class WCPvP extends JavaPlugin {
                 }catch(ConcurrentModificationException e){}
             }
         },1, 20);
-	}
+	}*/
 
 	public Manager getManager(){
 	    return manager;

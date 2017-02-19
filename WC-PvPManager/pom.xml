@@ -62,5 +62,10 @@
             <artifactId>worldguard</artifactId>
             <version>LATEST</version>
         </dependency>
+        <dependency>
+            <groupId>es.projectalpha</groupId>
+            <artifactId>WC-Core</artifactId>
+            <version>1.7.4</version>
+        </dependency>
     </dependencies>
 </project>
