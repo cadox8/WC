@@ -19,7 +19,7 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 public class SafariNet extends JavaPlugin implements Listener{
 
-    private static SafariNet instance;
+    @Getter private static SafariNet instance;
 
     @Getter private Economy eco;
     private PokeEgg pe = new PokeEgg();
@@ -49,9 +49,5 @@ public class SafariNet extends JavaPlugin implements Listener{
 
     private void registerCommands(){
         WCCommands.register(new SafariCMD());
-    }
-
-    public static SafariNet getInstance(){
-        return instance;
     }
 }
