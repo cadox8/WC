@@ -69,16 +69,28 @@ public class CatchMob implements Listener{
                     if (e.getHitEntity() instanceof Monster || e.getHitEntity() instanceof Animals || e.getHitEntity() instanceof Villager) {
                         if (mu.bannedMobs().contains(e.getEntity().getType())) {
                             p.sendMessage(this.plugin.getPrefix() + ChatColor.RED + "Este mob esta prohibido");
+                            p.getInventory().addItem(pe.getPokeEgg());
                             return;
                         }
                         if (!files.getConfig().getStringList("mundosPermitidos").contains(e.getEntity().getLocation().getWorld().getName())) {
                             p.sendMessage(this.plugin.getPrefix() + ChatColor.RED + "No se puede usar en este mundo");
+                            p.getInventory().addItem(pe.getPokeEgg());
                             return;
                         }
                         if (!vu.hasEnoughMoney(p, e.getHitEntity().getType().toString())) {
                             p.sendMessage(SafariNet.getInstance().getPrefix() + ChatColor.RED + "No tienes dinero suficiente para hacer esto");
+                            p.getInventory().addItem(pe.getPokeEgg());
                             return;
                         }
+                        if (e.getEntity() instanceof Monster || e.getEntity() instanceof Animals){
+                            LivingEntity le = (LivingEntity)e.getEntity();
+                            if (le.getHealth() <= 0 || le.isDead()){
+                                p.sendMessage(SafariNet.getInstance().getPrefix() + ChatColor.RED + "No puedes capturar a un mob muerto");
+                                p.getInventory().addItem(pe.getPokeEgg());
+                                return;
+                            }
+                        }
+
                         SNMob mob = new SNMob(e.getHitEntity(), p);
                         mob.writeConfig();
                         mob.givePlayerEgg();

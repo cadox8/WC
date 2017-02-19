@@ -18,15 +18,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
-/**
- * Created by cadox on 13/12/2016.
- */
 public class SNMob {
 
     @Getter private final Player player;
     @Getter private final Entity entity;
-
-    private final SafariNet plugin = SafariNet.getInstance();
 
     private final Files files = new Files();
     private final ColorUtils color = new ColorUtils();
@@ -300,10 +295,11 @@ public class SNMob {
         boolean powered = settings.keySet().contains("powered") ? Boolean.valueOf(settings.get("powered")) : false;
         Rabbit.Type rabbitType = settings.keySet().contains("rabbitType") ? Rabbit.Type.valueOf(settings.get("rabbitType")) : Rabbit.Type.BLACK;
 
-        //TODO: Añadir nombres
         switch (EntityType.valueOf(entityTypeS)){
             case SHEEP:
                 Sheep s = player.getWorld().spawn(player.getLocation(), Sheep.class);
+                s.setCustomName(name);
+                s.setCustomNameVisible(true);
                 s.setAge(age);
                 s.setColor(color);
                 s.setMaxHealth(health);
@@ -311,47 +307,63 @@ public class SNMob {
                 break;
             case PIG:
                 Pig pig = player.getWorld().spawn(player.getLocation(), Pig.class);
+                pig.setCustomName(name);
+                pig.setCustomNameVisible(true);
                 pig.setAge(age);
                 pig.setMaxHealth(health);
                 pig.setHealth(health);
                 break;
             case OCELOT:
                 Ocelot o = player.getWorld().spawn(player.getLocation(), Ocelot.class);
+                o.setCustomName(name);
+                o.setCustomNameVisible(true);
                 o.setAge(age);
                 o.setMaxHealth(health);
                 o.setHealth(health);
                 break;
             case WOLF:
                 Wolf w = player.getWorld().spawn(player.getLocation(), Wolf.class);
+                w.setCustomName(name);
+                w.setCustomNameVisible(true);
                 w.setAge(age);
                 w.setMaxHealth(health);
                 w.setHealth(health);
                 break;
             case GUARDIAN:
                 Guardian gu = player.getWorld().spawn(player.getLocation(), Guardian.class);
+                gu.setCustomName(name);
+                gu.setCustomNameVisible(true);
                 gu.setMaxHealth(health);
                 gu.setHealth(health);
                 break;
             case COW:
                 Cow c = player.getWorld().spawn(player.getLocation(), Cow.class);
+                c.setCustomName(name);
+                c.setCustomNameVisible(true);
                 c.setAge(age);
                 c.setMaxHealth(health);
                 c.setHealth(health);
                 break;
             case MUSHROOM_COW:
                 MushroomCow mc = player.getWorld().spawn(player.getLocation(), MushroomCow.class);
+                mc.setCustomName(name);
+                mc.setCustomNameVisible(true);
                 mc.setAge(age);
                 mc.setMaxHealth(health);
                 mc.setHealth(health);
                 break;
             case CHICKEN:
                 Chicken ch = player.getWorld().spawn(player.getLocation(), Chicken.class);
+                ch.setCustomName(name);
+                ch.setCustomNameVisible(true);
                 ch.setAge(age);
                 ch.setMaxHealth(health);
                 ch.setHealth(health);
                 break;
             case VILLAGER:
                 Villager v = player.getWorld().spawn(player.getLocation(), Villager.class);
+                v.setCustomName(name);
+                v.setCustomNameVisible(true);
                 v.setAge(age);
                 v.setProfession(profession);
                 v.setMaxHealth(health);
@@ -371,6 +383,8 @@ public class SNMob {
                 break;
             case DONKEY:
                 Donkey d = player.getWorld().spawn(player.getLocation(), Donkey.class);
+                d.setCustomName(name);
+                d.setCustomNameVisible(true);
                 d.setAge(age);
                 d.setCarryingChest(hasChest);
                 d.setMaxHealth(health);
@@ -381,6 +395,8 @@ public class SNMob {
                 break;
             case MULE:
                 Mule m = player.getWorld().spawn(player.getLocation(), Mule.class);
+                m.setCustomName(name);
+                m.setCustomNameVisible(true);
                 m.setAge(age);
                 m.setCarryingChest(hasChest);
                 m.setMaxHealth(health);
@@ -391,6 +407,8 @@ public class SNMob {
                 break;
             case LLAMA:
                 Llama ll = player.getWorld().spawn(player.getLocation(), Llama.class);
+                ll.setCustomName(name);
+                ll.setCustomNameVisible(true);
                 ll.setColor(llamaColor);
                 ll.setCarryingChest(hasChest);
                 ll.setStrength(llamaStrength);
@@ -404,88 +422,120 @@ public class SNMob {
             case ZOMBIE:
                 Zombie z = player.getWorld().spawn(player.getLocation(), Zombie.class);
                 if (isBaby) z.setBaby(true);
+                z.setCustomName(name);
+                z.setCustomNameVisible(true);
                 z.setMaxHealth(health);
                 z.setHealth(health);
                 break;
             case PIG_ZOMBIE:
                 PigZombie pz = player.getWorld().spawn(player.getLocation(), PigZombie.class);
                 if (isBaby) pz.setBaby(true);
+                pz.setCustomName(name);
+                pz.setCustomNameVisible(true);
                 pz.setMaxHealth(health);
                 pz.setHealth(health);
                 break;
             case ZOMBIE_VILLAGER:
                 ZombieVillager zv = player.getWorld().spawn(player.getLocation(), ZombieVillager.class);
                 if (isBaby) zv.setBaby(true);
+                zv.setCustomName(name);
+                zv.setCustomNameVisible(true);
                 zv.setVillagerProfession(professionZombie);
                 zv.setMaxHealth(health);
                 zv.setHealth(health);
                 break;
             case ZOMBIE_HORSE:
                 ZombieHorse zh = player.getWorld().spawn(player.getLocation(), ZombieHorse.class);
+                zh.setCustomName(name);
+                zh.setCustomNameVisible(true);
                 zh.setMaxHealth(health);
                 zh.setHealth(health);
                 zh.setJumpStrength(JumpStrenght);
                 break;
             case SKELETON_HORSE:
                 SkeletonHorse sh = player.getWorld().spawn(player.getLocation(), SkeletonHorse.class);
+                sh.setCustomName(name);
+                sh.setCustomNameVisible(true);
                 sh.setMaxHealth(health);
                 sh.setHealth(health);
                 sh.setJumpStrength(JumpStrenght);
                 break;
             case SKELETON:
                 Skeleton sk = player.getWorld().spawn(player.getLocation(), Skeleton.class);
+                sk.setCustomName(name);
+                sk.setCustomNameVisible(true);
                 sk.setMaxHealth(health);
                 sk.setHealth(health);
                 break;
             case WITHER_SKELETON:
                 WitherSkeleton ws = player.getWorld().spawn(player.getLocation(), WitherSkeleton.class);
+                ws.setCustomName(name);
+                ws.setCustomNameVisible(true);
                 ws.setMaxHealth(health);
                 ws.setHealth(health);
                 break;
             case CREEPER:
                 Creeper cr = player.getWorld().spawn(player.getLocation(), Creeper.class);
+                cr.setCustomName(name);
+                cr.setCustomNameVisible(true);
                 cr.setMaxHealth(health);
                 cr.setHealth(health);
                 cr.setPowered(powered);
                 break;
             case SPIDER:
                 Spider sp = player.getWorld().spawn(player.getLocation(), Spider.class);
+                sp.setCustomName(name);
+                sp.setCustomNameVisible(true);
                 sp.setMaxHealth(health);
                 sp.setHealth(health);
                 break;
             case CAVE_SPIDER:
                 CaveSpider cs = player.getWorld().spawn(player.getLocation(), CaveSpider.class);
+                cs.setCustomName(name);
+                cs.setCustomNameVisible(true);
                 cs.setMaxHealth(health);
                 cs.setHealth(health);
                 break;
             case BLAZE:
                 Blaze b = player.getWorld().spawn(player.getLocation(), Blaze.class);
+                b.setCustomName(name);
+                b.setCustomNameVisible(true);
                 b.setMaxHealth(health);
                 b.setHealth(health);
                 break;
             case GHAST:
                 Ghast g = player.getWorld().spawn(player.getLocation(), Ghast.class);
+                g.setCustomName(name);
+                g.setCustomNameVisible(true);
                 g.setMaxHealth(health);
                 g.setHealth(health);
                 break;
             case ENDERMAN:
                 Enderman e = player.getWorld().spawn(player.getLocation(), Enderman.class);
+                e.setCustomName(name);
+                e.setCustomNameVisible(true);
                 e.setMaxHealth(health);
                 e.setHealth(health);
                 break;
             case POLAR_BEAR:
                 PolarBear pb = player.getWorld().spawn(player.getLocation(), PolarBear.class);
+                pb.setCustomName(name);
+                pb.setCustomNameVisible(true);
                 pb.setAge(age);
                 pb.setMaxHealth(health);
                 pb.setHealth(health);
                 break;
             case VINDICATOR:
                 Vindicator vi = player.getWorld().spawn(player.getLocation(), Vindicator.class);
+                vi.setCustomName(name);
+                vi.setCustomNameVisible(true);
                 vi.setMaxHealth(health);
                 vi.setHealth(health);
                 break;
             case RABBIT:
                 Rabbit r = player.getWorld().spawn(player.getLocation(), Rabbit.class);
+                r.setCustomName(name);
+                r.setCustomNameVisible(true);
                 r.setAge(age);
                 r.setMaxHealth(health);
                 r.setHealth(health);
@@ -493,6 +543,8 @@ public class SNMob {
                 break;
             case SQUID:
                 Squid sq = player.getWorld().spawn(player.getLocation(), Squid.class);
+                sq.setCustomName(name);
+                sq.setCustomNameVisible(true);
                 sq.setMaxHealth(health);
                 sq.setHealth(health);
                 break;
