@@ -4,7 +4,7 @@
     <parent>
         <groupId>es.projectalpha</groupId>
         <artifactId>WC</artifactId>
-        <version>1.7.3</version>
+        <version>LATEST</version>
     </parent>
     <artifactId>WC-Core</artifactId>
     <packaging>jar</packaging>

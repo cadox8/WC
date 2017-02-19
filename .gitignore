@@ -12,3 +12,6 @@
 hs_err_pid*
 *.iml
 WC-Survival/WC-Survival.iml
+
+# Directories
+.idea
