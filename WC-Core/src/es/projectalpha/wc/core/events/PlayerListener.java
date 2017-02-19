@@ -10,6 +10,8 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 
 public class PlayerListener implements Listener{
 
@@ -17,6 +19,16 @@ public class PlayerListener implements Listener{
 
     public PlayerListener(WCCore instance) {
         plugin = instance;
+    }
+
+    @EventHandler
+    public void onPlayerJoin(PlayerJoinEvent e){
+        e.setJoinMessage(Utils.colorize(plugin.getConfig().getString("join")).replace("{0}", e.getPlayer().getName()));
+    }
+
+    @EventHandler
+    public void onPlayerQuit(PlayerQuitEvent e){
+        e.setQuitMessage(Utils.colorize(plugin.getConfig().getString("leave")).replace("{0}", e.getPlayer().getName()));
     }
 
     /*
@@ -59,7 +71,7 @@ public class PlayerListener implements Listener{
 
         if (isBannedCMD(e.getMessage())){
             p.sendMessage("&cLos plugins de este servidor ha sido creados por los desarrolladores del mismo, es por eso por lo que no tenemos" +
-                    "ningún problema en decírtelos: &6WCCCore, SafariNet y PvPManager. &cAhora, te invito a que los crees tu mismo, puesto que el código " +
+                    "ningún problema en decírtelos: &6WCCore, SafariNet y PvPManager. &cAhora, te invito a que los crees tu mismo, puesto que el código " +
                     "de los plugins sólo lo tenemos nosotros :D");
             e.setCancelled(true);
         }

@@ -1,8 +1,9 @@
 package es.projectalpha.wc.core;
 
-import es.projectalpha.wc.core.utils.Utils;
 import es.projectalpha.wc.core.api.WCServer;
 import es.projectalpha.wc.core.events.PlayerListener;
+import es.projectalpha.wc.core.utils.Utils;
+import es.projectalpha.wc.core.utils.WCFileManager;
 import lombok.Getter;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -12,30 +13,28 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Arrays;
 
-public class WCCore extends JavaPlugin{
+public class WCCore extends JavaPlugin {
 
     @Getter private static WCCore instance;
     @Getter private static String prefix = ChatColor.GRAY + " || " + ChatColor.RED + "WCC" + ChatColor.GRAY + " || " + ChatColor.RESET;
 
-    @Getter private boolean debug = false;
-
     @Getter private Utils utils;
 
-    @Override
-    public void onEnable(){
+    @Override public void onEnable() {
         instance = this;
 
         try {
-        debugLog("Cargando Clases...");
-        register();
+            debugLog("Cargando Archivos...");
+            WCFileManager.init();
 
-        debugLog("Cargando Eventos...");
-        registerEvent();
+            debugLog("Cargando Clases y Eventos...");
+            register();
+            registerEvent();
 
-        debugLog("Cargando comandos...");
-        WCCommands.load();
+            debugLog("Cargando comandos...");
+            WCCommands.load();
 
-        log("WCCore v" + getDescription().getVersion() + " ha sido cargado completamente!");
+            log("WCCore v" + getDescription().getVersion() + " ha sido cargado completamente!");
         } catch (Throwable t) {
             log("No se ha podido cargar WCCore v" + getDescription().getVersion());
             debugLog("Causa: " + t.toString());
@@ -44,14 +43,13 @@ public class WCCore extends JavaPlugin{
     }
 
 
-
-    private void registerEvent(){
+    private void registerEvent() {
         PluginManager pluginManager = getServer().getPluginManager();
 
         pluginManager.registerEvents(new PlayerListener(instance), this);
     }
 
-    private void register(){
+    private void register() {
         utils = new Utils(this);
     }
 
@@ -66,15 +64,19 @@ public class WCCore extends JavaPlugin{
         return true;
     }
 
-    public void log(String msg){
+    public void log(String msg) {
         log(WCServer.Level.INFO, msg);
     }
 
-    public void log(WCServer.Level level, String msg){
+    public void log(WCServer.Level level, String msg) {
         WCServer.log(level, msg);
     }
 
-    public void debugLog(String msg){
+    private boolean isDebug(){
+        return getConfig().getBoolean("debug");
+    }
+
+    public void debugLog(String msg) {
         if (!isDebug()) return;
         log(WCServer.Level.DEBUG, msg);
     }
