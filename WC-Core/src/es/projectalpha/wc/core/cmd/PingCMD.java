@@ -17,7 +17,7 @@ public class PingCMD extends WCCmd {
 
     @Override
     public void run(WCUser user, String label, String[] args) {
-        if (args.length == 1 && user.hasPermission("wcc.admin")) {
+        if (args.length == 1 && user.hasPermission("wc.admin")) {
             Player target = plugin.getServer().getPlayer(args[0]);
             if (target == null) {
                 user.sendMessage("&cEl usuario está desconectado");

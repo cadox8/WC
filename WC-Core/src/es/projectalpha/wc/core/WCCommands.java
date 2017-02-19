@@ -2,9 +2,8 @@ package es.projectalpha.wc.core;
 
 import es.projectalpha.wc.core.api.WCServer;
 import es.projectalpha.wc.core.api.WCUser;
-import es.projectalpha.wc.core.cmd.AdminChatCMD;
-import es.projectalpha.wc.core.cmd.PingCMD;
-import es.projectalpha.wc.core.cmd.WCCmd;
+import es.projectalpha.wc.core.cmd.*;
+import es.projectalpha.wc.core.utils.Messages;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.*;
@@ -17,6 +16,10 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author cadox8
+ * */
+
 public class WCCommands implements TabCompleter {
 
     private static WCCore plugin = WCCore.getInstance();
@@ -27,10 +30,18 @@ public class WCCommands implements TabCompleter {
     public static void load() {
         cmds.add(new AdminChatCMD());
         cmds.add(new PingCMD());
+        cmds.add(new AyudaCMD());
+        cmds.add(new DecirCMD());
         //
         ucmds = new WCCommands();
         //
         cmds.forEach(cmd -> registrar(cmd));
+    }
+
+    public static void registrar(WCCmd... cmdList){
+        for (WCCmd cmd : cmdList){
+            registrar(cmd);
+        }
     }
 
     public static void registrar(WCCmd cmd) {
@@ -65,8 +76,7 @@ public class WCCommands implements TabCompleter {
             c.setAccessible(true);
 
             command = c.newInstance(name, WCCore.getInstance());
-        } catch (Exception e) {
-        }
+        } catch (Exception e) {}
         return command;
     }
 
@@ -88,7 +98,7 @@ public class WCCommands implements TabCompleter {
                         return;
                     }
 
-                    p.sendMessage("&cNo tienes permiso para este comando");
+                    p.sendMessagePrefix(Messages.noPerms);
                     return;
                 }
                 cmdr.run(sender, label, args);
@@ -113,7 +123,7 @@ public class WCCommands implements TabCompleter {
                     }
                     rtrn = cmdr.onTabComplete(sender, cmd, label, args, args[args.length - 1], args.length - 1);
                 } catch (Exception ex) {
-                    WCCore.getInstance().log("Fallo al autocompletar " + label);
+                    WCCore.getInstance().log(WCServer.Level.WARNING, "Fallo al autocompletar " + label);
                 }
                 break;
             }

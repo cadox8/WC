@@ -1,9 +1,10 @@
 package es.projectalpha.wc.core.events;
 
 import es.projectalpha.wc.core.WCCore;
-import es.projectalpha.wc.core.utils.Utils;
 import es.projectalpha.wc.core.api.WCServer;
 import es.projectalpha.wc.core.api.WCUser;
+import es.projectalpha.wc.core.utils.Utils;
+import org.bukkit.Sound;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -22,13 +23,30 @@ public class PlayerListener implements Listener{
      * Capturar eventos del adminchat antes de nada
      */
     @EventHandler(priority = EventPriority.LOW)
-    public void onPlayerChat(AsyncPlayerChatEvent event) {
-        WCUser user = WCServer.getUser(event.getPlayer());
+    public void onPlayerChat(AsyncPlayerChatEvent e) {
+        WCUser user = WCServer.getUser(e.getPlayer());
+        WCUser to;
 
         //AdminChat
         if (WCServer.getAdminChatMode().contains(user)) {
-            Utils.sendAdminMsg(user, event.getMessage());
-            event.setCancelled(true);
+            Utils.sendAdminMsg(user, e.getMessage());
+            e.setCancelled(true);
+        }
+
+        if (e.getMessage().contains("@")){
+            String[] args = e.getMessage().split(" ");
+            for (String s : args){
+                if (s.startsWith("@")){
+                    to = WCServer.getUser(plugin.getServer().getPlayer(s.replaceAll("@", "")));
+
+                    if (!to.isOnline()) {
+                        user.sendMessagePrefix("&cEl jugador no está conectado");
+                        e.setCancelled(true);
+                        return;
+                    }
+                    to.sendSound(Sound.ENTITY_PLAYER_LEVELUP);
+                }
+            }
         }
     }
 

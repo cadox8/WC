@@ -31,10 +31,10 @@
             <id>spigot-repo</id>
             <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
         </repository>
-        <!--<repository>
+        <repository>
             <id>wc-repo</id>
-            <url>http://cadox8.cf/repo</url>
-        </repository>-->
+            <url>http://cadox8.cf/repo/w/</url>
+        </repository>
     </repositories>
     <dependencies>
         <dependency>

@@ -6,6 +6,7 @@ import es.projectalpha.wc.core.api.WCServer;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.Sound;
 
 public class Utils {
 
@@ -23,6 +24,7 @@ public class Utils {
     public static void sendAdminMsg(WCUser user, String msg){
         WCServer.getUsers().forEach(u -> {
             u.sendMessage("&0[&2A&0] &3" + user.getName() + "&r: " + msg);
+            u.sendSound(Sound.BLOCK_ANVIL_HIT);
         });
     }
 

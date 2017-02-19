@@ -11,6 +11,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public abstract class WCCmd {
@@ -32,6 +33,10 @@ public abstract class WCCmd {
         this.aliases = aliases;
     }
 
+    public WCCmd(final String name, final String permission, final String aliase){
+        this(name, permission, Arrays.asList(aliase));
+    }
+
     public WCCmd(final String name, final String permission, final List<String> aliases) {
         this.name = name.toLowerCase();
         this.permission = permission;
@@ -47,7 +52,7 @@ public abstract class WCCmd {
     }
 
     public void run(CommandSender sender, String label, String[] args) {
-        sender.sendMessage(utils.colorize("&cEste comando no está funcional para este sender"));
+        sender.sendMessage(Utils.colorize("&cEste comando no está funcional para este sender"));
     }
 
     public List<String> onTabComplete(CommandSender sender, Command cmd, String alias, String[] args, String curs, Integer curn) {
