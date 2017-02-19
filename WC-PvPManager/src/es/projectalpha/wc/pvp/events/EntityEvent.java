@@ -1,6 +1,6 @@
 package es.projectalpha.wc.pvp.events;
 
-import es.projectalpha.wc.pvp.Main;
+import es.projectalpha.wc.pvp.WCPvP;
 import es.projectalpha.wc.pvp.files.Message;
 import es.projectalpha.wc.pvp.files.Files;
 import es.projectalpha.wc.pvp.manager.Manager;
@@ -20,12 +20,12 @@ import com.sk89q.worldguard.protection.flags.StateFlag.State;
 
 public class EntityEvent implements Listener{
 
-    private Main plugin;
+    private WCPvP plugin;
     private Manager manager;
 
     
-    public EntityEvent(Main Main, Manager manager){
-        this.plugin = Main;
+    public EntityEvent(WCPvP WCPvP, Manager manager){
+        this.plugin = WCPvP;
         this.manager = manager;
         this.plugin.getServer().getPluginManager().registerEvents(this, this.plugin);
     }

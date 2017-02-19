@@ -1,9 +1,8 @@
 package es.projectalpha.wc.pvp.manager;
 
+import es.projectalpha.wc.pvp.WCPvP;
 import es.projectalpha.wc.pvp.files.Files;
 import org.bukkit.entity.Player;
-
-import es.projectalpha.wc.pvp.Main;
 
 public class Manager {
 
@@ -36,34 +35,34 @@ public class Manager {
 	public void addCooldown(Player p){
 		if(isInCooldown(p)) return;
 		
-		Main.getInstance().cooldown.put(p, 20); //Tiempo en segundos
+		WCPvP.getInstance().cooldown.put(p, 20); //Tiempo en segundos
 	}
 
 	public boolean isInCooldown(Player p){
-		return Main.getInstance().cooldown.containsKey(p);
+		return WCPvP.getInstance().cooldown.containsKey(p);
 	}
 	
 	public void addPvp(Player p){
 		if(isInPvP(p)) return;
 		
-		Main.getInstance().pvpCooldown.put(p, 15);
+		WCPvP.getInstance().pvpCooldown.put(p, 15);
 		
 	}
 	
 	public boolean isInPvP(Player p){
-		return Main.getInstance().pvpCooldown.containsKey(p);
+		return WCPvP.getInstance().pvpCooldown.containsKey(p);
 		
 	}
 	
 	public void addNewbie(Player p){
 		if(isInPvP(p)) return;
 		
-		Main.getInstance().newbieCooldown.put(p, 600);
+		WCPvP.getInstance().newbieCooldown.put(p, 600);
 		
 	}
 	
 	public boolean isNewbie(Player p){
-		return Main.getInstance().newbieCooldown.containsKey(p);
+		return WCPvP.getInstance().newbieCooldown.containsKey(p);
 		
 	}
 }

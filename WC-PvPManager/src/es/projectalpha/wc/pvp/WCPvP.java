@@ -18,7 +18,7 @@ import java.util.ConcurrentModificationException;
 import java.util.HashMap;
 
 @SuppressWarnings("LossyEncoding")
-public class Main extends JavaPlugin {
+public class WCPvP extends JavaPlugin {
 
 	public HashMap<Player, Integer> cooldown = new HashMap<>();
     public HashMap<Player, Integer> pvpCooldown = new HashMap<>();
@@ -31,7 +31,7 @@ public class Main extends JavaPlugin {
 
 	private Economy vault;
 
-	private static Main instance;
+	private static WCPvP instance;
 
 	public void onEnable(){
 		instance = this;
@@ -126,7 +126,7 @@ public class Main extends JavaPlugin {
 	    return manager;
     }
 
-	public static Main getInstance(){
+	public static WCPvP getInstance(){
 		return instance;
 	}
 }

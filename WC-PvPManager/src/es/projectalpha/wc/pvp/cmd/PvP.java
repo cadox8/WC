@@ -1,6 +1,6 @@
 package es.projectalpha.wc.pvp.cmd;
 
-import es.projectalpha.wc.pvp.Main;
+import es.projectalpha.wc.pvp.WCPvP;
 import es.projectalpha.wc.pvp.files.Message;
 import es.projectalpha.wc.pvp.files.Files;
 import es.projectalpha.wc.pvp.manager.Manager;
@@ -17,7 +17,7 @@ import java.io.IOException;
 public class PvP implements CommandExecutor {
 
 	private Manager manager = new Manager();
-	private Main main;
+	private WCPvP WCPvP;
 	
 	private void save(){
 		
@@ -113,7 +113,7 @@ public class PvP implements CommandExecutor {
 					
 					if(args[0].equalsIgnoreCase("disable")){
 						if(manager.isNewbie(p)){
-							Main.getInstance().pvpCooldown.remove(p);
+							WCPvP.getInstance().pvpCooldown.remove(p);
 							p.sendMessage(Message.prefix + ChatColor.GRAY + " Has desactivado tu protecci�n de novato, ahora puedes ser golpeado por otros jugadores");
 						}else{
 							p.sendMessage(Message.prefix + ChatColor.DARK_RED + " Ya has desactivado tu protecci�n de novato, no puedes hacerlo de nuevo.");

@@ -1,6 +1,6 @@
-main: Main
-name: pvpmanager
-version: 1.2.2
+main: ${project.artifactId}
+name: es.projectalpha.wc.pvp.WCPvP
+version: ${project.version}
 authors: [Wikijito7, cadox8]
 depend: [Vault]
 

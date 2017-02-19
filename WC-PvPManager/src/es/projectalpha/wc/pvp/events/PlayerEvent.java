@@ -1,6 +1,6 @@
 package es.projectalpha.wc.pvp.events;
 
-import es.projectalpha.wc.pvp.Main;
+import es.projectalpha.wc.pvp.WCPvP;
 import es.projectalpha.wc.pvp.files.Message;
 import es.projectalpha.wc.pvp.files.Files;
 import es.projectalpha.wc.pvp.manager.Manager;
@@ -23,10 +23,10 @@ public class PlayerEvent implements Listener {
 
 	private Manager manager;
 	private VaultUtils vu = new VaultUtils();
-	private Main plugin;
+	private WCPvP plugin;
 
-	public PlayerEvent(Main Main, Manager manager){
-        this.plugin = Main;
+	public PlayerEvent(WCPvP WCPvP, Manager manager){
+        this.plugin = WCPvP;
         this.manager = manager;
         this.plugin.getServer().getPluginManager().registerEvents(this, this.plugin);
     }
@@ -67,8 +67,8 @@ public class PlayerEvent implements Listener {
 
             	e.setKeepInventory(true);
             	
-            	Main.getInstance().pvpCooldown.remove(p);
-            	Main.getInstance().pvpCooldown.remove(pl);
+            	WCPvP.getInstance().pvpCooldown.remove(p);
+            	WCPvP.getInstance().pvpCooldown.remove(pl);
             	
             	
             	
