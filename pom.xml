@@ -13,7 +13,6 @@
         <!-- Survival-->
         <module>WC-Survival</module>
         <module>WC-SafariNet</module>
-        <module>WC-PvPManager</module>
 
     </modules>
     <properties>
