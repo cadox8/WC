@@ -3,11 +3,14 @@ package es.projectalpha.wc.core.api;
 import es.projectalpha.wc.core.WCCore;
 import es.projectalpha.wc.core.utils.ReflectionAPI;
 import es.projectalpha.wc.core.utils.Utils;
+import lombok.Data;
 import lombok.Getter;
+import lombok.Setter;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
+import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -24,6 +27,8 @@ public class WCUser {
 
     @Getter private UUID uuid;
 
+    @Getter @Setter private UserData userData;
+
     public WCUser(OfflinePlayer p) {
         this(p.getUniqueId());
     }
@@ -35,7 +40,6 @@ public class WCUser {
     public OfflinePlayer getOfflinePlayer() {
         return plugin.getServer().getOfflinePlayer(uuid);
     }
-
     public Player getPlayer() {
         return plugin.getServer().getPlayer(uuid);
     }
@@ -47,7 +51,6 @@ public class WCUser {
     public boolean isOnline() {
         return getOfflinePlayer().isOnline();
     }
-
     public boolean hasPermission(String permission){
         return getPlayer().hasPermission(permission);
     }
@@ -151,5 +154,10 @@ public class WCUser {
         message.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, command));
         message.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(hover).create()));
         getPlayer().spigot().sendMessage(message);
+    }
+
+    @Data
+    public static class UserData {
+        Location lastLocation = null;
     }
 }

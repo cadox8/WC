@@ -78,7 +78,7 @@ public class WCSurvival extends JavaPlugin {
 
     private void registerCommands() {
         WCCommands.register(new SurvivalCMD(), new Cash2xp(), new XP2cash(),
-                new XPbalance(), new Forcespawn(), new Secreto(), new Casino(),
+                new XPbalance(), new Secreto(), new Casino(),
                 new Bypass(), new Balfichas(), new VolarCMD(), new Lluvia());
     }
 

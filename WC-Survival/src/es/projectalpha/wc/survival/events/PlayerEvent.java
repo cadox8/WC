@@ -39,14 +39,6 @@ public class PlayerEvent implements Listener{
 
         fichas.createPlayer();
 
-        if (files.getConfig().getString("Forcespawn").equalsIgnoreCase("NONE")) {
-            if (p.hasPermission("wc.admin")) {
-                WCSurvival.getPlayer(p).sendMessagePrefix("&7El spawn no está definido. Puedes hacerlo poniendo /forcespawn set en las coordenadas que quieras");
-            }
-        } else {
-            p.teleport(Utils.stringToLocation(files.getConfig().getString("Forcespawn")));
-        }
-
         if(p.hasPermission("volar.bypass")){
             files.getUsers().set("Users." + p.getName() + ".bypass", false);
             files.saveFiles();

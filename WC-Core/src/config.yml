@@ -1,3 +1,5 @@
 debug: false
 join: '&7[&2+&7] &6{0}'
 leave: '&7[&c-&7] &6{0}'
+spawn: NONE
+allowUnsafeEnchantment: true

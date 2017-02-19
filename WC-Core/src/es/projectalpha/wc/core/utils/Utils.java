@@ -1,8 +1,8 @@
 package es.projectalpha.wc.core.utils;
 
 import es.projectalpha.wc.core.WCCore;
-import es.projectalpha.wc.core.api.WCUser;
 import es.projectalpha.wc.core.api.WCServer;
+import es.projectalpha.wc.core.api.WCUser;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -10,7 +10,7 @@ import org.bukkit.Sound;
 
 public class Utils {
 
-    private WCCore plugin;
+    private static WCCore plugin;
 
     public Utils(WCCore instance) {
         plugin = instance;
@@ -22,9 +22,19 @@ public class Utils {
     }
 
     public static void sendAdminMsg(WCUser user, String msg){
-        WCServer.getUsers().forEach(u -> {
-            u.sendMessage("&0[&2A&0] &3" + user.getName() + "&r: " + msg);
-            u.sendSound(Sound.BLOCK_ANVIL_HIT);
+        plugin.getServer().getOnlinePlayers().forEach(p -> {
+            WCUser u = WCServer.getUser(p);
+            if (u.hasPermission("wc.admin")) {
+                u.sendMessage("&0[&2A&0] &3" + user.getName() + "&r: " + msg);
+                u.sendSound(Sound.BLOCK_ANVIL_HIT);
+            }
+        });
+    }
+
+    public static void broadcastMsg(String msg) {
+        plugin.getServer().getOnlinePlayers().forEach(p -> {
+            WCUser u = WCServer.getUser(p);
+            u.sendMessagePrefix(msg);
         });
     }
 
