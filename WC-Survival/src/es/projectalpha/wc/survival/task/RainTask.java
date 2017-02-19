@@ -1,7 +1,6 @@
 package es.projectalpha.wc.survival.task;
 
 import es.projectalpha.wc.survival.WCSurvival;
-import es.projectalpha.wc.survival.utils.Utils;
 import lombok.Getter;
 import org.bukkit.Location;
 import org.bukkit.Material;

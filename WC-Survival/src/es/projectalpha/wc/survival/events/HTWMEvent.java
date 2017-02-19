@@ -21,7 +21,7 @@ public class HTWMEvent implements Listener{
             System.out.println("Si");
 
             System.out.println(h.getLocation().distance(p.getLocation()));
-            if (h.getLocation().distance(p.getLocation()) >= 300) { //TODO: Mirar
+            if (h.getLocation().distance(p.getLocation()) >= 300) {
                 System.out.println("Si");
                 if (p.isInsideVehicle()) h.eject();
                 Bukkit.getScheduler().runTaskLater(this.plugin, () -> {

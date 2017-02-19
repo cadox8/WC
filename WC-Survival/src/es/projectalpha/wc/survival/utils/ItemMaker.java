@@ -16,6 +16,8 @@ import java.util.List;
  */
 public class ItemMaker {
 
+    //TODO: Cambiar esta clase, pero da pereza ahora
+
     private ItemStack itemStack;
 
     @Getter public EnchantedBookMaker enchantedBookMaker;

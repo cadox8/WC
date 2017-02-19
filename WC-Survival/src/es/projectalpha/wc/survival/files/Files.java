@@ -48,10 +48,7 @@ public class Files {
             config.set("Experiencia.vender", 1);
             config.set("Experiencia.comprar", 1);
 
-            config.set("Forcespawn.x", "NONE");
-            config.set("Forcespawn.y", "NONE");
-            config.set("Forcespawn.z", "NONE");
-            config.set("Forcespawn.mundo", "NONE");
+            config.set("Forcespawn", "NONE");
 
             config.set("IronElevators.minElevation", 3);
             config.set("IronElevators.maxElevation", 14);

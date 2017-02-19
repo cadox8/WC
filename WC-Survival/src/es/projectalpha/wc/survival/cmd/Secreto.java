@@ -1,33 +1,31 @@
 package es.projectalpha.wc.survival.cmd;
 
+import es.projectalpha.wc.core.api.WCUser;
+import es.projectalpha.wc.core.cmd.WCCmd;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 
 import java.util.Random;
 
-public class Secreto implements CommandExecutor{
+public class Secreto extends WCCmd{
 
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        Player p = (Player) sender;
+    public Secreto(){
+        super("secreto", "", "");
+    }
 
-        if (cmd.getName().equalsIgnoreCase("secreto")) {
-            if (args.length == 0) {
-                p.sendMessage(ChatColor.RED + "Error 403: " + ChatColor.DARK_RED + "Aquí no hay nada que ver, a no seeeeer...");
-                p.playSound(p.getLocation(), Sound.values()[new Random().nextInt(Sound.values().length)], 1f, 1f);
+    @Override
+    public void run(WCUser user, String label, String[] args){
+        if (args.length == 0) {
+            user.sendMessage("&cError 403: " + "&4Aquí no hay nada que ver, a no seeeeer...");
+            user.getPlayer().playSound(user.getPlayer().getLocation(), Sound.values()[new Random().nextInt(Sound.values().length)], 1f, 1f);
+        }
+        if (args.length == 1){
+            if (args[0].equalsIgnoreCase("cadox8")){
+                user.sendMessage(ChatColor.LIGHT_PURPLE + "Os vigilamos desde las sombras...");
             }
-            if (args.length == 1){
-                if (args[0].equalsIgnoreCase("cadox8")){
-                    p.sendMessage(ChatColor.LIGHT_PURPLE + "Os vigilamos desde las sombras...");
-                }
-                if (args[0].equalsIgnoreCase("link")){
-                    p.sendMessage(ChatColor.AQUA + "Anda :D " + ChatColor.YELLOW + "https://gyazo.com/ca48ea193feb84fcaeae383df774c2fe http://pastebin.com/tCtR64M0");
-                }
+            if (args[0].equalsIgnoreCase("link")){
+                user.sendMessage(ChatColor.AQUA + "Anda :D " + "&ehttps://gyazo.com/ca48ea193feb84fcaeae383df774c2fe &chttp://pastebin.com/tCtR64M0");
             }
         }
-        return false;
     }
 }

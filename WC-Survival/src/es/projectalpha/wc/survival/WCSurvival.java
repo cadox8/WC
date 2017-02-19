@@ -1,19 +1,23 @@
 package es.projectalpha.wc.survival;
 
-import es.projectalpha.wc.survival.events.FichasShopEvent;
-import es.projectalpha.wc.survival.events.Sit;
-import es.projectalpha.wc.survival.files.Files;
+import es.projectalpha.wc.core.WCCommands;
+import es.projectalpha.wc.core.WCCore;
+import es.projectalpha.wc.core.api.WCServer;
+import es.projectalpha.wc.core.api.WCUser;
+import es.projectalpha.wc.core.utils.Utils;
 import es.projectalpha.wc.survival.cmd.*;
+import es.projectalpha.wc.survival.events.FichasShopEvent;
 import es.projectalpha.wc.survival.events.IronElevators;
 import es.projectalpha.wc.survival.events.PlayerEvent;
-import es.projectalpha.wc.survival.task.FlyLimit;
-import es.projectalpha.wc.survival.task.ItemsTask;
-import es.projectalpha.wc.survival.utils.Utils;
+import es.projectalpha.wc.survival.events.Sit;
+import es.projectalpha.wc.survival.files.Files;
+import es.projectalpha.wc.survival.task.MainRun;
+import es.projectalpha.wc.survival.utils.Info;
 import lombok.Getter;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -22,12 +26,11 @@ import java.util.ArrayList;
 
 public class WCSurvival extends JavaPlugin {
 
-    @Getter private static String prefix = ChatColor.GRAY + " || " + ChatColor.YELLOW + "WCC" + ChatColor.GRAY + " || ";
-
     @Getter private static WCSurvival instance;
 
     @Getter private Economy eco;
-    @Getter private Files files = new Files();
+    @Getter private Files files;
+    @Getter private Info info;
 
     @Getter private ArrayList<Player> creando = new ArrayList<>();
     @Getter private ArrayList<Location> casinos = new ArrayList<>();
@@ -35,21 +38,21 @@ public class WCSurvival extends JavaPlugin {
 
     public void onEnable() {
         instance = this;
-        files.setupFiles();
+        register();
 
         RegisteredServiceProvider<Economy> economyProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.economy.Economy.class);
         if (economyProvider != null) {
             eco = economyProvider.getProvider();
         }
 
+        files.setupFiles();
         registerCommands();
         registerEvents();
         loadCasinos();
+        info.init();
 
-        new ItemsTask().runTaskTimer(this, 0, 20);
-        new FlyLimit().runTaskTimer(this, 0, 20);
-        System.out.println("Se ha activado el plugin");
-
+        new MainRun().runTaskTimer(this, 0, 20);
+        WCCore.getInstance().log(WCServer.Level.INFO, "Survival activado");
     }
 
     private void registerEvents() {
@@ -63,21 +66,20 @@ public class WCSurvival extends JavaPlugin {
         //new CasinoInvEvent(this);
     }
 
+    private void register(){
+        files = new Files();
+        info = new Info();
+    }
+
     public void onDisable() {
-        System.out.println("Se ha desactivado el plugin");
+        WCCore.getInstance().log(WCServer.Level.INFO, "Survival desactivado");
         Bukkit.getScheduler().cancelTasks(this);
     }
 
     private void registerCommands() {
-        getCommand("worldcrafteroscore").setExecutor(new WorldCrafterosCoreCMD());
-        getCommand("cash2exp").setExecutor(new cash2xp());
-        getCommand("exp2cash").setExecutor(new xp2cash());
-        getCommand("expbalance").setExecutor(new xpbalance());
-        getCommand("forcespawn").setExecutor(new Forcespawn());
-        getCommand("secreto").setExecutor(new Secreto());
-        getCommand("casino").setExecutor(new Casino());
-        getCommand("bypass").setExecutor(new Bypass());
-        getCommand("balfichas").setExecutor(new Balfichas());
+        WCCommands.registrar(new SurvivalCMD(), new Cash2xp(), new XP2cash(),
+                new XPbalance(), new Forcespawn(), new Secreto(), new Casino(),
+                new Bypass(), new Balfichas(), new VolarCMD(), new Lluvia());
     }
 
     public void loadCasinos() {
@@ -85,7 +87,11 @@ public class WCSurvival extends JavaPlugin {
         for (int x = 0; x < getFiles().getCurrentID(); x++) {
             casinos.add(Utils.stringToLocation(getFiles().getConfig().getString("casino.id_" + x)));
         }
-        Bukkit.getConsoleSender().sendMessage(prefix + "Casinos cargados: " + casinos.size());
+        WCCore.getInstance().debugLog("Casinos cargados: " + casinos.size());
+    }
+
+    public static WCUser getPlayer(OfflinePlayer player){
+        return WCServer.getUser(player);
     }
 
     public enum RainType {
