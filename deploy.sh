@@ -9,10 +9,8 @@ else
     # Solo deploy al server si el branch es el deseado
     if [ "$TRAVIS_BRANCH" == "$BRANCH_A_DEPLOY" ]; then
         for file in *.jar; do
-            for i in 1 2 3; do
-                echo Subiendo $file al servidor $i [185.116.215.111]
-                curl --ftp-create-dirs -T $file -u $FTP_USER:$FTP_PASSWORD ftp://185.116.215.111/$file
-            done
+            echo Subiendo $file al servidor [185.116.215.111]
+            curl --ftp-create-dirs -T $file -u $FTP_USER:$FTP_PASSWORD ftp://185.116.215.111/$file
         done
         echo "Todos los archivos han sido subidos"
     else
