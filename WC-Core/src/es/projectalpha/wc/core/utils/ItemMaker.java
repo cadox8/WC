@@ -12,48 +12,48 @@ import org.bukkit.potion.PotionType;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ItemBuilder {
+public class ItemMaker {
 
     private final ItemStack itemStack;
 
-    public ItemBuilder() {
+    public ItemMaker() {
         itemStack = new ItemStack(Material.AIR);
     }
 
-    public ItemBuilder(Material type) {
+    public ItemMaker(Material type) {
         itemStack = new ItemStack(type);
     }
 
-    public ItemBuilder setType(Material type) {
+    public ItemMaker setType(Material type) {
         itemStack.setType(type);
         return this;
     }
 
-    public ItemBuilder setAmount(int amount) {
+    public ItemMaker setAmount(int amount) {
         this.itemStack.setAmount(amount);
         return this;
     }
 
-    public ItemBuilder setDisplayName(String displayName) {
+    public ItemMaker setDisplayName(String displayName) {
         ItemMeta itemMeta = this.itemStack.getItemMeta();
         itemMeta.setDisplayName(Utils.colorize(displayName));
         this.itemStack.setItemMeta(itemMeta);
         return this;
     }
 
-    public ItemBuilder setDurability(short durability){
+    public ItemMaker setDurability(short durability){
         this.itemStack.setDurability(durability);
         return this;
     }
 
-    public ItemBuilder setLores(List<String> lores) {
+    public ItemMaker setLores(List<String> lores) {
         ItemMeta itemMeta = this.itemStack.getItemMeta();
         itemMeta.setLore(lores);
         this.itemStack.setItemMeta(itemMeta);
         return this;
     }
 
-    public ItemBuilder setLores(String... lores) {
+    public ItemMaker setLores(String... lores) {
         ItemMeta itemMeta = this.itemStack.getItemMeta();
         List<String> loresList = new ArrayList<>();
         for (String lore : lores) {
@@ -64,38 +64,38 @@ public class ItemBuilder {
         return this;
     }
 
-    public ItemBuilder addItemFlag(ItemFlag itemFlag) {
+    public ItemMaker addItemFlag(ItemFlag itemFlag) {
         ItemMeta itemMeta = this.itemStack.getItemMeta();
         itemMeta.addItemFlags(itemFlag);
         this.itemStack.setItemMeta(itemMeta);
         return this;
     }
 
-    public ItemBuilder addItemFlag(ItemFlag... itemFlags) {
+    public ItemMaker addItemFlag(ItemFlag... itemFlags) {
         ItemMeta itemMeta = this.itemStack.getItemMeta();
         itemMeta.addItemFlags(itemFlags);
         this.itemStack.setItemMeta(itemMeta);
         return this;
     }
 
-    public ItemBuilder addEnchant(Enchantment ench, int level, boolean ignoreLevelRestriction) {
+    public ItemMaker addEnchant(Enchantment ench, int level, boolean ignoreLevelRestriction) {
         ItemMeta itemMeta = this.itemStack.getItemMeta();
         itemMeta.addEnchant(ench, level, ignoreLevelRestriction);
         this.itemStack.setItemMeta(itemMeta);
         return this;
     }
 
-    public ItemBuilder addUnsafeEnchant(Enchantment ench, int level) {
+    public ItemMaker addUnsafeEnchant(Enchantment ench, int level) {
         this.itemStack.addUnsafeEnchantment(ench, level);
         return this;
     }
 
-    public ItemBuilder addPotionType(PotionType type, int time){
+    public ItemMaker addPotionType(PotionType type, int time){
         addPotionType(type, time, 0);
         return this;
     }
 
-    public ItemBuilder addPotionType(PotionType type, int time, int amplifier) {
+    public ItemMaker addPotionType(PotionType type, int time, int amplifier) {
         PotionMeta itemMeta = (PotionMeta) this.itemStack.getItemMeta();
         itemMeta.setMainEffect(type.getEffectType());
 
@@ -105,7 +105,7 @@ public class ItemBuilder {
         return this;
     }
 
-    public ItemBuilder setUnbreakable(){
+    public ItemMaker setUnbreakable(){
         ItemMeta meta = this.itemStack.getItemMeta();
         meta.spigot().setUnbreakable(true);
         meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);

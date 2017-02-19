@@ -35,16 +35,16 @@ public class WCCommands implements TabCompleter {
         //
         ucmds = new WCCommands();
         //
-        cmds.forEach(cmd -> registrar(cmd));
+        cmds.forEach(cmd -> register(cmd));
     }
 
-    public static void registrar(WCCmd... cmdList){
+    public static void register(WCCmd... cmdList){
         for (WCCmd cmd : cmdList){
-            registrar(cmd);
+            register(cmd);
         }
     }
 
-    public static void registrar(WCCmd cmd) {
+    public static void register(WCCmd cmd) {
         CommandMap commandMap = getCommandMap();
         PluginCommand command = getCmd(cmd.getName());
         if (command.isRegistered()) {

@@ -1,0 +1,9 @@
+name: ${project.artifactId}
+main: SafariNet
+version: ${project.version}
+authors: [cadox8, Wikijito7]
+depend: [Vault]
+
+commands:
+    game:
+      description: Comando SafariNet

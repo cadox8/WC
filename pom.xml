@@ -12,6 +12,7 @@
 
         <!-- Survival-->
         <module>WC-Survival</module>
+        <module>WC-SafariNet</module>
 
     </modules>
     <properties>
