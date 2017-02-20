@@ -13,7 +13,11 @@ import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.Sound;
+import org.bukkit.World;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerTeleportEvent;
+import org.bukkit.inventory.Inventory;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -26,7 +30,6 @@ public class WCUser {
     private WCCore plugin = WCCore.getInstance();
 
     @Getter private UUID uuid;
-
     @Getter @Setter private UserData userData;
 
     public WCUser(OfflinePlayer p) {
@@ -43,11 +46,14 @@ public class WCUser {
     public Player getPlayer() {
         return plugin.getServer().getPlayer(uuid);
     }
+    //
 
+    /*
+    * Getters/Setters
+    */
     public String getName() {
         return getOfflinePlayer().getName();
     }
-
     public boolean isOnline() {
         return getOfflinePlayer().isOnline();
     }
@@ -55,6 +61,9 @@ public class WCUser {
         return getPlayer().hasPermission(permission);
     }
 
+    /*
+    * Methods
+    */
     public void sendDiv(){
         getPlayer().sendMessage(Utils.colorize("&e====================="));
     }
@@ -62,13 +71,22 @@ public class WCUser {
     public void sendMessage(String str) {
         getPlayer().sendMessage(Utils.colorize(str));
     }
-
     public void sendMessagePrefix(String str) {
         getPlayer().sendMessage(WCCore.getPrefix() + Utils.colorize(str));
     }
 
     public void sendSound(Sound sound){
         getPlayer().playSound(getPlayer().getLocation(), sound, 1, 1);
+    }
+
+    public void teleport(Location location){
+        getPlayer().teleport(location, PlayerTeleportEvent.TeleportCause.COMMAND);
+    }
+    public void teleport(Entity entity){
+        getPlayer().teleport(entity, PlayerTeleportEvent.TeleportCause.COMMAND);
+    }
+    public void teleport(World world){
+        teleport(world.getSpawnLocation());
     }
 
     public void toggleAdminChat() {
@@ -140,7 +158,7 @@ public class WCUser {
     }
 
     /*
-    * JSON
+    * Json
     */
     public void jsonURL(String text, String hover, String url){
         TextComponent message = new TextComponent(text);
@@ -156,8 +174,12 @@ public class WCUser {
         getPlayer().spigot().sendMessage(message);
     }
 
+    /*
+    * UserData (Cremita para nosotros)
+    */
     @Data
     public static class UserData {
         Location lastLocation = null;
+        Inventory inventory = null;
     }
 }

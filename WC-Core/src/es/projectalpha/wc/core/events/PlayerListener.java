@@ -5,6 +5,7 @@ import es.projectalpha.wc.core.api.WCServer;
 import es.projectalpha.wc.core.api.WCUser;
 import es.projectalpha.wc.core.utils.Utils;
 import org.bukkit.Sound;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -20,6 +21,11 @@ public class PlayerListener implements Listener{
 
     @EventHandler(priority = EventPriority.LOW)
     public void onPlayerJoin(PlayerJoinEvent e){
+        Player p = e.getPlayer();
+        WCUser user = WCServer.getUser(p);
+
+        Utils.sendGeoIPMsg(user, Utils.getCountry(user));
+
         if (plugin.getConfig().getString("spawn").equalsIgnoreCase("NONE")) {
             if (e.getPlayer().hasPermission("wc.admin")) {
                 WCServer.getUser(e.getPlayer()).sendMessagePrefix("&7El spawn no está definido. Puedes hacerlo poniendo /forcespawn set en las coordenadas que quieras");
@@ -91,7 +97,6 @@ public class PlayerListener implements Listener{
 
     private boolean isBannedCMD(String cmd){
         switch (cmd){
-            case "help":
             case "bukkit:help":
             case "bukkit:?":
             case "?":

@@ -14,7 +14,7 @@ public class SpawnCMD extends WCCmd {
     public void run(WCUser user, String label, String[] args){
         if (args.length == 0) {
             if (plugin.getConfig().getString("spawn").equalsIgnoreCase("NONE")) return;
-            user.getPlayer().teleport(Utils.stringToLocation(plugin.getConfig().getString("spawn")));
+            user.teleport(Utils.stringToLocation(plugin.getConfig().getString("spawn")));
         }
         if (args.length == 1) {
             if (args[0].equalsIgnoreCase("set")) {
