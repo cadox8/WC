@@ -1,5 +1,6 @@
 package es.projectalpha.wc.survival.events;
 
+import es.projectalpha.wc.core.api.WCServer;
 import es.projectalpha.wc.core.api.WCUser;
 import es.projectalpha.wc.core.utils.Utils;
 import es.projectalpha.wc.survival.FichasMenu;
@@ -8,17 +9,20 @@ import es.projectalpha.wc.survival.WCSurvival;
 import es.projectalpha.wc.survival.files.Files;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.EquipmentSlot;
+import org.bukkit.util.Vector;
 
 public class PlayerEvent implements Listener{
 
@@ -31,8 +35,7 @@ public class PlayerEvent implements Listener{
 
     private Files files = WCSurvival.getInstance().getFiles();
 
-
-    @EventHandler(priority = EventPriority.LOWEST)
+    @EventHandler
     public void onJoin(PlayerJoinEvent e){
         Player p = e.getPlayer();
         WCFichas fichas = new WCFichas(p);
@@ -87,6 +90,19 @@ public class PlayerEvent implements Listener{
             plugin.getFiles().saveFiles();
             p.sendMessagePrefix(ChatColor.GREEN + "Máquina añadida " + plugin.getFiles().getCurrentID());
             plugin.getCasinos().add(e.getBlock().getLocation());
+        }
+    }
+
+    @EventHandler
+    public void onMove(PlayerMoveEvent e){
+        Player p = e.getPlayer();
+        Block launch = p.getWorld().getBlockAt(p.getLocation()).getRelative(BlockFace.DOWN);
+        Block base = launch.getRelative(BlockFace.DOWN);
+
+        if(launch.getType() == Material.SPONGE && base.getType() == Material.DIAMOND_BLOCK){
+            p.setVelocity(p.getLocation().getDirection().multiply(3));
+            p.setVelocity(new Vector(p.getVelocity().getX(), 1.0D, p.getVelocity().getZ()));
+            WCServer.getUser(p).sendSound(Sound.ENTITY_IRONGOLEM_ATTACK);
         }
     }
 }
