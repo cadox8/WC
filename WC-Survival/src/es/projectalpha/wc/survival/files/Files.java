@@ -48,8 +48,6 @@ public class Files {
             config.set("Experiencia.vender", 1);
             config.set("Experiencia.comprar", 1);
 
-            config.set("Forcespawn", "NONE");
-
             config.set("IronElevators.minElevation", 3);
             config.set("IronElevators.maxElevation", 14);
             config.set("IronElevators.elevatorMaterial", "IRON_BLOCK");

@@ -64,6 +64,7 @@ public class WCCore extends JavaPlugin {
         return true;
     }
 
+    //Log
     public void log(String msg) {
         log(WCServer.Level.INFO, msg);
     }

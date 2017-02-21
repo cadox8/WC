@@ -5,13 +5,11 @@ import es.projectalpha.wc.core.api.WCServer;
 import es.projectalpha.wc.core.api.WCUser;
 import es.projectalpha.wc.core.utils.Utils;
 import org.bukkit.Sound;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
-import org.bukkit.event.player.PlayerCommandPreprocessEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.*;
 
 public class PlayerListener implements Listener{
 
@@ -21,14 +19,34 @@ public class PlayerListener implements Listener{
         plugin = instance;
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOW)
     public void onPlayerJoin(PlayerJoinEvent e){
+        Player p = e.getPlayer();
+        WCUser user = WCServer.getUser(p);
+
+        Utils.sendGeoIPMsg(user, Utils.getCountry(user));
+
+        if (plugin.getConfig().getString("spawn").equalsIgnoreCase("NONE")) {
+            if (e.getPlayer().hasPermission("wc.admin")) {
+                WCServer.getUser(e.getPlayer()).sendMessagePrefix("&7El spawn no está definido. Puedes hacerlo poniendo /forcespawn set en las coordenadas que quieras");
+            }
+        } else {
+            e.getPlayer().teleport(Utils.stringToLocation(plugin.getConfig().getString("spawn")));
+        }
         e.setJoinMessage(Utils.colorize(plugin.getConfig().getString("join")).replace("{0}", e.getPlayer().getName()));
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOW)
     public void onPlayerQuit(PlayerQuitEvent e){
         e.setQuitMessage(Utils.colorize(plugin.getConfig().getString("leave")).replace("{0}", e.getPlayer().getName()));
+    }
+
+    /*
+    * Obtener el último punto de TP
+    */
+    @EventHandler(priority = EventPriority.LOW)
+    public void onTeleport(PlayerTeleportEvent e){
+        WCServer.getUser(e.getPlayer()).getUserData().setLastLocation(e.getFrom());
     }
 
     /*
@@ -79,7 +97,6 @@ public class PlayerListener implements Listener{
 
     private boolean isBannedCMD(String cmd){
         switch (cmd){
-            case "help":
             case "bukkit:help":
             case "bukkit:?":
             case "?":

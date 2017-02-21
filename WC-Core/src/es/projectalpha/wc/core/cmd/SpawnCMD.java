@@ -1,29 +1,26 @@
-package es.projectalpha.wc.survival.cmd;
+package es.projectalpha.wc.core.cmd;
 
 import es.projectalpha.wc.core.api.WCUser;
-import es.projectalpha.wc.core.cmd.WCCmd;
 import es.projectalpha.wc.core.utils.Messages;
 import es.projectalpha.wc.core.utils.Utils;
-import es.projectalpha.wc.survival.WCSurvival;
-import es.projectalpha.wc.survival.files.Files;
 
-public class Forcespawn extends WCCmd{
+public class SpawnCMD extends WCCmd {
 
-    private Files files = WCSurvival.getInstance().getFiles();
-
-    public Forcespawn(){
-        super("forcespawn", "wc.admin", "");
+    public SpawnCMD(){
+        super("spawn", "", "");
     }
 
     @Override
     public void run(WCUser user, String label, String[] args){
         if (args.length == 0) {
-            user.sendMessagePrefix(Messages.help);
+            if (plugin.getConfig().getString("spawn").equalsIgnoreCase("NONE")) return;
+            user.teleport(Utils.stringToLocation(plugin.getConfig().getString("spawn")));
         }
         if (args.length == 1) {
             if (args[0].equalsIgnoreCase("set")) {
-                files.getConfig().set("Forcespawn", Utils.locationToString(user.getPlayer().getLocation()));
-                files.saveFiles();
+                if (!user.hasPermission("wc.spawn")) return;
+                plugin.getConfig().set("spawn", Utils.locationToString(user.getPlayer().getLocation()));
+                plugin.saveConfig();
 
                 user.sendMessagePrefix("&2Has puesto el punto de spawn satisfactoriamente");
             }

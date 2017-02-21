@@ -17,8 +17,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ *
  * @author cadox8
- * */
+ *
+ */
 
 public class WCCommands implements TabCompleter {
 
@@ -32,6 +34,18 @@ public class WCCommands implements TabCompleter {
         cmds.add(new PingCMD());
         cmds.add(new AyudaCMD());
         cmds.add(new DecirCMD());
+        cmds.add(new BroadcastCMD());
+        cmds.add(new ClearCMD());
+        cmds.add(new EnchantCMD());
+        cmds.add(new FakeJoinCMD());
+        cmds.add(new FakeLeaveCMD());
+        cmds.add(new FeedCMD());
+        cmds.add(new GamemodeCMD());
+        cmds.add(new HealCMD());
+        cmds.add(new HelpOPCMD());
+        cmds.add(new InvSeeCMD());
+        cmds.add(new SpawnCMD());
+        cmds.add(new WeatherCMD());
         //
         ucmds = new WCCommands();
         //
