@@ -17,8 +17,7 @@ import java.util.List;
 public abstract class WCCmd {
 
     @Getter private final transient String name;
-    @Getter private transient Grupo group = Grupo.Usuario;
-    @Getter private transient String permission = "";
+    @Getter private transient Grupo group = Grupo.Craftero;
     @Getter private final transient List<String> aliases;
 
 
@@ -26,21 +25,14 @@ public abstract class WCCmd {
     protected static transient WCServer server = new WCServer();
     protected static transient Utils utils = WCCore.getInstance().getUtils();
 
-    @Deprecated
     public WCCmd(final String name, final Grupo grupo, final List<String> aliases) {
         this.name = name.toLowerCase();
         this.group = grupo;
         this.aliases = aliases;
     }
 
-    public WCCmd(final String name, final String permission, final String aliase){
-        this(name, permission, Arrays.asList(aliase));
-    }
-
-    public WCCmd(final String name, final String permission, final List<String> aliases) {
-        this.name = name.toLowerCase();
-        this.permission = permission;
-        this.aliases = aliases;
+    public WCCmd(final String name, final Grupo grupo, final String aliase){
+        this(name, grupo, Arrays.asList(aliase));
     }
 
     public void run(ConsoleCommandSender sender, String label, String[] args) {
@@ -62,10 +54,16 @@ public abstract class WCCmd {
     @Getter
     @AllArgsConstructor
     public enum Grupo {
-        Usuario(0),
-        Moderador(1),
-        Admin(2),
-        Dev(3);
+        Craftero(0),
+        SuperCraftero(1),
+        MegaCraftero(2),
+        VIP(3),
+        YT(4),
+        Builder(5),
+        Mod(6),
+        DEV(7),
+        Admin(8),
+        Creador(9);
 
         private final int rank;
     }

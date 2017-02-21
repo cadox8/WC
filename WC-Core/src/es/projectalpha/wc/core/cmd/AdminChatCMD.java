@@ -11,7 +11,7 @@ import java.util.List;
 public class AdminChatCMD extends WCCmd {
 
     public AdminChatCMD() {
-        super("a", "wc.admin", Arrays.asList("adminchat", "ac"));
+        super("a", Grupo.Builder, Arrays.asList("adminchat", "ac"));
     }
 
     @Override

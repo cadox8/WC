@@ -10,7 +10,7 @@ import java.util.List;
 public class AyudaCMD extends WCCmd {
 
     public AyudaCMD() {
-        super("ayuda", "", Arrays.asList("help"));
+        super("ayuda", Grupo.Craftero, Arrays.asList("help"));
     }
 
     @Override

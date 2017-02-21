@@ -8,13 +8,15 @@ import java.util.Arrays;
 public class ClearCMD extends WCCmd{
 
     public ClearCMD() {
-        super("clear", "wc.clear", Arrays.asList("limpiar", "limpia"));
+        super("clear", Grupo.Mod, Arrays.asList("limpiar", "limpia"));
     }
+
+    //TODO: Mensages
 
     @Override
     public void run(WCUser user, String lbl, String[] args) {
         if (args.length < 1) {
-            user.sendMessage("*clear.mensaje");
+            //user.sendMessage("");
             int invsize = user.getPlayer().getInventory().getSize() - 5;
             for (int i = 0; i < invsize; i++) {
                 user.getPlayer().getInventory().clear(i);

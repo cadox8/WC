@@ -1,21 +1,17 @@
 package es.projectalpha.wc.pvp;
 
 import es.projectalpha.wc.core.WCCommands;
-import es.projectalpha.wc.pvp.cmd.PvP;
+import es.projectalpha.wc.pvp.cmd.PvPCMD;
 import es.projectalpha.wc.pvp.events.EntityEvent;
 import es.projectalpha.wc.pvp.events.PlayerEvent;
 import es.projectalpha.wc.pvp.files.Files;
 import es.projectalpha.wc.pvp.files.Lang;
-import es.projectalpha.wc.pvp.files.Message;
 import es.projectalpha.wc.pvp.manager.Manager;
 import net.milkbowl.vault.economy.Economy;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.ConcurrentModificationException;
 import java.util.HashMap;
 
 @SuppressWarnings("LossyEncoding")
@@ -67,7 +63,7 @@ public class WCPvP extends JavaPlugin {
     }
 	
 	private void registerCommands(){
-		WCCommands.register(new PvP());
+		WCCommands.register(new PvPCMD());
 	}
 
 	public Economy getVault(){

@@ -6,7 +6,7 @@ import es.projectalpha.wc.core.api.WCUser;
 public class FeedCMD extends WCCmd{
 
     public FeedCMD(){
-        super("feed", "wc.feed", "alimentar");
+        super("feed", Grupo.Admin, "alimentar");
     }
 
     public void run(WCUser user, String label, String[] args){

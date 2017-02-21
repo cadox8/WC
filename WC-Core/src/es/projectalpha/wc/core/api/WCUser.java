@@ -1,6 +1,7 @@
 package es.projectalpha.wc.core.api;
 
 import es.projectalpha.wc.core.WCCore;
+import es.projectalpha.wc.core.cmd.WCCmd;
 import es.projectalpha.wc.core.utils.ReflectionAPI;
 import es.projectalpha.wc.core.utils.Utils;
 import lombok.Data;
@@ -48,6 +49,11 @@ public class WCUser {
     }
     //
 
+    public void save() {
+        plugin.getMysql().saveUser(this);
+        plugin.getMysql().loadUserData(uuid);
+    }
+
     /*
     * Getters/Setters
     */
@@ -57,8 +63,8 @@ public class WCUser {
     public boolean isOnline() {
         return getOfflinePlayer().isOnline();
     }
-    public boolean hasPermission(String permission){
-        return getPlayer().hasPermission(permission);
+    public boolean isOnRank(WCCmd.Grupo rank) {
+        return rank.getRank() <= getUserData().getGrupo().getRank();
     }
 
     /*
@@ -179,7 +185,13 @@ public class WCUser {
     */
     @Data
     public static class UserData {
+        WCCmd.Grupo grupo = WCCmd.Grupo.Craftero;
         Location lastLocation = null;
         Inventory inventory = null;
+    }
+
+    @Override
+    public String toString() {
+        return "WCUser{name: " + getName() + ", uuid: " + getUuid() + ", group: + " + getUserData().getGrupo() + "}";
     }
 }

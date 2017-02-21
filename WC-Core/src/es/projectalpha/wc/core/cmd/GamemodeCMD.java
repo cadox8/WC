@@ -8,7 +8,7 @@ import org.bukkit.inventory.Inventory;
 public class GamemodeCMD extends WCCmd{
 
     public GamemodeCMD(){
-        super("gamemode", "wc.gamemode", "gm");
+        super("gamemode", Grupo.Builder, "gm");
     }
 
     public void run(WCUser user, String label, String[] args){

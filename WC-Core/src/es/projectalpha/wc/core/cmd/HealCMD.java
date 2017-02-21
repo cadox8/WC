@@ -6,7 +6,7 @@ import es.projectalpha.wc.core.api.WCUser;
 public class HealCMD extends WCCmd{
 
     public HealCMD(){
-        super("heal", "wc.heal", "curar");
+        super("heal", Grupo.Mod, "curar");
     }
 
     public void run(WCUser user, String label, String[] args){

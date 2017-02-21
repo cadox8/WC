@@ -8,7 +8,7 @@ import es.projectalpha.wc.core.utils.Utils;
 public class HelpOPCMD extends WCCmd{
 
     public HelpOPCMD() {
-        super("helpop", "", "hp");
+        super("helpop", Grupo.Craftero, "hp");
     }
 
     private final Cooldown temp = new Cooldown(30);
