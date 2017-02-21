@@ -3,8 +3,8 @@ package es.projectalpha.wc.pvp.cmd;
 import es.projectalpha.wc.core.api.WCUser;
 import es.projectalpha.wc.core.cmd.WCCmd;
 import es.projectalpha.wc.pvp.WCPvP;
-import es.projectalpha.wc.pvp.files.Message;
 import es.projectalpha.wc.pvp.files.Files;
+import es.projectalpha.wc.pvp.files.Message;
 import es.projectalpha.wc.pvp.manager.Manager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -12,15 +12,14 @@ import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.entity.Player;
 
 import java.io.IOException;
-import java.util.List;
 
-public class PvP extends WCCmd {
+public class PvPCMD extends WCCmd {
 
 	private Manager manager = new Manager();
 	private WCPvP WCPvP;
 
-	public PvP() {
-		super("survival", "", "");
+	public PvPCMD() {
+		super("pvp", Grupo.Craftero, "");
 	}
 
 	private void save() {
@@ -62,7 +61,7 @@ public class PvP extends WCCmd {
 					user.sendMessage(ChatColor.GOLD + "/pvp. " + ChatColor.GREEN + "Sirve para cambiarte el estado del pvp, hay un subcomando, el cual es /pvp <on/off> que hace lo mismo.");
 					user.sendMessage(ChatColor.GOLD + "/pvp status. " + ChatColor.GREEN + "Con este comando puedes ver si tienes el pvp activado o desactivado.");
 					user.sendMessage(ChatColor.GOLD + "/pvp info. " + ChatColor.GREEN + "Este comando te da un poco de información sobre el servidor.");
-					if(user.hasPermission("pvpmanager.admin")){
+					if(user.isOnRank(Grupo.Admin)){
 						user.sendMessage("");
 						user.sendMessage(ChatColor.RED + "Comandos de administrador");
 						user.sendMessage("");
@@ -135,7 +134,7 @@ public class PvP extends WCCmd {
 
 		if(args.length == 2){
 			if(args[0].equalsIgnoreCase("inspect")){
-				if(user.hasPermission("pvpmanager.admin")){
+				if(user.isOnRank(Grupo.Admin)){
 
 					Player pl = Bukkit.getPlayerExact(args[1]);
 
@@ -158,7 +157,7 @@ public class PvP extends WCCmd {
 
 		if(args.length == 3){
 			if(args[0].equalsIgnoreCase("set")){
-				if(!user.hasPermission("pvpmanager.admin")){
+				if(!user.isOnRank(Grupo.Admin)){
 					user.sendMessage(Message.noperm);
 					return;
 				}

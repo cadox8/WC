@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import es.projectalpha.wc.core.WCCore;
 import es.projectalpha.wc.core.api.WCServer;
 import es.projectalpha.wc.core.api.WCUser;
+import es.projectalpha.wc.core.cmd.WCCmd;
 import org.bukkit.*;
 
 import java.io.BufferedReader;
@@ -29,7 +30,7 @@ public class Utils {
     public static void sendAdminMsg(WCUser user, String msg){
         plugin.getServer().getOnlinePlayers().forEach(p -> {
             WCUser u = WCServer.getUser(p);
-            if (u.hasPermission("wc.admin")) {
+            if (u.isOnRank(WCCmd.Grupo.Builder)) {
                 u.sendMessage("&0[&2A&0] &3" + user.getName() + "&r: " + msg);
                 u.sendSound(Sound.BLOCK_ANVIL_HIT);
             }
@@ -39,7 +40,7 @@ public class Utils {
     public static void sendGeoIPMsg(WCUser user, String msg){
         plugin.getServer().getOnlinePlayers().forEach(p -> {
             WCUser u = WCServer.getUser(p);
-            if (u.hasPermission("wc.admin")) {
+            if (u.isOnRank(WCCmd.Grupo.Admin)) {
                 u.sendMessagePrefix("&cGeoIP &3" + user.getName() + "&r: " + msg);
             }
         });

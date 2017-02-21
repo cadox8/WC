@@ -14,7 +14,7 @@ import java.util.List;
 public class Lluvia extends WCCmd{
 
     public Lluvia(){
-        super("lluvia", "wc.admin", "");
+        super("lluvia", Grupo.Mod, "");
     }
 
     public void run(WCUser user, String label, String[] args){

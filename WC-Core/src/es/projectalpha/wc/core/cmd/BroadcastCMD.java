@@ -9,7 +9,7 @@ import java.util.Arrays;
 public class BroadcastCMD extends WCCmd{
 
     public BroadcastCMD() {
-        super("broadcast", "wc.broadcast", Arrays.asList("bcast", "bc", "decir"));
+        super("broadcast", Grupo.Mod, Arrays.asList("bcast", "bc", "decir"));
     }
 
     @Override

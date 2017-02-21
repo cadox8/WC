@@ -14,7 +14,7 @@ import org.bukkit.inventory.Inventory;
 public class Balfichas extends WCCmd{
 
     public Balfichas(){
-        super("balfichas", "", "");
+        super("balfichas", Grupo.Craftero, "");
     }
 
     private YamlConfiguration files = WCSurvival.getInstance().getFiles().getCasino();

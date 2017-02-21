@@ -9,7 +9,7 @@ import java.util.Random;
 public class WeatherCMD extends WCCmd {
 
     public WeatherCMD(){
-        super("weather", "wc.weather", Arrays.asList("tiempo", "metereologia"));
+        super("weather", Grupo.Admin, Arrays.asList("tiempo", "metereologia"));
     }
 
     @Override

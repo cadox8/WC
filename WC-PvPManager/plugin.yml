@@ -6,4 +6,4 @@ depend: [Vault]
 
 commands: 
     pvp:
-      description: Comando PvP
+      description: Comando PvPCMD

@@ -16,7 +16,7 @@ public class XP2cash extends WCCmd{
     private ExperienceManager exp;
 
     public XP2cash(){
-        super("xp2cash", "exp.exp2cash", "");
+        super("xp2cash", Grupo.Craftero, "");
     }
 
     @Override
