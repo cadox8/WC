@@ -1,5 +1,6 @@
 package es.projectalpha.wc.pvp.events;
 
+import es.projectalpha.wc.core.utils.Cooldown;
 import es.projectalpha.wc.pvp.WCPvP;
 import es.projectalpha.wc.pvp.files.Message;
 import es.projectalpha.wc.pvp.files.Files;
@@ -24,7 +25,7 @@ public class PlayerEvent implements Listener {
 	private Manager manager;
 	private VaultUtils vu = new VaultUtils();
 	private WCPvP plugin;
-
+	private Cooldown pvpc = new Cooldown(25);
 	public PlayerEvent(WCPvP WCPvP, Manager manager){
         this.plugin = WCPvP;
         this.manager = manager;
@@ -64,14 +65,11 @@ public class PlayerEvent implements Listener {
 
 			if(manager.isInPvP(p)){
                 vu.killMoney(p, pl);
-
             	e.setKeepInventory(true);
-            	
-            	WCPvP.getInstance().pvpCooldown.remove(p);
-            	WCPvP.getInstance().pvpCooldown.remove(pl);
-            	
-            	
-            	
+
+				pvpc.removeCooldown(p);
+				pvpc.removeCooldown(pl);
+
             	p.sendMessage(Message.prefix + ChatColor.DARK_GREEN + " Ya no estás en pvp, puedes desconectarte.");
             	pl.sendMessage(Message.prefix + ChatColor.DARK_GREEN + " Ya no estás en pvp, puedes desconectarte.");
             }
@@ -110,28 +108,18 @@ public class PlayerEvent implements Listener {
 	@EventHandler
 	public void onInteract(PlayerBucketEmptyEvent e){
 		Player p = e.getPlayer();
-		
 		for(Entity en : p.getNearbyEntities (4D, 4D, 4D)){
-			
 			if (en instanceof Player){
-				
 				if(en == p) continue;
-				
 				if(e.getBucket() == Material.LAVA_BUCKET){
 					
 					if(Files.user.getBoolean("Users." + en.getName() + ".pvp") == false){
-							
 							p.sendMessage(Message.prefix + ChatColor.DARK_RED + " No puedes poner ese bloque cerca de un jugador con el pvp desactivado.");
 							e.setCancelled(true);
-							
 					}
-					
 				}
-				
 			}
-			
 		}
-				
 	}
 	
 	@EventHandler

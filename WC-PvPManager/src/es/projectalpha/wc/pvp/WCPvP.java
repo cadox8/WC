@@ -1,5 +1,6 @@
 package es.projectalpha.wc.pvp;
 
+import es.projectalpha.wc.core.WCCommands;
 import es.projectalpha.wc.pvp.cmd.PvP;
 import es.projectalpha.wc.pvp.events.EntityEvent;
 import es.projectalpha.wc.pvp.events.PlayerEvent;
@@ -66,61 +67,12 @@ public class WCPvP extends JavaPlugin {
     }
 	
 	private void registerCommands(){
-		getCommand("pvp").setExecutor(new PvP());
+		WCCommands.register(new PvP());
 	}
 
 	public Economy getVault(){
 	    return vault;
     }
-
-	/*private void startCooldowns(){
-
-		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable(){
-
-		    @Override
-            public void run(){
-		    	try{
-		    		cooldown.keySet().forEach(p -> {
-		    			int x = cooldown.get(p);
-
-		    			x--;
-		    			if(x <= 0){
-		    				cooldown.remove(p);
-		    				return;
-		    			}
-		    			cooldown.put(p, x);
-		    		});
-		    	}catch(ConcurrentModificationException e){}
-		    	
-		    	try{
-	                pvpCooldown.keySet().forEach(pl -> {
-	                    int x = pvpCooldown.get(pl);
-	
-	                    x--;
-	                    if(x <= 0){
-	                        pvpCooldown.remove(pl);
-	                        pl.sendMessage(Message.prefix + ChatColor.DARK_GREEN + " Ya no estás en pvp, puedes desconectarte.");
-	                        return;
-	                    }
-	                    pvpCooldown.put(pl, x);
-	                });
-		    	}catch(ConcurrentModificationException e){}
-                
-		    	try{
-			    	newbieCooldown.keySet().forEach(ple -> {
-	                    int x = newbieCooldown.get(ple);
-	
-	                    x--;
-	                    if(x <= 0){
-	                        newbieCooldown.remove(ple);
-	                        return;
-	                    }
-	                    newbieCooldown.put(ple, x);
-	                });
-                }catch(ConcurrentModificationException e){}
-            }
-        },1, 20);
-	}*/
 
 	public Manager getManager(){
 	    return manager;

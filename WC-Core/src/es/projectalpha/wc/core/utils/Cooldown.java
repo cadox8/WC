@@ -37,6 +37,10 @@ public class Cooldown {
         getCooldowns().put(str, System.currentTimeMillis());
     }
 
+    public void removeCooldown(Player player){
+        getCooldowns().remove(player);
+    }
+
     public boolean isCoolingDown(Player player) {
         if (!getCooldowns().containsKey(player.getName())) {
             return false;
