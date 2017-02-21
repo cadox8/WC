@@ -29,8 +29,8 @@ public class HelpOPCMD extends WCCmd{
     private void hp(WCUser user, String msg){
         plugin.getServer().getOnlinePlayers().forEach(p -> {
             WCUser u = WCServer.getUser(p);
-            if (u.hasPermission("wc.admin")) {
-                u.sendMessage("&4HELP: &3" + user.getName() + "&r: " + msg);
+            if (u.isOnRank(Grupo.Admin)) {
+                u.sendMessage("&4AYUDA: &3" + user.getName() + "&r: " + msg);
             }
         });
     }

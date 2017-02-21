@@ -107,7 +107,7 @@ public class WCCommands implements TabCompleter {
                 }
                 if (sender instanceof Player) {
                     WCUser p = WCServer.getUser((Player) sender);
-                    if (p.hasPermission(cmdr.getPermission())) {
+                    if (p.isOnRank(cmdr.getGroup())) {
                         cmdr.run(p, label, args);
                         return;
                     }
@@ -132,7 +132,7 @@ public class WCCommands implements TabCompleter {
         for (WCCmd cmdr : cmds) {
             if (cmdr.getName().equals(label) || cmdr.getAliases().contains(label)) {
                 try {
-                    if ((sender instanceof Player) && (!WCServer.getUser((Player) sender).hasPermission(cmdr.getPermission()))) {
+                    if ((sender instanceof Player) && (!WCServer.getUser((Player) sender).isOnRank(cmdr.getGroup()))) {
                         return new ArrayList<>();
                     }
                     rtrn = cmdr.onTabComplete(sender, cmd, label, args, args[args.length - 1], args.length - 1);

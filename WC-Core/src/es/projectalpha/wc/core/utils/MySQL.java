@@ -101,7 +101,7 @@ public class MySQL {
 
             if (rsDatos.next()) {
                 int rank = rsDatos.getInt("grupo");
-                data.setGrupo(WCCmd.Grupo.values()[rank] == null ? WCCmd.Grupo.Usuario : WCCmd.Grupo.values()[rank]);
+                data.setGrupo(WCCmd.Grupo.values()[rank] == null ? WCCmd.Grupo.Craftero : WCCmd.Grupo.values()[rank]);
             }
         } catch (CommunicationsException ex) {
             //Si (timeout) cerrar, abrir y volver a intentar
