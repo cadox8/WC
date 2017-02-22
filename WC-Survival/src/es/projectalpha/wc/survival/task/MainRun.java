@@ -2,6 +2,7 @@ package es.projectalpha.wc.survival.task;
 
 import es.projectalpha.wc.core.WCCore;
 import es.projectalpha.wc.core.api.WCUser;
+import es.projectalpha.wc.core.cmd.WCCmd;
 import es.projectalpha.wc.survival.WCSurvival;
 import es.projectalpha.wc.survival.files.Files;
 import es.projectalpha.wc.survival.utils.ItemMaker;
@@ -15,9 +16,18 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.HashMap;
+
 public class MainRun extends BukkitRunnable {
 
-    private Files files = WCSurvival.getInstance().getFiles();
+    private Files files;
+
+    @Getter private HashMap<WCUser, Integer> join;
+
+    public MainRun(WCSurvival Main){
+        files = Main.getFiles();
+        join = new HashMap<>();
+    }
 
     private int count;
 
@@ -25,18 +35,23 @@ public class MainRun extends BukkitRunnable {
         Bukkit.getOnlinePlayers().forEach(p -> {
             if(p == null) return;
             WCUser user = WCSurvival.getPlayer(p);
-            fly(p);
+            fly(user);
             items(p);
             user.sendActionBar(WCSurvival.getInstance().getInfo().getInfoMsg());
+
+            if (join.get(user) == 0){
+                //TODO: Dinero
+                join.put(user, 3600);
+            }
         });
         count++;
     }
 
-    private void fly(Player p){
+    private void fly(WCUser p){
         WCCore.getInstance().debugLog("Task Volar");
-        if(!p.hasPermission("volar.limit") || p.hasPermission("volar.bypass")) return;
+        if(!p.isOnRank(WCCmd.Grupo.YT)) return;
 
-        if(p.isFlying() && files.getFl().getInt("MainRun." + p.getName() + ".time") > 0){
+        if(p.getPlayer().isFlying() && files.getFl().getInt("MainRun." + p.getName() + ".time") > 0){
             int t = files.getFl().getInt("MainRun." + p.getName() + ".time");
             t--;
             files.getFl().set("MainRun." + p.getName() + ".time", t);

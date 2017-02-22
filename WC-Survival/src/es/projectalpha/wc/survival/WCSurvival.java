@@ -32,6 +32,8 @@ public class WCSurvival extends JavaPlugin {
     @Getter private Files files;
     @Getter private Info info;
 
+    @Getter private MainRun mainRun;
+
     @Getter private ArrayList<Player> creando = new ArrayList<>();
     @Getter private ArrayList<Location> casinos = new ArrayList<>();
     @Getter private ArrayList<Location> sillas = new ArrayList<>();
@@ -51,16 +53,16 @@ public class WCSurvival extends JavaPlugin {
         loadCasinos();
         info.init();
 
-        new MainRun().runTaskTimer(this, 0, 20);
+        mainRun.runTaskTimer(this, 0, 20);
         WCCore.getInstance().log(WCServer.Level.INFO, "Survival activado");
     }
 
     private void registerEvents() {
-        new Sit(this);
-        new PlayerEvent(this);
+        new Sit(instance);
+        new PlayerEvent(instance);
         //new HTWMEvent(this);
-        new IronElevators(this);
-        new FichasShopEvent(this);
+        new IronElevators(instance);
+        new FichasShopEvent(instance);
         //new IntercShopEvent(this);
         //new PremiosShopEvent(this);
         //new CasinoInvEvent(this);
@@ -69,6 +71,7 @@ public class WCSurvival extends JavaPlugin {
     private void register(){
         files = new Files();
         info = new Info();
+        mainRun = new MainRun(instance);
     }
 
     public void onDisable() {

@@ -21,6 +21,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.util.Vector;
 
@@ -41,12 +42,18 @@ public class PlayerEvent implements Listener{
         WCFichas fichas = new WCFichas(p);
 
         fichas.createPlayer();
+        plugin.getMainRun().getJoin().put(WCServer.getUser(p), 3600);
 
         if(p.hasPermission("volar.bypass")){
             files.getUsers().set("Users." + p.getName() + ".bypass", false);
             files.saveFiles();
         }
+    }
 
+    @EventHandler
+    public void onQuit(PlayerQuitEvent e){
+        Player p = e.getPlayer();
+        plugin.getMainRun().getJoin().remove(WCServer.getUser(p), 3600);
     }
 
     @EventHandler
