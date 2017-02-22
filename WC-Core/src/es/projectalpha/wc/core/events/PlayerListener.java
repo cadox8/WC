@@ -3,6 +3,7 @@ package es.projectalpha.wc.core.events;
 import es.projectalpha.wc.core.WCCore;
 import es.projectalpha.wc.core.api.WCServer;
 import es.projectalpha.wc.core.api.WCUser;
+import es.projectalpha.wc.core.managers.DataManager;
 import es.projectalpha.wc.core.utils.Utils;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -15,6 +16,8 @@ public class PlayerListener implements Listener{
 
     private final WCCore plugin;
 
+    private DataManager dataManager;
+
     public PlayerListener(WCCore instance) {
         plugin = instance;
     }
@@ -25,6 +28,19 @@ public class PlayerListener implements Listener{
         WCUser user = WCServer.getUser(p);
 
         Utils.sendGeoIPMsg(user, Utils.getCountry(user));
+
+        //
+        dataManager = new DataManager(user);
+        if (dataManager.create() && dataManager.setObject("Grupo", user.getUserData().getGrupo()) &&
+        dataManager.setObject("UUID", user.getUuid().toString()) &&
+        dataManager.setObject("IP", user.getPlayer().getAddress().getHostName()) &&
+        dataManager.setObject("Money", 0.0)) {
+            plugin.debugLog("Configuración creada para " + user.getName());
+        } else {
+            plugin.debugLog("Configuración no creada para " + user.getName());
+            user.sendMessage("&cPor favor, avisa a un staff para comprobar tu archivo de configuración");
+        }
+        //
 
         if (plugin.getConfig().getString("spawn").equalsIgnoreCase("NONE")) {
             if (e.getPlayer().hasPermission("wc.admin")) {

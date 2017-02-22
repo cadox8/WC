@@ -2,6 +2,7 @@ package es.projectalpha.wc.core;
 
 import es.projectalpha.wc.core.api.WCServer;
 import es.projectalpha.wc.core.events.PlayerListener;
+import es.projectalpha.wc.core.managers.WorldManager;
 import es.projectalpha.wc.core.utils.MySQL;
 import es.projectalpha.wc.core.utils.Utils;
 import lombok.Getter;
@@ -17,17 +18,14 @@ import java.util.Arrays;
 
 public class WCCore extends JavaPlugin {
 
-    @Getter
-    private static WCCore instance;
-    @Getter
-    private static String prefix = ChatColor.GRAY + " || " + ChatColor.RED + "WCC" + ChatColor.GRAY + " || " + ChatColor.RESET;
+    @Getter private static WCCore instance;
+    @Getter private static String prefix = ChatColor.GRAY + " || " + ChatColor.RED + "WCC" + ChatColor.GRAY + " || " + ChatColor.RESET;
 
-    @Getter
-    private MySQL mysql = null;
+    @Getter private MySQL mysql = null;
     private Connection connection = null;
 
-    @Getter
-    private Utils utils;
+    @Getter private Utils utils;
+    @Getter private WorldManager worldManager;
 
     @Override
     public void onEnable() {
@@ -87,6 +85,7 @@ public class WCCore extends JavaPlugin {
 
     private void register() {
         utils = new Utils(this);
+        worldManager = new WorldManager(this);
     }
 
     @Override

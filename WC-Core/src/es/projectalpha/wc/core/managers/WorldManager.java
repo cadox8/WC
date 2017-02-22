@@ -1,4 +1,4 @@
-package es.projectalpha.wc.core.world;
+package es.projectalpha.wc.core.managers;
 
 import es.projectalpha.wc.core.WCCore;
 import es.projectalpha.wc.core.api.WCServer;
@@ -15,8 +15,7 @@ import java.util.Arrays;
 
 /**
  * Simple WorldManager (Generate, Delete, TP, Load world) by Cadox8
- * */
-
+ */
 public class WorldManager {
 
     private WCCore plugin;
@@ -25,19 +24,32 @@ public class WorldManager {
         this.plugin = Main;
     }
 
-    /*
-    * Create World Method
-    *
-    * Default: World Name
-    * Utils: World Name, Pre Generate
-    * Complete: World Name, Environment
-    * */
+    /**
+     * Create World.
+     *
+     * @param name the name of the world to create
+     */
     public void createWorld(String name){
         createWorld(name, World.Environment.NORMAL, false);
     }
+
+    /**
+     * Create World.
+     *
+     * @param name the name of the world to create
+     * @param preGenerate if the world is loaded or not
+     */
     public void createWorld(String name, boolean preGenerate){
         createWorld(name, World.Environment.NORMAL, preGenerate);
     }
+
+    /**
+     * Create World.
+     *
+     * @param name the name of the world to create
+     * @param environment the world Environment
+     * @param preGenerate if the world is loaded or not
+     */
     public void createWorld(@NonNull String name, @NonNull World.Environment environment, boolean preGenerate){
         if (existWorld(name)) {
             plugin.debugLog("Este mundo ya existe");
@@ -52,11 +64,11 @@ public class WorldManager {
     }
     //
 
-    /*
-    * Delete World Method
-    *
-    * Default: World Name
-    * */
+    /**
+     * Delete World.
+     *
+     * @param name the name of the world to create.
+     */
     public void deleteWorld(String name) {
         unloadWorld(name);
         deleteWorld(Utils.getWorld(name).getWorldFolder());
@@ -84,11 +96,11 @@ public class WorldManager {
     }
     //
 
-    /*
-    * Unload World Method
-    *
-    * Default: World Name
-    * */
+    /**
+     * Unload World.
+     *
+     * @param name the name of the world to unload.
+     */
     public void unloadWorld(String name){
         World world = Utils.getWorld(name);
         if (!existWorld(name)) return;
@@ -103,31 +115,45 @@ public class WorldManager {
     }
     //
 
-    /*
-    * TP World Method
-    *
-    * Default: World Name, Player
-    * Complete: World, WCUser
-    * */
+    /**
+     * TP World.
+     *
+     * @param name the name of the world to teleport.
+     * @param player the player to teleport
+     */
     public void changeWorld(String name, Player player){
         if (!existWorld(name)) return;
         changeWorld(Utils.getWorld(name), WCServer.getUser(player));
     }
+
+    /**
+     * TP World.
+     *
+     * @param world the world to teleport.
+     * @param user the user to teleport
+     */
     public void changeWorld(World world, WCUser user){
         user.teleport(world);
     }
     //
 
-    /*
-    * Generate World Method
-    *
-    * Default: World Name, Radius
-    * Complete: World, Radius
-    * */
+    /**
+     * Generate World.
+     *
+     * @param name the name of the world to generate.
+     * @param radius the number of the area to generate
+     */
     public void generateWorld(String name, double radius){
         if (!existWorld(name)) return;
         generateWorld(Utils.getWorld(name), radius);
     }
+
+    /**
+     * Generate World.
+     *
+     * @param world the world to generate.
+     * @param radius the number of the area to generate
+     */
     public void generateWorld(World world, double radius){
         plugin.debugLog("Pre-Generando mundo, radio: " + radius);
         Utils.getCircle(world.getSpawnLocation(), radius, 300).forEach(l -> {
@@ -137,11 +163,18 @@ public class WorldManager {
     }
     //
 
-    //
+    /**
+     * Exist World.
+     *
+     * @param name the name of the world to check.
+     * @return if the world exists or not
+     *
+     * @exception NullWorldException the world doesn´t exist
+     */
     private boolean existWorld(String name){
         World world = Utils.getWorld(name);
         try {
-            if (world == null) throw new NullWorldException("El mundo no puede ser null");
+            if (world == null) throw new NullWorldException("El mundo no existe");
         } catch(NullWorldException e){
             plugin.debugLog("Causa: " + e.getCause());
             return false;
