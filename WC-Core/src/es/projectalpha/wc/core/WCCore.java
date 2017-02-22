@@ -13,7 +13,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.Arrays;
 
 public class WCCore extends JavaPlugin {
@@ -36,7 +35,8 @@ public class WCCore extends JavaPlugin {
 
         try {
 
-            try {
+            //Ja, nope
+/*            try {
                 debugLog("Cargando MySQL");
                 mysql = new MySQL(getConfig().getString("mysql.host"), getConfig().getString("mysql.port"),
                         getConfig().getString("mysql.database"), getConfig().getString("mysql.username"),
@@ -47,7 +47,7 @@ public class WCCore extends JavaPlugin {
                 debugLog("Causa: " + exc.toString());
                 log(WCServer.Level.SEVERE, "WCCore desactivado por imposibilidad de conexiones");
                 getServer().getPluginManager().disablePlugin(this); //Desactivar si no hay MySQL (Solo dará errores si esta activo)
-            }
+            }*/
 
 
             debugLog("Cargando Archivos...");
@@ -109,7 +109,7 @@ public class WCCore extends JavaPlugin {
         WCServer.log(level, msg);
     }
 
-    private boolean isDebug() {
+    public boolean isDebug() {
         return getConfig().getBoolean("debug");
     }
 
