@@ -58,12 +58,14 @@ public abstract class WCCmd {
         SuperCraftero(1),
         MegaCraftero(2),
         VIP(3),
-        YT(4),
-        Builder(5),
-        Mod(6),
-        DEV(7),
-        Admin(8),
-        Creador(9);
+        Ultra(4),
+        Supremo(5),
+        YT(6),
+        Builder(7),
+        Mod(8),
+        DEV(9),
+        Admin(10),
+        Creador(11);
 
         private final int rank;
     }
