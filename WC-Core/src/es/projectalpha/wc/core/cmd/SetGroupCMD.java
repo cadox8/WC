@@ -2,15 +2,16 @@ package es.projectalpha.wc.core.cmd;
 
 import es.projectalpha.wc.core.api.WCServer;
 import es.projectalpha.wc.core.api.WCUser;
+import es.projectalpha.wc.core.managers.DataManager;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class SetGroup extends WCCmd{
+public class SetGroupCMD extends WCCmd{
 
-    public SetGroup(){
+    public SetGroupCMD(){
         super("setgroup", Grupo.Admin, Arrays.asList("dargrupo", "setgrupo", "setgroup"));
     }
 
@@ -34,7 +35,7 @@ public class SetGroup extends WCCmd{
         }
         WCUser target = WCServer.getUser(plugin.getServer().getPlayer(args[0]));
         target.getUserData().setGrupo(Grupo.values()[i]);
-        target.save();
+        new DataManager(target).setGrupo();
         user.sendMessage("");
     }
 

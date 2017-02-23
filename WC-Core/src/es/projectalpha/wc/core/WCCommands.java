@@ -46,6 +46,10 @@ public class WCCommands implements TabCompleter {
         cmds.add(new InvSeeCMD());
         cmds.add(new SpawnCMD());
         cmds.add(new WeatherCMD());
+        cmds.add(new AfkCMD());
+        cmds.add(new CoreCMD());
+        cmds.add(new SetGroupCMD());
+        cmds.add(new SocialCMD());
         //
         ucmds = new WCCommands();
         //

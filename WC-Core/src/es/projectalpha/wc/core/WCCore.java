@@ -27,7 +27,6 @@ public class WCCore extends JavaPlugin {
         instance = this;
 
         try {
-
             debugLog("Cargando Archivos...");
             File fConf = new File(getDataFolder(), "config.yml");
             if (!fConf.exists()) {

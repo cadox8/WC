@@ -86,4 +86,9 @@ public class DataManager {
     public boolean existPlayer(){
         return filePlayer.exists();
     }
+
+    //
+    public void setGrupo(){
+        setObject("Grupo", user.getUserData().getGrupo());
+    }
 }

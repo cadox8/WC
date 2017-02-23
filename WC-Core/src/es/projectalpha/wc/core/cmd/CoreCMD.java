@@ -5,7 +5,7 @@ import es.projectalpha.wc.core.api.WCUser;
 public class CoreCMD extends WCCmd{
 
     public CoreCMD() {
-        super("wccore", Grupo.Craftero, "");
+        super("wccore", Grupo.Craftero, "core");
     }
 
     @Override

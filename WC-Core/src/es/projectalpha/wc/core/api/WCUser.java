@@ -49,11 +49,6 @@ public class WCUser {
     }
     //
 
-    public void save() {
-        plugin.getMysql().saveUser(this);
-        plugin.getMysql().loadUserData(uuid);
-    }
-
     /*
     * Getters/Setters
     */
