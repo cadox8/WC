@@ -3,7 +3,6 @@ package es.projectalpha.wc.core;
 import es.projectalpha.wc.core.api.WCServer;
 import es.projectalpha.wc.core.events.PlayerListener;
 import es.projectalpha.wc.core.managers.WorldManager;
-import es.projectalpha.wc.core.utils.MySQL;
 import es.projectalpha.wc.core.utils.Utils;
 import lombok.Getter;
 import org.bukkit.ChatColor;
@@ -13,16 +12,12 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
-import java.sql.Connection;
 import java.util.Arrays;
 
 public class WCCore extends JavaPlugin {
 
     @Getter private static WCCore instance;
     @Getter private static String prefix = ChatColor.GRAY + " || " + ChatColor.RED + "WCC" + ChatColor.GRAY + " || " + ChatColor.RESET;
-
-    @Getter private MySQL mysql = null;
-    private Connection connection = null;
 
     @Getter private Utils utils;
     @Getter private WorldManager worldManager;
@@ -32,21 +27,6 @@ public class WCCore extends JavaPlugin {
         instance = this;
 
         try {
-
-            //Ja, nope
-/*            try {
-                debugLog("Cargando MySQL");
-                mysql = new MySQL(getConfig().getString("mysql.host"), getConfig().getString("mysql.port"),
-                        getConfig().getString("mysql.database"), getConfig().getString("mysql.username"),
-                        getConfig().getString("mysql.password"));
-                connection = mysql.openConnection();
-            } catch (SQLException | ClassNotFoundException exc) {
-                log(WCServer.Level.SEVERE, "Error al abrir la conexion MySQL!");
-                debugLog("Causa: " + exc.toString());
-                log(WCServer.Level.SEVERE, "WCCore desactivado por imposibilidad de conexiones");
-                getServer().getPluginManager().disablePlugin(this); //Desactivar si no hay MySQL (Solo dará errores si esta activo)
-            }*/
-
 
             debugLog("Cargando Archivos...");
             File fConf = new File(getDataFolder(), "config.yml");
