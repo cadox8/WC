@@ -37,11 +37,17 @@ public class MainRun extends BukkitRunnable {
             WCUser user = WCSurvival.getPlayer(p);
             fly(user);
             items(p);
-            user.sendActionBar(WCSurvival.getInstance().getInfo().getInfoMsg());
 
+            int time = join.get(user);
+            time--;
+            join.put(user, time);
             if (join.get(user) == 0){
                 //TODO: Dinero
                 join.put(user, 3600);
+            }
+
+            if (count == 180){
+                user.sendActionBar(WCSurvival.getInstance().getInfo().getInfoMsg());
             }
         });
         count++;

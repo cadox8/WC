@@ -45,7 +45,6 @@
             <groupId>es.projectalpha</groupId>
             <artifactId>WC-Core</artifactId>
             <version>LATEST</version>
-            <type>jar</type>
         </dependency>
         <dependency>
             <groupId>org.spigotmc</groupId>
