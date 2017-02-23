@@ -74,7 +74,10 @@ public class FichasShopEvent implements Listener{
         if(e.getInventory().getName().equalsIgnoreCase(ChatColor.AQUA + "Máquina")){
             e.setCancelled(true);
         }
-        if(e.getInventory().getName().equalsIgnoreCase(ChatColor.AQUA + "Fichas")){
+        if(e.getInventory().getName().equalsIgnoreCase("Fichas")){
+            e.setCancelled(true);
+        }
+        if(e.getInventory().getName().equalsIgnoreCase("Casino")){
             e.setCancelled(true);
         }
         if(e.getInventory().getName().equalsIgnoreCase(ChatColor.GOLD + ChatColor.BOLD.toString() + "Casino Premios")){
