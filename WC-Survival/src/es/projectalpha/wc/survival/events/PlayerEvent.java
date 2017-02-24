@@ -2,6 +2,7 @@ package es.projectalpha.wc.survival.events;
 
 import es.projectalpha.wc.core.api.WCServer;
 import es.projectalpha.wc.core.api.WCUser;
+import es.projectalpha.wc.core.cmd.WCCmd;
 import es.projectalpha.wc.core.utils.Utils;
 import es.projectalpha.wc.survival.FichasMenu;
 import es.projectalpha.wc.survival.WCFichas;
@@ -44,7 +45,7 @@ public class PlayerEvent implements Listener{
         fichas.createPlayer();
         plugin.getMainRun().getJoin().put(WCServer.getUser(p), 3600);
 
-        if(p.hasPermission("volar.bypass")){
+        if(!WCSurvival.getPlayer(p).isOnRank(WCCmd.Grupo.YT)){
             files.getUsers().set("Users." + p.getName() + ".bypass", false);
             files.saveFiles();
         }
@@ -60,10 +61,8 @@ public class PlayerEvent implements Listener{
     public void onDeath(PlayerDeathEvent e){
         Player p = e.getEntity();
 
-        if(p.hasPermission("dead.keepItems")) {
+        if(WCSurvival.getPlayer(p).isOnRank(WCCmd.Grupo.VIP)) {
             e.setKeepInventory(true);
-        }
-        if(p.hasPermission("dead.keepXP")) {
             e.setKeepLevel(true);
         }
     }
