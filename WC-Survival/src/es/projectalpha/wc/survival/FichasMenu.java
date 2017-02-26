@@ -9,6 +9,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -32,12 +33,8 @@ public class FichasMenu {
 
     public static void openCasino(Player p, WCFichas.Fichas ficha, int amount){
         Inventory inv = Bukkit.createInventory(null, 9, "Casino");
-        ItemStack i = ficha.getItemStack();
-        List<String> lore = i.getItemMeta().getLore();
-        lore.add(ChatColor.GRAY.toString() + amount);
-        ItemMeta im = i.getItemMeta();
-        im.setLore(lore);
-        i.setItemMeta(im);
+        ItemStack i = addToLore(ficha.getItemStack(), ChatColor.GRAY.toString() + amount);
+
 
         List<String> loreRem = Arrays.asList(ChatColor.RESET + "Click izquierdo: -1", ChatColor.RESET + "Click derecho: -10", ChatColor.RESET + "Sift Click: -64");
         inv.setItem(3, new ItemMaker(Material.STAINED_GLASS_PANE).setDurability((short)14).setDisplayName(ChatColor.GREEN + "Quitar").setLores(loreRem).build());
@@ -51,5 +48,21 @@ public class FichasMenu {
 
         FichasMenu.amount = amount;
         FichasMenu.fichas = ficha;
+    }
+
+    private static ItemStack addToLore(ItemStack i, String... toAdd){
+        List<String> lore = new ArrayList<>();
+        if (!lore.isEmpty()) lore.clear();
+        lore.addAll(i.getItemMeta().getLore());
+
+        for(String s : toAdd){
+            lore.add(s);
+        }
+
+        ItemMeta im = i.getItemMeta();
+        im.setLore(lore);
+        i.setItemMeta(im);
+
+        return i;
     }
 }
