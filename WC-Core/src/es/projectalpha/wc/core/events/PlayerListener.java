@@ -3,7 +3,6 @@ package es.projectalpha.wc.core.events;
 import es.projectalpha.wc.core.WCCore;
 import es.projectalpha.wc.core.api.WCServer;
 import es.projectalpha.wc.core.api.WCUser;
-import es.projectalpha.wc.core.cmd.WCCmd;
 import es.projectalpha.wc.core.managers.DataManager;
 import es.projectalpha.wc.core.utils.Utils;
 import org.bukkit.Sound;
@@ -79,17 +78,6 @@ public class PlayerListener implements Listener{
             Utils.sendAdminMsg(user, e.getMessage());
             e.setCancelled(true);
         }
-
-        //Format
-        String format = "{clan} {group} {name} &7: &r{message}";
-
-        format = format.replace("{clan}", "&f" + new DataManager(user).getString("Clan"));
-        format = format.replace("{group}", WCCmd.Grupo.groupColor(user.getUserData().getGrupo()) + user.getUserData().getGrupo().toString());
-        format = format.replace("{name}", user.getName());
-        format = format.replace("{message}", e.getMessage());
-
-        e.setFormat(format);
-        //
 
         if (e.getMessage().contains("@")){
             String[] args = e.getMessage().split(" ");
