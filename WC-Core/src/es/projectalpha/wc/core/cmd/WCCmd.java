@@ -59,8 +59,8 @@ public abstract class WCCmd {
     @AllArgsConstructor
     public enum Grupo {
         Craftero(0),
-        SuperCraftero(1),
-        MegaCraftero(2),
+        SC(1),
+        MC(2),
         VIP(3),
         Ultra(4),
         Supremo(5),
@@ -72,5 +72,31 @@ public abstract class WCCmd {
         Creador(11);
 
         private final int rank;
+
+        public static char groupColor(Grupo grupo){
+            switch (grupo){
+                case Creador:
+                    return 'c';
+                case Admin:
+                    return '2';
+                case DEV:
+                    return 'b';
+                case Mod:
+                    return 'a';
+                case Builder:
+                    return '6';
+                case YT:
+                    return '5';
+                case Supremo:
+                case Ultra:
+                case VIP:
+                    return 'e';
+                case MC:
+                case SC:
+                    return '1';
+                default:
+                    return '7';
+            }
+        }
     }
 }
