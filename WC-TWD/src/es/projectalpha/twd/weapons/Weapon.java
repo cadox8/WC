@@ -72,6 +72,8 @@ public class Weapon {
         snowball.setShooter(player);
         snowball.setMetadata("twd", new FixedMetadataValue(WCTWD.getInstance(), "weapon_" + getId()));
 
+        //Test
+        //player.spawnParticle(Particle.BLOCK_CRACK, player.getLocation(), 5);
         //
         player.playSound(player.getLocation(), sound, 1, 1);
         particle.display(particleData, 0, 0, 0, 1, 3, player.getLocation(), 20);
