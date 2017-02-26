@@ -164,8 +164,10 @@ public class FichasShopEvent implements Listener{
                     addRemove(e.getClick(), 1, FichasMenu.amount, p);
                     break;
                 case 8:
+                    e.getClickedInventory().setItem(8, new ItemStack(Material.AIR)); //Por si acaso
+                    e.getCurrentItem().setType(Material.AIR);
                     for (int x = 0; x < FichasMenu.amount; x++) {
-                        new SpinAnimation(p, FichasMenu.fichas, FichasMenu.amount).runTaskTimer(plugin, 0, 15);
+                        new SpinAnimation(p, FichasMenu.fichas, FichasMenu.amount).runTaskTimer(plugin, 1, 15);
                     }
                     break;
                 default:
