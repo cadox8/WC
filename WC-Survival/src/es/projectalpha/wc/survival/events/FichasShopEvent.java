@@ -35,7 +35,7 @@ public class FichasShopEvent implements Listener{
     public Inventory casinoInventory;
     public Inventory fichasInventory;
     public Inventory interInventory;
-    private WCFichas fichas;
+    private WCFichas.Fichas fichas;
     private String fName = ChatColor.GOLD + ChatColor.BOLD.toString() + "Casino Fichas";
     private Economy eco = WCSurvival.getInstance().getEco();
     YamlConfiguration files = WCSurvival.getInstance().getFiles().getCasino();
@@ -149,29 +149,10 @@ public class FichasShopEvent implements Listener{
         }
         //Maquina
         if (e.getClickedInventory().getName().equalsIgnoreCase("Fichas")) {
-            switch (e.getSlot()) {
-                case 0:
-                    ficha = WCFichas.Fichas.FICHA_1;
-                    break;
-                case 1:
-                    ficha = WCFichas.Fichas.FICHA_10;
-                    break;
-                case 2:
-                    ficha = WCFichas.Fichas.FICHA_50;
-                    break;
-                case 3:
-                    ficha = WCFichas.Fichas.FICHA_100;
-                    break;
-                case 4:
-                    ficha = WCFichas.Fichas.FICHA_200;
-                    break;
-                case 5:
-                    ficha = WCFichas.Fichas.FICHA_500;
-                    break;
-                default:
-                    break;
-            }
-            FichasMenu.openCasino(p, ficha, 1);
+            if (e.getCurrentItem() == null) return;
+            fichas = WCFichas.parseFichas(e.getCurrentItem());
+            if (fichas == WCFichas.Fichas.BASURA_1) return;
+            FichasMenu.openCasino(p, fichas, 1);
         }
 
         if (e.getClickedInventory().getName().equalsIgnoreCase("Casino")) {
