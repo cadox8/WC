@@ -60,12 +60,8 @@ public class WCSurvival extends JavaPlugin {
     private void registerEvents() {
         new Sit(instance);
         new PlayerEvent(instance);
-        //new HTWMEvent(this);
         new IronElevators(instance);
         new FichasShopEvent(instance);
-        //new IntercShopEvent(this);
-        //new PremiosShopEvent(this);
-        //new CasinoInvEvent(this);
     }
 
     private void register(){

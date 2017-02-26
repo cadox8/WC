@@ -36,6 +36,7 @@ public class Sit implements Listener{
 
         if (e.getItem() == null){
             if (e.getAction() == Action.RIGHT_CLICK_BLOCK){
+                if(!(p.getInventory().getItemInMainHand().equals(null))) return;
                 b = e.getClickedBlock();
                 if (isStairs(b.getType())) {
                     if(!p.isSneaking() && p.getVehicle() != null) {
