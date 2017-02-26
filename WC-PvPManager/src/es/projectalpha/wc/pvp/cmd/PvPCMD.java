@@ -1,5 +1,6 @@
 package es.projectalpha.wc.pvp.cmd;
 
+import es.projectalpha.wc.core.WCCore;
 import es.projectalpha.wc.core.api.WCUser;
 import es.projectalpha.wc.core.cmd.WCCmd;
 import es.projectalpha.wc.pvp.WCPvP;
@@ -110,7 +111,7 @@ public class PvPCMD extends WCCmd {
 
 				if(args[0].equalsIgnoreCase("disable")){
 					if(manager.isNewbie(user.getPlayer())){
-						WCPvP.getInstance().pvpCooldown.remove(user.getPlayer());
+						WCPvP.getManager().removeNoobie(user.getPlayer());
 						user.sendMessage(Message.prefix + ChatColor.GRAY + " Has desactivado tu protección de novato, ahora puedes ser golpeado por otros jugadores");
 					}else{
 						user.sendMessage(Message.prefix + ChatColor.DARK_RED + " Ya has desactivado tu protección de novato, no puedes hacerlo de nuevo.");

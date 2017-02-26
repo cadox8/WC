@@ -60,6 +60,16 @@ public class Manager {
 		if(noobc.isCoolingDown(p)) return;
 		noobc.setOnCooldown(p);
 	}
+
+	public void removePvP(Player p){
+		pvpc.removeCooldown(p);
+	}
+	public void removeCooldown(Player p){
+		cmdc.removeCooldown(p);
+	}
+	public void removeNoobie(Player p){
+		noobc.removeCooldown(p);
+	}
 	
 	public boolean isNewbie(Player p){
 		return noobc.isCoolingDown(p);
