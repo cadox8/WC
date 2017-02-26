@@ -11,14 +11,12 @@ import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
-import org.bukkit.Location;
-import org.bukkit.OfflinePlayer;
-import org.bukkit.Sound;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -88,6 +86,10 @@ public class WCUser {
     }
     public void teleport(World world){
         teleport(world.getSpawnLocation());
+    }
+
+    public void removeItemInHand(){
+        getPlayer().getInventory().setItemInMainHand(new ItemStack(Material.AIR));
     }
 
     public void toggleAdminChat() {
