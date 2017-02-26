@@ -41,27 +41,32 @@
         </repository>
     </repositories>
     <dependencies>
+        <!-- WC repo -->
         <dependency>
             <groupId>es.projectalpha</groupId>
             <artifactId>WC-Core</artifactId>
             <version>LATEST</version>
         </dependency>
+        <!-- Spigot repo -->
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
             <version>1.11-R0.1-SNAPSHOT</version>
         </dependency>
+        <!-- Lombok repo -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.14.8</version>
             <scope>provided</scope>
         </dependency>
+        <!-- Vault repo -->
         <dependency>
             <groupId>net.milkbowl.vault</groupId>
             <artifactId>VaultAPI</artifactId>
             <version>LATEST</version>
         </dependency>
+        <!-- WorldGuard repo -->
         <dependency>
             <groupId>com.sk89q</groupId>
             <artifactId>worldguard</artifactId>
