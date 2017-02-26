@@ -8,19 +8,12 @@ import es.projectalpha.wc.pvp.files.Files;
 import es.projectalpha.wc.pvp.files.Lang;
 import es.projectalpha.wc.pvp.manager.Manager;
 import net.milkbowl.vault.economy.Economy;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import java.util.HashMap;
 
 @SuppressWarnings("LossyEncoding")
 public class WCPvP extends JavaPlugin {
 
-	public HashMap<Player, Integer> cooldown = new HashMap<>();
-    public HashMap<Player, Integer> pvpCooldown = new HashMap<>();
-    public HashMap<Player, Integer> newbieCooldown = new HashMap<>();
-	//
 	private Files files = new Files();
 	private Lang lang = new Lang();
 
@@ -37,7 +30,6 @@ public class WCPvP extends JavaPlugin {
 		files.setupFiles();
 		lang.setupLang();
 
-		//startCooldowns();
 		registerEvents();
 		registerCommands();
 
