@@ -42,7 +42,8 @@ public class MainRun extends BukkitRunnable {
             time--;
             join.put(user, time);
             if (join.get(user) == 0){
-                //TODO: Dinero
+                WCSurvival.getInstance().getEco().depositPlayer(p, 2000);
+                user.sendMessage("Has conseguido 2000$ por estar una hora conectado.");
                 join.put(user, 3600);
             }
 
@@ -141,10 +142,6 @@ public class MainRun extends BukkitRunnable {
                 p.setWalkSpeed(0.2f);
             }
         }
-    }
-
-    private void online(Player p){
-
     }
 
     @AllArgsConstructor
