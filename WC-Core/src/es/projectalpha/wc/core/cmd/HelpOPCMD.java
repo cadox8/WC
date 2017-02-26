@@ -15,7 +15,7 @@ public class HelpOPCMD extends WCCmd{
 
     @Override
     public void run(WCUser user, String label, String[] args) {
-        if (temp.isCoolingDown(user.getPlayer())){
+        if (temp.isCoolingDown(user.getName())){
             user.sendMessagePrefix("&cEl comando está en cooldown");
             return;
         }

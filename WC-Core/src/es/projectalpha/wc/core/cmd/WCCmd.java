@@ -35,6 +35,10 @@ public abstract class WCCmd {
         this(name, grupo, Arrays.asList(aliase));
     }
 
+    public WCCmd(final String name, final Grupo grupo){
+        this(name, grupo, "");
+    }
+
     public void run(ConsoleCommandSender sender, String label, String[] args) {
         run((CommandSender) sender, label, args);
     }
