@@ -10,7 +10,7 @@
         <!-- Globales -->
         <module>WC-Core</module>
 
-        <!-- Survival-->
+        <!-- Survival -->
         <module>WC-Survival</module>
         <module>WC-SafariNet</module>
         <module>WC-PvPManager</module>
