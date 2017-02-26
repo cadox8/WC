@@ -21,6 +21,8 @@ public class FileManager {
         }
         if (!fileConfig.exists()){
             fileConfig.mkdir();
+
+            config.set("bounds", "world%0.0%0.0%0.0%0.0%0.0;world%0.0%0.0%0.0%0.0%0.0");
         }
         saveFiles();
     }

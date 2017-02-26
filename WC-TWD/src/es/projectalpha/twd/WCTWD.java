@@ -1,9 +1,6 @@
 package es.projectalpha.twd;
 
-import es.projectalpha.twd.cmd.GaussCMD;
-import es.projectalpha.twd.cmd.MoneyCMD;
-import es.projectalpha.twd.cmd.TWDCMD;
-import es.projectalpha.twd.cmd.WeaponCMD;
+import es.projectalpha.twd.cmd.*;
 import es.projectalpha.twd.events.*;
 import es.projectalpha.twd.manager.ChestManager;
 import es.projectalpha.twd.manager.FileManager;
@@ -12,6 +9,7 @@ import es.projectalpha.twd.mobs.Mobs;
 import es.projectalpha.twd.task.GameTask;
 import es.projectalpha.twd.teams.Teams;
 import es.projectalpha.twd.weapons.Weapon;
+import es.projectalpha.wc.core.WCCommands;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -43,26 +41,23 @@ public class WCTWD extends JavaPlugin{
         registerEvents();
         registerCommands();
 
-        worldManager.setWorldFlags();
         //chestManager.fillChests();
         fileManager.initFiles();
 
-        // Just to protect the server
-        worldManager.setWorldFlags();
-        worldManager.exterminate();
+        worldManager.initWorld();
         //
 
-        new GameTask().runTaskTimer(this, 0, 20);
+        new GameTask(instance, getServer().getWorld("TWD")).runTaskTimer(this, 0, 20);
     }
 
     private void registerEvents(){
         PluginManager pm = getServer().getPluginManager();
 
-        pm.registerEvents(new Thirst(this), this);
-        pm.registerEvents(new Weapons(this), this);
-        pm.registerEvents(new WeaponShop(this), this);
-        pm.registerEvents(new GaussShop(this), this);
-        pm.registerEvents(new WorldInteract(this), this);
+        pm.registerEvents(new Thirst(instance), instance);
+        pm.registerEvents(new Weapons(instance), instance);
+        pm.registerEvents(new WeaponShop(instance), instance);
+        pm.registerEvents(new GaussShop(instance), instance);
+        pm.registerEvents(new WorldInteract(instance), instance);
     }
 
     private void registerManagers(){
@@ -74,19 +69,11 @@ public class WCTWD extends JavaPlugin{
     }
 
     private void registerCommands(){
-        getCommand("loc").setExecutor(new TWDCMD());
-        getCommand("prision").setExecutor(new TWDCMD());
-        getCommand("woodbury").setExecutor(new TWDCMD());
-        getCommand("gauss").setExecutor(new GaussCMD());
-        getCommand("weapon").setExecutor(new WeaponCMD());
-        getCommand("dinero").setExecutor(new MoneyCMD());
-        getCommand("twd_help").setExecutor(new TWDCMD());
-
-        getCommand("zom").setExecutor(new TWDCMD());
+        WCCommands.register(new GaussCMD(), new MoneyCMD(), new PrisionCMD(), new TWDCMD(), new WeaponCMD(), new WoodburyCMD());
     }
 
     public void onDisable(){
-        Bukkit.getScheduler().cancelTasks(this);
+        Bukkit.getScheduler().cancelTasks(instance);
     }
 
     public static TWDPlayer getPlayer(OfflinePlayer p){

@@ -1,22 +1,18 @@
 package es.projectalpha.twd.cmd;
 
 import es.projectalpha.twd.events.GaussShop;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
+import es.projectalpha.wc.core.api.WCUser;
+import es.projectalpha.wc.core.cmd.WCCmd;
 
-public class GaussCMD implements CommandExecutor {
-    @Override
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+public class GaussCMD extends WCCmd {
 
-        if(cmd.getName().equalsIgnoreCase("gauss")){
-            Player p = (Player) sender;
-            if(args.length >= 0){
-                p.openInventory(new GaussShop().gaussShop);
-            }
+    public GaussCMD() {
+        super("gauss", Grupo.Craftero);
+    }
+
+    public void run(WCUser user, String label, String[] args) {
+        if (args.length >= 0) {
+            user.getPlayer().openInventory(new GaussShop().gaussShop);
         }
-
-        return false;
     }
 }

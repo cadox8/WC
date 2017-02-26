@@ -37,6 +37,7 @@ public class WorldInteract implements Listener{
             if (b instanceof Chest) {
                 Chest c = (Chest)b;
                 e.setCancelled(true);
+                p.closeInventory();
                 this.plugin.getChestManager().openChest(c, p);
                 return;
             }
@@ -91,8 +92,6 @@ public class WorldInteract implements Listener{
 
         if (e.getSpawnReason().equals(CreatureSpawnEvent.SpawnReason.CUSTOM) && e.getEntity() instanceof Zombie){
             System.out.println("Zombie intentado spawnear");
-
-            //plugin.getEntityManager().spawnCustomZombie(e.getLocation(), new Random().nextBoolean(), CustomEntity.MobType.NORMAL);
         }
     }
 

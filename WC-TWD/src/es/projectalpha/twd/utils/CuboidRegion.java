@@ -21,12 +21,12 @@ public class CuboidRegion {
             this.corner2 = corner2;
             world = corner1.getWorld();
         } else {
-            throw new IllegalArgumentException("Corners must be in same World");
+            throw new IllegalArgumentException("Illo, que te has ido a otro mundo!");
         }
     }
 
     public List<Block> toArray() {
-        List<Block> result = new ArrayList();
+        List<Block> result = new ArrayList<>();
 
         int minX = Math.min(corner1.getX(), corner2.getX());
         int minZ = Math.min(corner1.getZ(), corner2.getZ());
@@ -69,10 +69,13 @@ public class CuboidRegion {
     @Override
     public String toString() {
         Location l = corner1.getLocation();
-        String s = String.valueOf(new StringBuilder(String.valueOf(world.getName())).append("%").append(l.getBlockX()).toString()) + "%" + String.valueOf(l.getBlockY()) + "%" + String.valueOf(l.getBlockZ());
+        String s = String.valueOf(new StringBuilder(String.valueOf(world.getName())).append("%").append(l.getBlockX()).toString())
+                + "%" + String.valueOf(l.getBlockY()) + "%" + String.valueOf(l.getBlockZ())
+                + "%" + String.valueOf(l.getPitch() + "%" + String.valueOf(l.getYaw()));
         Location l1 = corner2.getLocation();
-        String s1 = String.valueOf(new StringBuilder(String.valueOf(world.getName())).append("%").append(l1.getBlockX()).toString()) + "%" + String.valueOf(l1.getBlockY()) + "%" + String.valueOf(l1.getBlockZ());
-        String result = s + ";" + s1;
-        return result;
+        String s1 = String.valueOf(new StringBuilder(String.valueOf(world.getName())).append("%").append(l1.getBlockX()).toString())
+                + "%" + String.valueOf(l1.getBlockY()) + "%" + String.valueOf(l1.getBlockZ()
+                + "%" + String.valueOf(l.getPitch() + "%" + String.valueOf(l.getYaw())));
+        return s + ";" + s1;
     }
 }

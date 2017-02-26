@@ -1,7 +1,8 @@
 package es.projectalpha.twd.manager;
 
+import es.projectalpha.twd.WCTWD;
 import es.projectalpha.twd.utils.AllItems;
-import es.projectalpha.twd.utils.Cooldown;
+import es.projectalpha.wc.core.utils.Cooldown;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.block.Chest;
@@ -14,16 +15,18 @@ import java.util.Random;
 
 public class ChestManager {
 
-    private Cooldown cooldown;
+    private Cooldown cooldown = new Cooldown(120);
     private Random r = new Random();
 
     public ChestManager(){}
 
     public void openChest(Chest chest, Player p){
         AllItems items = new AllItems();
-        cooldown = new Cooldown(60);
 
-        if (cooldown.isCoolingDown(chest)) return;
+        if (cooldown.isCoolingDown(chest)) {
+            WCTWD.getPlayer(p).sendMessage("&cEste cofre está en cooldown. Tiempo &6" + cooldown.getTimeLeft(chest));
+            return;
+        }
         cooldown.setOnCooldown(chest);
 
         Inventory inv = Bukkit.createInventory(null, 36, ChatColor.RED + "Cofre de Recursos");
@@ -46,6 +49,7 @@ public class ChestManager {
         }
 
         aleatorios.forEach(i -> setItem(inv, getSlot(r, inv), i));
+        p.closeInventory();
         p.openInventory(inv);
     }
 
