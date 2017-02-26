@@ -1,6 +1,7 @@
 package es.projectalpha.wc.survival.task;
 
 import es.projectalpha.wc.core.WCCore;
+import es.projectalpha.wc.core.api.WCServer;
 import es.projectalpha.wc.core.api.WCUser;
 import es.projectalpha.wc.core.cmd.WCCmd;
 import es.projectalpha.wc.survival.WCSurvival;
@@ -20,12 +21,14 @@ import java.util.HashMap;
 
 public class MainRun extends BukkitRunnable {
 
+    private WCSurvival plugin;
     private Files files;
 
     @Getter private HashMap<WCUser, Integer> join;
 
-    public MainRun(WCSurvival Main){
-        files = Main.getFiles();
+    public MainRun(WCSurvival plugin){
+        this.plugin = plugin;
+        files = plugin.getFiles();
         join = new HashMap<>();
     }
 
@@ -38,16 +41,22 @@ public class MainRun extends BukkitRunnable {
             fly(user);
             items(p);
 
+            if (WCServer.afkMode.contains(user)){
+                join.remove(user);
+            } else {
+                join.put(user, 3600);
+            }
+
             int time = join.get(user);
             time--;
             join.put(user, time);
             if (join.get(user) == 0){
-                WCSurvival.getInstance().getEco().depositPlayer(p, 2000);
+                plugin.getEco().depositPlayer(p, 2000);
                 user.sendMessage("Has conseguido 2000$ por estar una hora conectado.");
                 join.put(user, 3600);
             }
-
             if (count == 180){
+                count = 0;
                 user.sendActionBar(WCSurvival.getInstance().getInfo().getInfoMsg());
             }
         });
