@@ -36,9 +36,6 @@ public class WCPvP extends JavaPlugin {
         if (economyProvider != null) {
             vault = economyProvider.getProvider();
         }
-        
-    
-
 
         System.out.println("Pvpmanager ha sido cargado");
 	}
