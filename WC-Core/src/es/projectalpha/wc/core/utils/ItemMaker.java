@@ -116,4 +116,9 @@ public class ItemMaker {
     public ItemStack build() {
         return this.itemStack;
     }
+
+    public static ItemStack setAmount(ItemStack itemStack, int amount){
+        itemStack.setAmount(amount);
+        return itemStack;
+    }
 }
