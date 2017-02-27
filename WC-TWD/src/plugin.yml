@@ -3,21 +3,3 @@ main: es.projectalpha.twd.WCTWD
 authors: [cadox8, Wikijito7]
 version: ${project.version}
 depend: [WC-Core]
-
-commands:
-  twd_help:
-    description: twd
-  gauss:
-    description: gauss
-  weapon:
-    description: weapon
-  dinero:
-    description: money
-  woodbury:
-    description: woodbury
-  prision:
-    description: prision
-  loc:
-    description: loc
-  zom:
-    description: loc
