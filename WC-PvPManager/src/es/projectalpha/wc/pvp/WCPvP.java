@@ -11,7 +11,6 @@ import net.milkbowl.vault.economy.Economy;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
-@SuppressWarnings("LossyEncoding")
 public class WCPvP extends JavaPlugin {
 
 	private Files files = new Files();
