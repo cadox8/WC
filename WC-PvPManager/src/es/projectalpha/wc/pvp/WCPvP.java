@@ -1,6 +1,7 @@
 package es.projectalpha.wc.pvp;
 
 import es.projectalpha.wc.core.WCCommands;
+import es.projectalpha.wc.core.WCCore;
 import es.projectalpha.wc.pvp.cmd.PvPCMD;
 import es.projectalpha.wc.pvp.events.EntityEvent;
 import es.projectalpha.wc.pvp.events.PlayerEvent;
@@ -37,12 +38,12 @@ public class WCPvP extends JavaPlugin {
             vault = economyProvider.getProvider();
         }
 
-        System.out.println("Pvpmanager ha sido cargado");
+        WCCore.getInstance().log("Pvpmanager ha sido cargado");
 	}
 
 	public void onDisable(){
 		//TODO: Save Files
-		System.out.println("Pvpmanager ha sido descargado");
+        WCCore.getInstance().log("Pvpmanager ha sido descargado");
 	}
 
 	private void registerEvents(){
