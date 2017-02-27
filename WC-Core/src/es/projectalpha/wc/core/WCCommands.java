@@ -94,7 +94,9 @@ public class WCCommands implements TabCompleter {
             c.setAccessible(true);
 
             command = c.newInstance(name, WCCore.getInstance());
-        } catch (Exception e) {}
+        } catch (Exception e) {
+            plugin.debugLog("El comando no se puede obtener");
+        }
         return command;
     }
 
