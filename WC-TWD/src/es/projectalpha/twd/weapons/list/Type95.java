@@ -15,6 +15,7 @@ public class Type95 extends Weapon {
         super(id, Material.STONE_PICKAXE, "Type95", lore);
 
         setAmmo(new Gun());
+        setShootCooldown(500);
     }
 
     public double damage(){
@@ -29,5 +30,4 @@ public class Type95 extends Weapon {
     public int maxBullets(){
         return 30;
     }
-    public double shotsPerSecond() { return 1.5; }
 }

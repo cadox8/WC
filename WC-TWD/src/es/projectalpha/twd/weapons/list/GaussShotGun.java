@@ -12,6 +12,8 @@ public class GaussShotGun extends Weapon {
 
     public GaussShotGun(int id){
         super(id, Material.GOLD_BARDING, "Escopeta Gauss", lore);
+
+        setShootCooldown(1000);
     }
 
     public double damage(){
@@ -26,6 +28,7 @@ public class GaussShotGun extends Weapon {
     public int maxBullets(){
         return 8;
     }
-    public double shotsPerSecond() { return 1; }
-
+    public double distance(){
+        return 1;
+    }
 }

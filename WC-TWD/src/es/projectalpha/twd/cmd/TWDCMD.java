@@ -23,6 +23,9 @@ public class TWDCMD extends WCCmd {
         economy = new Economy(p);
 
         if (args.length == 0) {
+            user.sendDiv();
+            user.sendMessage("");
+            user.sendDiv();
         }
 
         if (args.length == 2) {

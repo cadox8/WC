@@ -19,6 +19,7 @@ public class Grenade extends Weapon {
         setParticle(ParticleEffect.SMOKE_NORMAL);
         setSound(Sound.BLOCK_REDSTONE_TORCH_BURNOUT);
         setAmmo(new Grenades());
+        setShootCooldown(1000);
     }
 
     public double damage(){
@@ -32,8 +33,5 @@ public class Grenade extends Weapon {
     }
     public int maxBullets(){
         return 0;
-    }
-    public double shotsPerSecond() {
-        return 1;
     }
 }

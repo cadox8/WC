@@ -29,6 +29,4 @@ public class Carabina extends Weapon {
     public int maxBullets(){
         return 6;
     }
-    public double shotsPerSecond() { return 3; }
-
 }

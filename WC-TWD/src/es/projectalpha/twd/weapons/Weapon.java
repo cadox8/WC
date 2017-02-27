@@ -51,6 +51,9 @@ public class Weapon {
     @Getter @Setter private ParticleEffect particle = ParticleEffect.BLOCK_CRACK;
     @Getter @Setter private ParticleEffect.ParticleData particleData = new ParticleEffect.BlockData(Material.STAINED_CLAY, (byte)9);
 
+    //Just cooldown
+    @Getter @Setter private long lastAttackTimer, shootCooldown = 400, attackTimer = shootCooldown;
+
     public Weapon(int id, Material material, String name, List<String> lore) {
         this.id = id;
         this.name = ChatColor.RESET + name;
@@ -62,18 +65,20 @@ public class Weapon {
 
     //Default Methods
     public void shoot(Player player){
+        setAttackTimer(getAttackTimer() + System.currentTimeMillis() - getLastAttackTimer());
+        setLastAttackTimer(System.currentTimeMillis());
+        if(getAttackTimer() < getShootCooldown()) return;
+
         if (hasBullets()) {
             System.out.println("Tiene balas: " + Integer.parseInt(lore.get(lore.size() - 1).split(" ")[1]));
             youShotM8();
         }
 
         Snowball snowball = player.getWorld().spawn(player.getEyeLocation(), Snowball.class);
-        snowball.setVelocity(player.getLocation().getDirection().multiply(1.5));
+        snowball.setVelocity(player.getLocation().getDirection().multiply(distance()));
         snowball.setShooter(player);
         snowball.setMetadata("twd", new FixedMetadataValue(WCTWD.getInstance(), "weapon_" + getId()));
 
-        //Test
-        //player.spawnParticle(Particle.BLOCK_CRACK, player.getLocation(), 5);
         //
         player.playSound(player.getLocation(), sound, 1, 1);
         particle.display(particleData, 0, 0, 0, 1, 3, player.getLocation(), 20);
@@ -84,7 +89,7 @@ public class Weapon {
             player.removePotionEffect(PotionEffectType.SLOW);
             return;
         }
-        player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 99999, 200));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 99999, 5));
     }
 
     public double damage(){
@@ -99,8 +104,8 @@ public class Weapon {
     public int maxBullets(){
         return -1;
     }
-    public double shotsPerSecond(){
-        return -1;
+    public double distance(){
+        return 1.5;
     }
     //
 

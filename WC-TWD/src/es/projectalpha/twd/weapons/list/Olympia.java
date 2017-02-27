@@ -15,6 +15,7 @@ public class Olympia extends Weapon {
         super(id, Material.STONE_HOE, "Olympia", lore);
 
         setAmmo(new Shotgun());
+        setShootCooldown(1500);
     }
 
     public double damage(){
@@ -29,5 +30,7 @@ public class Olympia extends Weapon {
     public int maxBullets(){
         return 2;
     }
-    public double shotsPerSecond() { return 0.5; }
+    public double distance(){
+        return 1.9;
+    }
 }

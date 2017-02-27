@@ -71,7 +71,7 @@ public class GameTask extends BukkitRunnable{
             Location location = plugin.getWorldManager().getCuboidRegion().getRandomLocation();
             Mobs.MobType mt;
 
-            if (new Random().nextInt(4) >= 3){
+            if (new Random().nextInt(5) >= 3){
                 mt = Mobs.MobType.SPECIAL;
             } else {
                 mt = Mobs.MobType.NORMAL;

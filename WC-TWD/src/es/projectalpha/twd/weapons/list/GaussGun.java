@@ -12,6 +12,8 @@ public class GaussGun extends Weapon {
 
     public GaussGun(int id){
         super(id, Material.IRON_BARDING, "Pistola Gauss", lore);
+
+        setShootCooldown(1000);
     }
 
     public double damage(){
@@ -26,5 +28,7 @@ public class GaussGun extends Weapon {
     public int maxBullets(){
         return 16;
     }
-    public double shotsPerSecond() { return 1; }
+    public double distance(){
+        return 3;
+    }
 }
