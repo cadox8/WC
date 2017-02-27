@@ -65,24 +65,20 @@ public class WCCommands implements TabCompleter {
     public static void register(WCCmd cmd) {
         CommandMap commandMap = getCommandMap();
         PluginCommand command = getCmd(cmd.getName());
-        if (command.isRegistered()) {
-            command.unregister(commandMap);
-        }
+
+        if (command.isRegistered()) command.unregister(commandMap);
 
         command.setAliases(cmd.getAliases());
         command.setTabCompleter(ucmds);
 
-        if (commandMap == null) {
-            return;
-        }
+        if (commandMap == null) return;
+
         commandMap.register(WCCore.getInstance().getDescription().getName(), command);
 
         //Añadir a la lista por si se registra desde otro plugin:
-        if (!cmds.contains(cmd)) {
-            cmds.add(cmd);
-        }
+        if (!cmds.contains(cmd)) cmds.add(cmd);
 
-        if (plugin.getServer().getPluginCommand("wcccore:" + cmd.getName()) == null) {
+        if (plugin.getServer().getPluginCommand("wc-core:" + cmd.getName()) == null) {
             WCCore.getInstance().log(WCServer.Level.WARNING, "Error al cargar el comando /" + cmd.getName());
         }
     }
@@ -101,8 +97,8 @@ public class WCCommands implements TabCompleter {
     }
 
     public static void onCmd(final CommandSender sender, Command cmd, String label, final String[] args) {
-        if (label.startsWith("wcccore:")) {
-            label = label.replaceFirst("wcccore:", "");
+        if (label.startsWith("wc-core:")) {
+            label = label.replaceFirst("wc-core:", "");
         }
         for (WCCmd cmdr : cmds) {
             if (label.equals(cmdr.getName()) || cmdr.getAliases().contains(label)) {
@@ -129,8 +125,8 @@ public class WCCommands implements TabCompleter {
     @Override
     public List<String> onTabComplete(CommandSender sender, Command cmd, String label, String[] args) {
         List<String> rtrn = null;
-        if (label.startsWith("wcccore:")) {
-            label = label.replaceFirst("wcccore:", "");
+        if (label.startsWith("wc-core:")) {
+            label = label.replaceFirst("wc-core:", "");
         }
         /*
         * Auto Complete normal para cada comando si está declarado
