@@ -33,5 +33,4 @@ public class RacistGrenade extends Weapon {
     public int maxBullets(){
         return 0;
     }
-    public double shotsPerSecond() { return 1; }
 }

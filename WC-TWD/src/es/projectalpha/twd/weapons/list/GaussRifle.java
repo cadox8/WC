@@ -12,6 +12,8 @@ public class GaussRifle extends Weapon {
 
     public GaussRifle(int id){
         super(id, Material.DIAMOND_BARDING, "Fusil Gauss", lore);
+
+        setShootCooldown(250);
     }
 
     public double damage(){
@@ -26,7 +28,6 @@ public class GaussRifle extends Weapon {
     public int maxBullets(){
         return 120;
     }
-    public double shotsPerSecond() { return 4; }
     public double distance(){
         return 10;
     }

@@ -51,6 +51,9 @@ public class Weapon {
     @Getter @Setter private ParticleEffect particle = ParticleEffect.BLOCK_CRACK;
     @Getter @Setter private ParticleEffect.ParticleData particleData = new ParticleEffect.BlockData(Material.STAINED_CLAY, (byte)9);
 
+    //Just cooldown
+    @Getter @Setter private long lastAttackTimer, shootCooldown = 400, attackTimer = shootCooldown;
+
     public Weapon(int id, Material material, String name, List<String> lore) {
         this.id = id;
         this.name = ChatColor.RESET + name;
@@ -62,6 +65,10 @@ public class Weapon {
 
     //Default Methods
     public void shoot(Player player){
+        setAttackTimer(getAttackTimer() + System.currentTimeMillis() - getLastAttackTimer());
+        setLastAttackTimer(System.currentTimeMillis());
+        if(getAttackTimer() < getShootCooldown()) return;
+
         if (hasBullets()) {
             System.out.println("Tiene balas: " + Integer.parseInt(lore.get(lore.size() - 1).split(" ")[1]));
             youShotM8();
@@ -95,9 +102,6 @@ public class Weapon {
         return -1;
     }
     public int maxBullets(){
-        return -1;
-    }
-    public double shotsPerSecond(){
         return -1;
     }
     public double distance(){

@@ -16,6 +16,7 @@ public class Python extends Weapon {
         super(id, Material.WOOD_HOE, "Python", lore);
 
         setAmmo(new Gun());
+        setShootCooldown(1000);
     }
 
     public void watch(Player player){}
@@ -32,5 +33,4 @@ public class Python extends Weapon {
     public int maxBullets(){
         return 9;
     }
-    public double shotsPerSecond() { return 1; }
 }

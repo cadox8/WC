@@ -17,6 +17,7 @@ public class Bazooka extends Weapon {
 
         setSound(Sound.BLOCK_ANVIL_BREAK);
         setAmmo(new Grenades());
+        setShootCooldown(1750);
     }
 
     public double damage() {
