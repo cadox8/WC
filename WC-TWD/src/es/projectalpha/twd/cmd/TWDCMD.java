@@ -3,10 +3,11 @@ package es.projectalpha.twd.cmd;
 import es.projectalpha.twd.WCTWD;
 import es.projectalpha.twd.economy.Economy;
 import es.projectalpha.twd.manager.FileManager;
-import es.projectalpha.twd.utils.Messages;
+import es.projectalpha.twd.mobs.Mobs;
 import es.projectalpha.twd.utils.Parsers;
 import es.projectalpha.wc.core.api.WCUser;
 import es.projectalpha.wc.core.cmd.WCCmd;
+import es.projectalpha.wc.core.utils.Messages;
 import org.bukkit.entity.Player;
 
 public class TWDCMD extends WCCmd {
@@ -34,13 +35,17 @@ public class TWDCMD extends WCCmd {
                 fileManager.getConfig().set("prision", Parsers.locationToString(p.getLocation()));
                 fileManager.saveFiles();
                 p.sendMessage(Messages.locationSet(args[0]));
+                WCTWD.getInstance().getFileManager().saveFiles();
             }
             if (args[0].equalsIgnoreCase("woodbury")) {
                 fileManager.getConfig().set("woodbury", Parsers.locationToString(p.getLocation()));
                 fileManager.saveFiles();
                 p.sendMessage(Messages.locationSet(args[0]));
+                WCTWD.getInstance().getFileManager().saveFiles();
             }
-            WCTWD.getInstance().getFileManager().saveFiles();
+            if (args[0].equalsIgnoreCase("boss")){
+                WCTWD.getInstance().getMobs().spawnMob(user.getPlayer().getLocation(), Mobs.BossType.GIANT);
+            }
         }
     }
 }

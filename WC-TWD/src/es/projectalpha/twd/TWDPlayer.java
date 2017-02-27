@@ -1,8 +1,8 @@
 package es.projectalpha.twd;
 
-import es.projectalpha.twd.utils.ItemMaker;
 import es.projectalpha.twd.weapons.Weapon;
 import es.projectalpha.wc.core.api.WCUser;
+import es.projectalpha.wc.core.utils.ItemMaker;
 import org.bukkit.OfflinePlayer;
 
 import java.util.UUID;

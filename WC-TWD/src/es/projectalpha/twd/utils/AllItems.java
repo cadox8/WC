@@ -2,6 +2,7 @@ package es.projectalpha.twd.utils;
 
 import es.projectalpha.twd.weapons.Weapon;
 import es.projectalpha.twd.ammo.list.*;
+import es.projectalpha.wc.core.utils.ItemMaker;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;

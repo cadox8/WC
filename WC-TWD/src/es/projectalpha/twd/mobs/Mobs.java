@@ -30,6 +30,10 @@ public class Mobs {
         spawnMob(mobType, location, BossType.NOPE);
     }
 
+    public void spawnMob(Location location, BossType bossType){
+        spawnMob(MobType.BOSS, location, bossType);
+    }
+
     public void spawnMob(MobType mobType, Location location, BossType bossType){
         World w = location.getWorld();
         switch (mobType){

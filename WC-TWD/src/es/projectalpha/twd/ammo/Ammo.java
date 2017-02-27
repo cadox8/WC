@@ -1,9 +1,9 @@
 package es.projectalpha.twd.ammo;
 
 import es.projectalpha.twd.TWDPlayer;
-import es.projectalpha.twd.utils.ItemMaker;
 import es.projectalpha.twd.utils.Parsers;
 import es.projectalpha.twd.weapons.Weapon;
+import es.projectalpha.wc.core.utils.ItemMaker;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
