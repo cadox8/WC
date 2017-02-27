@@ -27,4 +27,7 @@ public class GaussRifle extends Weapon {
         return 120;
     }
     public double shotsPerSecond() { return 4; }
+    public double distance(){
+        return 10;
+    }
 }

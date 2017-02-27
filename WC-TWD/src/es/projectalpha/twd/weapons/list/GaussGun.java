@@ -27,4 +27,7 @@ public class GaussGun extends Weapon {
         return 16;
     }
     public double shotsPerSecond() { return 1; }
+    public double distance(){
+        return 3;
+    }
 }

@@ -68,12 +68,10 @@ public class Weapon {
         }
 
         Snowball snowball = player.getWorld().spawn(player.getEyeLocation(), Snowball.class);
-        snowball.setVelocity(player.getLocation().getDirection().multiply(1.5));
+        snowball.setVelocity(player.getLocation().getDirection().multiply(distance()));
         snowball.setShooter(player);
         snowball.setMetadata("twd", new FixedMetadataValue(WCTWD.getInstance(), "weapon_" + getId()));
 
-        //Test
-        //player.spawnParticle(Particle.BLOCK_CRACK, player.getLocation(), 5);
         //
         player.playSound(player.getLocation(), sound, 1, 1);
         particle.display(particleData, 0, 0, 0, 1, 3, player.getLocation(), 20);
@@ -84,7 +82,7 @@ public class Weapon {
             player.removePotionEffect(PotionEffectType.SLOW);
             return;
         }
-        player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 99999, 200));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 99999, 5));
     }
 
     public double damage(){
@@ -101,6 +99,9 @@ public class Weapon {
     }
     public double shotsPerSecond(){
         return -1;
+    }
+    public double distance(){
+        return 1.5;
     }
     //
 

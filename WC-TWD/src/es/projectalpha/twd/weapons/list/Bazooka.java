@@ -34,4 +34,7 @@ public class Bazooka extends Weapon {
     public double shotsPerSecond() {
         return 0.25;
     }
+    public double distance(){
+        return 7;
+    }
 }

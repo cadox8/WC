@@ -33,5 +33,4 @@ public class Python extends Weapon {
         return 9;
     }
     public double shotsPerSecond() { return 1; }
-
 }

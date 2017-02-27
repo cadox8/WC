@@ -30,4 +30,7 @@ public class Olympia extends Weapon {
         return 2;
     }
     public double shotsPerSecond() { return 0.5; }
+    public double distance(){
+        return 1.9;
+    }
 }
