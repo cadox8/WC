@@ -29,6 +29,8 @@ public class WCCommands implements TabCompleter {
     public static List<WCCmd> cmds = new ArrayList<>();
     public static WCCommands ucmds;
 
+    private static String name = "wc-core:";
+
     public static void load() {
         cmds.add(new AdminChatCMD());
         cmds.add(new PingCMD());
@@ -78,7 +80,7 @@ public class WCCommands implements TabCompleter {
         //Añadir a la lista por si se registra desde otro plugin:
         if (!cmds.contains(cmd)) cmds.add(cmd);
 
-        if (plugin.getServer().getPluginCommand("wc-core:" + cmd.getName()) == null) {
+        if (plugin.getServer().getPluginCommand(name + cmd.getName()) == null) {
             WCCore.getInstance().log(WCServer.Level.WARNING, "Error al cargar el comando /" + cmd.getName());
         }
     }
@@ -97,8 +99,8 @@ public class WCCommands implements TabCompleter {
     }
 
     public static void onCmd(final CommandSender sender, Command cmd, String label, final String[] args) {
-        if (label.startsWith("wc-core:")) {
-            label = label.replaceFirst("wc-core:", "");
+        if (label.startsWith(name)) {
+            label = label.replaceFirst(name, "");
         }
         for (WCCmd cmdr : cmds) {
             if (label.equals(cmdr.getName()) || cmdr.getAliases().contains(label)) {
@@ -125,8 +127,8 @@ public class WCCommands implements TabCompleter {
     @Override
     public List<String> onTabComplete(CommandSender sender, Command cmd, String label, String[] args) {
         List<String> rtrn = null;
-        if (label.startsWith("wc-core:")) {
-            label = label.replaceFirst("wc-core:", "");
+        if (label.startsWith(name)) {
+            label = label.replaceFirst(name, "");
         }
         /*
         * Auto Complete normal para cada comando si está declarado

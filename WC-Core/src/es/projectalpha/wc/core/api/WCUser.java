@@ -2,6 +2,7 @@ package es.projectalpha.wc.core.api;
 
 import es.projectalpha.wc.core.WCCore;
 import es.projectalpha.wc.core.cmd.WCCmd;
+import es.projectalpha.wc.core.managers.DataManager;
 import es.projectalpha.wc.core.utils.ReflectionAPI;
 import es.projectalpha.wc.core.utils.Utils;
 import lombok.Data;
@@ -37,6 +38,7 @@ public class WCUser {
 
     public WCUser(UUID id) {
         uuid = id;
+        setUserData(new DataManager(this).parseUserData());
     }
 
     public OfflinePlayer getOfflinePlayer() {

@@ -1,6 +1,7 @@
 package es.projectalpha.wc.core.managers;
 
 import es.projectalpha.wc.core.api.WCUser;
+import es.projectalpha.wc.core.cmd.WCCmd;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -90,5 +91,14 @@ public class DataManager {
     //
     public void setGrupo(){
         setObject("Grupo", user.getUserData().getGrupo());
+    }
+
+    public WCUser.UserData parseUserData(){
+        WCUser.UserData data = new WCUser.UserData();
+        int rank = (int)getDouble("Grupo");
+
+        data.setGrupo(WCCmd.Grupo.values()[rank] == null ? WCCmd.Grupo.Craftero : WCCmd.Grupo.values()[rank]);
+
+        return data;
     }
 }

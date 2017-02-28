@@ -33,7 +33,7 @@ public class PlayerListener implements Listener{
         dataManager = new DataManager(user);
         if (dataManager.create() && dataManager.setObject("Grupo", user.getUserData().getGrupo()) &&
         dataManager.setObject("UUID", user.getUuid().toString()) &&
-        dataManager.setObject("IP", user.getPlayer().getAddress().getHostName()) &&
+        /*dataManager.setObject("IP", user.getPlayer().getAddress().getHostName()) &&*/
         dataManager.setObject("Money", 0.0) && dataManager.setObject("Clan", "")) {
             plugin.debugLog("Configuración creada para " + user.getName());
         } else {
