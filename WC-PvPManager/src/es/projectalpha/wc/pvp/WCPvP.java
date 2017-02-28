@@ -25,7 +25,8 @@ public class WCPvP extends JavaPlugin {
 
 	public void onEnable(){
 		instance = this;
-		manager = new Manager();
+		manager = new Manager(instance);
+		manager.check();
 
 		files.setupFiles();
 		lang.setupLang();

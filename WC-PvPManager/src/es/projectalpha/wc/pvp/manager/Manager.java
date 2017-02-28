@@ -1,12 +1,21 @@
 package es.projectalpha.wc.pvp.manager;
 
 
+import es.projectalpha.wc.core.WCCore;
 import es.projectalpha.wc.core.utils.Cooldown;
+import es.projectalpha.wc.pvp.WCPvP;
 import es.projectalpha.wc.pvp.files.Files;
 import org.bukkit.entity.Player;
 
 
 public class Manager {
+
+    private WCPvP plugin;
+
+    public Manager(WCPvP instance){
+        this.plugin = instance;
+    }
+
 	private Cooldown cmdc = new Cooldown(20);
 	private Cooldown pvpc = new Cooldown(25);
 	private Cooldown noobc = new Cooldown(1800);
@@ -74,4 +83,17 @@ public class Manager {
 	public boolean isNewbie(Player p){
 		return noobc.isCoolingDown(p);
 	}
+
+	public void check(){
+	    try {
+            plugin.getServer().getOnlinePlayers().forEach(p -> {
+                if (!isInPvP(p)) {
+                    //Mensaje de PvP
+                }
+            });
+            check();
+        }catch (StackOverflowError e){
+            WCCore.getInstance().debugLog("Se ha producido un StackOverflowError :D");
+        }
+    }
 }
