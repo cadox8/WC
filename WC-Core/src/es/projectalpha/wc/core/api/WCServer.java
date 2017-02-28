@@ -1,6 +1,7 @@
 package es.projectalpha.wc.core.api;
 
 import es.projectalpha.wc.core.WCCore;
+import es.projectalpha.wc.core.utils.Utils;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.bukkit.OfflinePlayer;
@@ -68,6 +69,6 @@ public class WCServer {
     }
 
     public static void log(Level level, String msg){
-        plugin.getServer().getConsoleSender().sendMessage(level.getPrefix() + " &" + level.getPrefix() + msg);
+        plugin.getServer().getConsoleSender().sendMessage(Utils.colorize(level.getPrefix() + " &" + level.getPrefix() + msg));
     }
 }
