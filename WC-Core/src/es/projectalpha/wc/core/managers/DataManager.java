@@ -23,7 +23,7 @@ public class DataManager {
     public DataManager(WCUser user){
         File f = new File(DIRECTORY);
         
-        if (!f.exists(() {
+        if (!f.exists()) {
             f.mkdir();
         }
         
