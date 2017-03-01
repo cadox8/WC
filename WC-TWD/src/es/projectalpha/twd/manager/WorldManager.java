@@ -7,6 +7,7 @@ import lombok.Getter;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Animals;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Monster;
 
@@ -43,6 +44,9 @@ public class WorldManager {
             if (e instanceof Monster || e instanceof Animals){
                 LivingEntity le = (LivingEntity)e;
                 le.damage(le.getMaxHealth());
+            }
+            if (e instanceof Item){
+                e.remove();
             }
         });
     }

@@ -2,23 +2,27 @@ package es.projectalpha.twd.events;
 
 import es.projectalpha.twd.WCTWD;
 import es.projectalpha.twd.economy.Economy;
+import es.projectalpha.twd.utils.AllItems;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
+import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.Zombie;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.*;
 import org.bukkit.event.entity.CreatureSpawnEvent;
+import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.ExplosionPrimeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.event.weather.WeatherChangeEvent;
 import org.bukkit.inventory.ItemStack;
+
+import java.util.Random;
 
 public class WorldInteract implements Listener{
 
@@ -89,10 +93,6 @@ public class WorldInteract implements Listener{
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onCreatureSpawn(CreatureSpawnEvent e) {
         if (!e.getSpawnReason().equals(CreatureSpawnEvent.SpawnReason.CUSTOM)) e.setCancelled(true);
-
-        if (e.getSpawnReason().equals(CreatureSpawnEvent.SpawnReason.CUSTOM) && e.getEntity() instanceof Zombie){
-            System.out.println("Zombie intentado spawnear");
-        }
     }
 
     @EventHandler
@@ -100,6 +100,24 @@ public class WorldInteract implements Listener{
         Player p = e.getPlayer();
 
         p.setLevel(1000);
+    }
+
+    @EventHandler
+    public void onMobDie(EntityDeathEvent e){
+        AllItems items = new AllItems();
+
+        if (e instanceof Monster){
+            e.getDrops().clear();
+            e.setDroppedExp(0);
+
+            if (new Random().nextInt(5) > 3){
+                if (new Random().nextBoolean()){
+                    ((Monster) e).getWorld().dropItemNaturally(((Monster) e).getLocation(), items.weapons.get(new Random().nextInt(items.weapons.size())));
+                } else {
+                    ((Monster) e).getWorld().dropItemNaturally(((Monster) e).getLocation(), items.health.get(new Random().nextInt(items.health.size())));
+                }
+            }
+        }
     }
 
     @EventHandler

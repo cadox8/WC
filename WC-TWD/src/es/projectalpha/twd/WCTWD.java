@@ -41,11 +41,8 @@ public class WCTWD extends JavaPlugin{
         registerEvents();
         registerCommands();
 
-        //chestManager.fillChests();
         fileManager.initFiles();
-
         worldManager.initWorld();
-        //
 
         new GameTask(instance, getServer().getWorld("TWD")).runTaskTimer(this, 0, 20);
     }
