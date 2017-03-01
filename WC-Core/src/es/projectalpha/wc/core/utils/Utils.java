@@ -113,6 +113,7 @@ public class Utils {
         return plugin.getServer().getWorld(name);
     }
 
+    //ToDo: cambiar
     public static String getCountry(WCUser user){
         try {
             URL url = new URL("http://freegeoip.net/json/" + user.getPlayer().getAddress().getHostName());
