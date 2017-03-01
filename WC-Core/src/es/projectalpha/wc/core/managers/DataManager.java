@@ -18,9 +18,15 @@ public class DataManager {
 
     private WCUser user;
 
-    private final String DIRECTORY = "userdata/";
+    private final String DIRECTORY = "home/server/userdata/";
 
     public DataManager(WCUser user){
+        File f = new File(DIRECTORY);
+        
+        if (!f.exists(() {
+            f.mkdir();
+        }
+        
         filePlayer = new File(DIRECTORY, user.getName() + ".yml");
         playerConfig = YamlConfiguration.loadConfiguration(filePlayer);
 
