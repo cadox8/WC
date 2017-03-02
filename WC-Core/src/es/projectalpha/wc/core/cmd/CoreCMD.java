@@ -11,17 +11,23 @@ public class CoreCMD extends WCCmd{
     @Override
     public void run(WCUser user, String label, String[] args) {
         if (args.length == 1) {
-            if (!user.isOnRank(Grupo.Mod)) {
+            if (!user.isOnRank(Grupo.DEV)) {
                 def(user);
                 return;
             }
 
             switch (args[0].toLowerCase()) {
-                case "toggledebug":
+                case "debug":
                     toggleDebug(user);
                     break;
-                case "reloadconfig":
+                case "reload":
                     reloadConfig(user);
+                    break;
+                case "mantenimiento":
+                    toggleMaintenance(user);
+                    break;
+                case "pruebas":
+                    togglePruebas(user);
                     break;
             }
             return;
@@ -44,5 +50,21 @@ public class CoreCMD extends WCCmd{
     private void reloadConfig(WCUser user) {
         plugin.reloadConfig();
         user.sendMessage("&eConfiguración recargada");
+    }
+
+    private void toggleMaintenance(WCUser user){
+        plugin.getConfig().set("maintenance", !plugin.isDebug());
+        plugin.saveConfig();
+
+        String main = (plugin.isMaintenance()) ? "&aActivado" : "&cDesactivado";
+        user.sendMessage("&eHas cambiado el modo Mantenimiento del WCCore a: " + main);
+    }
+
+    private void togglePruebas(WCUser user){
+        plugin.getConfig().set("pruebas", !plugin.isDebug());
+        plugin.saveConfig();
+
+        String pruebas = (plugin.isPruebas()) ? "&aActivado" : "&cDesactivado";
+        user.sendMessage("&eHas cambiado el modo Mantenimiento del WCCore a: " + pruebas);
     }
 }

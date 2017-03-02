@@ -3,13 +3,11 @@
 #Para Debug, solo activar si quieres mirar algo de los plugins
 debug: false
 
-#MySQL para guardar datos :D
-mysql:
-  host: ''
-  port: 3360
-  database: ''
-  username: ''
-  password: ''
+#Modo Mantenimiento
+maintenance: false
+
+#Modo Pruebas
+pruebas: false
 
 #Estilo de mensajes de entrada y salida del servidor. {0} es el jugador
 join: '&7[&2+&7] &6{0}'

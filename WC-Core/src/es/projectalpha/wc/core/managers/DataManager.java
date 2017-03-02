@@ -2,6 +2,7 @@ package es.projectalpha.wc.core.managers;
 
 import es.projectalpha.wc.core.api.WCUser;
 import es.projectalpha.wc.core.cmd.WCCmd;
+import es.projectalpha.wc.core.utils.Utils;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -97,6 +98,12 @@ public class DataManager {
     //
     public void setGrupo(){
         setObject("Grupo", user.getUserData().getGrupo());
+    }
+
+    public void addHome(){
+        List<String> homes = getArray("Homes").isEmpty() ? new ArrayList<>() : getArray("Homes");
+        homes.add(Utils.locationToString(user.getPlayer().getLocation()));
+        setObject("Homes", homes);
     }
 
     public WCUser.UserData parseUserData(){

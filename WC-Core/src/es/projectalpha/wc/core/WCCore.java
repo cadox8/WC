@@ -95,4 +95,13 @@ public class WCCore extends JavaPlugin {
         if (!isDebug()) return;
         log(WCServer.Level.DEBUG, msg);
     }
+
+    //Maintenance/Pruebas
+    public boolean isMaintenance(){
+        return getConfig().getBoolean("maintenance");
+    }
+
+    public boolean isPruebas(){
+        return getConfig().getBoolean("pruebas");
+    }
 }

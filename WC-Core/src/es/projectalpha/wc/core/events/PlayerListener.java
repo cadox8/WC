@@ -3,6 +3,7 @@ package es.projectalpha.wc.core.events;
 import es.projectalpha.wc.core.WCCore;
 import es.projectalpha.wc.core.api.WCServer;
 import es.projectalpha.wc.core.api.WCUser;
+import es.projectalpha.wc.core.cmd.WCCmd;
 import es.projectalpha.wc.core.managers.DataManager;
 import es.projectalpha.wc.core.utils.Utils;
 import org.bukkit.Sound;
@@ -20,6 +21,25 @@ public class PlayerListener implements Listener{
 
     public PlayerListener(WCCore instance) {
         plugin = instance;
+    }
+
+
+    @EventHandler
+    public void onLogin(PlayerLoginEvent e){
+        Player p = e.getPlayer();
+        WCUser user = WCServer.getUser(p);
+
+        if (plugin.isMaintenance()){
+            if (!user.isOnRank(WCCmd.Grupo.Builder)){
+                user.getPlayer().kickPlayer(Utils.colorize("&cEl servidor está en mantenimiento, lo sentimos"));
+            }
+        }
+
+        if (plugin.isPruebas()){
+            if (!user.isOnRank(WCCmd.Grupo.VIP)){
+                user.getPlayer().kickPlayer(Utils.colorize("&cEl servidor está en pruebas, lo sentimos"));
+            }
+        }
     }
 
     @EventHandler(priority = EventPriority.LOW)
