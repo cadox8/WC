@@ -69,11 +69,11 @@ public class Weapon {
         setLastAttackTimer(System.currentTimeMillis());
         if(getAttackTimer() < getShootCooldown()) return;
 
-        if (hasBullets()) {
+        /*if (hasBullets()) {
             System.out.println("Tiene balas: " + Integer.parseInt(lore.get(lore.size() - 1).split(" ")[1]));
-            //youShotM8();
-        }
-
+            youShotM8();
+        }*/
+        
         Snowball snowball = player.getWorld().spawn(player.getEyeLocation(), Snowball.class);
         snowball.setVelocity(player.getLocation().getDirection().multiply(distance()));
         snowball.setShooter(player);
