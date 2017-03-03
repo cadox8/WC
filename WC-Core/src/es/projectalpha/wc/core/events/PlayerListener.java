@@ -47,13 +47,15 @@ public class PlayerListener implements Listener{
         Player p = e.getPlayer();
         WCUser user = WCServer.getUser(p);
 
-        Utils.sendGeoIPMsg(user, Utils.getCountry(user));
+        if (p.hasMetadata("NPC")) return;
+
+        //Utils.sendGeoIPMsg(user, Utils.getCountry(user));
 
         //
         dataManager = new DataManager(user);
-        if (dataManager.create() && dataManager.setObject("Grupo", user.getUserData().getGrupo()) &&
+        if (dataManager.create() && dataManager.setObject("Grupo", WCCmd.Grupo.Craftero) &&
         dataManager.setObject("UUID", user.getUuid().toString()) &&
-        /*dataManager.setObject("IP", user.getPlayer().getAddress().getHostName()) &&*/
+        dataManager.setObject("IP", user.getPlayer().getAddress().getHostName()) &&
         dataManager.setObject("Money", 0.0) && dataManager.setObject("Clan", "")) {
             plugin.debugLog("Configuración creada para " + user.getName());
         } else {

@@ -71,7 +71,7 @@ public class DataManager {
     }
 
     public double getDouble(String data){
-        if (!existPlayer()) return -1;
+        if (!existPlayer()) return 0;
         return playerConfig.getDouble(data);
     }
 
