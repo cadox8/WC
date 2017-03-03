@@ -1,8 +1,10 @@
 package es.projectalpha.twd.events;
 
+import es.projectalpha.twd.TWDPlayer;
 import es.projectalpha.twd.WCTWD;
 import es.projectalpha.twd.economy.Economy;
 import es.projectalpha.twd.utils.AllItems;
+import es.projectalpha.wc.core.cmd.WCCmd;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -16,6 +18,7 @@ import org.bukkit.event.block.*;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.ExplosionPrimeEvent;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
@@ -168,5 +171,18 @@ public class WorldInteract implements Listener{
         if (!e.getPlayer().hasPermission("twd.admin")){
             e.setCancelled(true);
         }
+    }
+
+    @EventHandler
+    public void onChat(AsyncPlayerChatEvent e){
+        TWDPlayer user = WCTWD.getPlayer(e.getPlayer());
+        String format = "{clan} {group} {name} &7: &r{message}";
+
+        format = format.replace("{clan}", "&f" + plugin.getTeams().getTeam(user));
+        format = format.replace("{group}", WCCmd.Grupo.groupColor(user.getUserData().getGrupo()) + user.getUserData().getGrupo().toString());
+        format = format.replace("{name}", user.getName());
+        format = format.replace("{message}", e.getMessage());
+
+        e.setFormat(format);
     }
 }
