@@ -19,7 +19,7 @@ public class DataManager {
 
     private WCUser user;
 
-    private final String DIRECTORY = "home/server/userdata/";
+    private final String DIRECTORY = "/home/server/userdata/";
 
     public DataManager(WCUser user){
         File f = new File(DIRECTORY);
