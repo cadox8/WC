@@ -181,7 +181,7 @@ public class WorldInteract implements Listener{
         TWDPlayer user = WCTWD.getPlayer(e.getPlayer());
         String format = "{clan} {group} {name} &7: &r{message}";
 
-        format = format.replace("{clan}", "&f" + plugin.getTeams().getTeam(user) == null ? "" : plugin.getTeams().getTeam(user).toString());
+        format = format.replace("{clan}", "&f" + plugin.getTeams().getTeam(user) == null ? plugin.getTeams().getTeam(user).toString() : "");
         format = format.replace("{group}", Utils.colorize("&" + WCCmd.Grupo.groupColor(user.getUserData().getGrupo()) + user.getUserData().getGrupo().toString()));
         format = format.replace("{name}", user.getName());
         format = format.replace("{message}", e.getMessage());

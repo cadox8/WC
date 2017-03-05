@@ -29,7 +29,7 @@ public class TWDCMD extends WCCmd {
             user.sendDiv();
         }
 
-        if (args.length == 2) {
+        if (args.length == 1) {
             if (!user.isOnRank(Grupo.Admin)) return;
             if (args[0].equalsIgnoreCase("prision")) {
                 fileManager.getConfig().set("prision", Parsers.locationToString(p.getLocation()));
