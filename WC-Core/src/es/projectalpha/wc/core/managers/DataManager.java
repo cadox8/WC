@@ -97,7 +97,7 @@ public class DataManager {
 
     //
     public void setGrupo(){
-        setObject("Grupo", user.getUserData().getGrupo());
+        setObject("Grupo", user.getUserData().getGrupo().getRank());
     }
 
     public void addHome(){

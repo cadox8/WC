@@ -53,7 +53,7 @@ public class PlayerListener implements Listener{
 
         //
         dataManager = new DataManager(user);
-        if (dataManager.create() && dataManager.setObject("Grupo", WCCmd.Grupo.Craftero) &&
+        if (dataManager.create() && dataManager.setObject("Grupo", WCCmd.Grupo.Craftero.getRank()) &&
         dataManager.setObject("UUID", user.getUuid().toString()) &&
         dataManager.setObject("IP", user.getPlayer().getAddress().getHostName()) &&
         dataManager.setObject("Money", 0.0) && dataManager.setObject("Clan", "")) {
