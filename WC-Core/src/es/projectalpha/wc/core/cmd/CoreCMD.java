@@ -36,7 +36,7 @@ public class CoreCMD extends WCCmd{
     }
 
     private void def(WCUser user) {
-        user.sendMessage("&6WC &afunciona con WCCore " + "&7v" + plugin.getDescription().getVersion());
+        user.sendMessagePrefix("&aFunciona con WCCore " + "&7v" + plugin.getDescription().getVersion());
     }
 
     private void toggleDebug(WCUser user) {

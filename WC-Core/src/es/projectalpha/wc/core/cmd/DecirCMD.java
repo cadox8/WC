@@ -29,7 +29,9 @@ public class DecirCMD extends WCCmd{
             user.sendMessagePrefix("&cEl jugador está desconectado");
             return;
         }
-        sendPrivateMessage(target, user, Utils.buildString(args));
+        String[] formatedArgs = args;
+        formatedArgs[0] = "";
+        sendPrivateMessage(target, user, Utils.buildString(formatedArgs));
     }
 
     @Override

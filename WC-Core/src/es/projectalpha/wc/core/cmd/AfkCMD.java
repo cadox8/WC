@@ -14,11 +14,11 @@ public class AfkCMD extends WCCmd{
     @Override
     public void run(WCUser user, String lbl, String[] args) {
         if (WCServer.afkMode.contains(user)) {
-            plugin.getServer().getOnlinePlayers().stream().map(p -> WCServer.getUser(p)).forEach(b -> b.sendMessage(""));
+            plugin.getServer().getOnlinePlayers().forEach(p -> WCServer.getUser(p).sendMessagePrefix("&3" + user.getName() + " &6ya no está afk"));
             WCServer.afkMode.remove(user);
         } else {
             WCServer.afkMode.add(user);
-            plugin.getServer().getOnlinePlayers().stream().map(p -> WCServer.getUser(p)).forEach(b -> b.sendMessage(""));
+            plugin.getServer().getOnlinePlayers().forEach(p -> WCServer.getUser(p).sendMessagePrefix("&3" + user.getName() + " &6está afk"));
         }
     }
 }
