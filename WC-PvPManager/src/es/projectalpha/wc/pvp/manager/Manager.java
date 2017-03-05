@@ -5,6 +5,8 @@ import es.projectalpha.wc.core.WCCore;
 import es.projectalpha.wc.core.utils.Cooldown;
 import es.projectalpha.wc.pvp.WCPvP;
 import es.projectalpha.wc.pvp.files.Files;
+import es.projectalpha.wc.pvp.files.Message;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 
@@ -88,7 +90,7 @@ public class Manager {
 	    try {
             plugin.getServer().getOnlinePlayers().forEach(p -> {
                 if (!isInPvP(p)) {
-                    //Mensaje de PvP
+					p.sendMessage(Message.prefix + ChatColor.DARK_GREEN + " Ya no estás en pvp, puedes desconectarte.");
                 }
             });
             check();

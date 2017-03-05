@@ -59,7 +59,7 @@ public class PlayerEvent implements Listener {
 	    Entity en1 = e.getEntity();
 	    Entity en = e.getEntity().getKiller();
 	    
-	    if (en instanceof  Player){
+	    if (en instanceof Player){
 	        Player pl = (Player)en1;
             Player p = (Player)en;
 
@@ -90,11 +90,8 @@ public class PlayerEvent implements Listener {
 				if(b.getType() == Material.FIRE){
 							
 					if(Files.user.getBoolean("Users." + en.getName() + ".pvp") == false){
-							
-							
 							p.sendMessage(Message.prefix + ChatColor.DARK_RED + " No puedes poner ese bloque cerca de un jugador con el pvp desactivado.");
 							e.setCancelled(true);
-							
 					}
 					
 				}
