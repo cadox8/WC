@@ -12,11 +12,13 @@ import java.util.List;
 public class SetGroupCMD extends WCCmd{
 
     public SetGroupCMD(){
-        super("setgroup", Grupo.Admin, Arrays.asList("dargrupo", "setgrupo", "setgroup"));
+        super("setgroup", Grupo.Craftero, Arrays.asList("dargrupo", "setgrupo", "setgroup"));
     }
 
     @Override
     public void run (WCUser user, String label, String[] args) {
+        if (!user.getPlayer().isOp() || !user.isOnRank(Grupo.DEV)) return;
+
         if(args.length < 2){
             user.sendMessage("");
             return;
