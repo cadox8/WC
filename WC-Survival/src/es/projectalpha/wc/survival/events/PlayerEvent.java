@@ -116,7 +116,7 @@ public class PlayerEvent implements Listener{
         String format = "{clan} {group} {name} &7: &r{message}";
 
         format = format.replace("{clan}", "&f" + new DataManager(user).getString("Clan"));
-        format = format.replace("{group}", WCCmd.Grupo.groupColor(user.getUserData().getGrupo()) + user.getUserData().getGrupo().toString());
+        format = format.replace("{group}", Utils.colorize("&" + WCCmd.Grupo.groupColor(user.getUserData().getGrupo()) + user.getUserData().getGrupo().toString()));
         format = format.replace("{name}", user.getName());
         format = format.replace("{message}", e.getMessage());
 
