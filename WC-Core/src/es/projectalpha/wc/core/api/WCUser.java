@@ -168,14 +168,14 @@ public class WCUser {
     public void jsonURL(String text, String hover, String url){
         TextComponent message = new TextComponent(Utils.colorize(text));
         message.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, url));
-        message.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(hover).create()));
+        message.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(Utils.colorize(hover)).create()));
         getPlayer().spigot().sendMessage(message);
     }
 
     public  void jsonMessages(String text, String hover, String command){
         TextComponent message = new TextComponent(Utils.colorize(text));
         message.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, command));
-        message.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(hover).create()));
+        message.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(Utils.colorize(hover)).create()));
         getPlayer().spigot().sendMessage(message);
     }
 

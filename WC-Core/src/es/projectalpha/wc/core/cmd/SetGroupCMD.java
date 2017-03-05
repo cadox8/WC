@@ -12,33 +12,34 @@ import java.util.List;
 public class SetGroupCMD extends WCCmd{
 
     public SetGroupCMD(){
-        super("setgroup", Grupo.Craftero, Arrays.asList("dargrupo", "setgrupo", "setgroup"));
+        super("setgroup", Grupo.Craftero, Arrays.asList("dargrupo", "setgrupo"));
     }
 
     @Override
     public void run (WCUser user, String label, String[] args) {
-        if (!user.getPlayer().isOp() || !user.isOnRank(Grupo.DEV)) return;
+        if (!user.getPlayer().isOp()) return;
 
         if(args.length < 2){
-            user.sendMessage("");
+            user.sendMessagePrefix("&6Tu Rango: &2" + user.getUserData().getGrupo().toString());
             return;
         }
+
         Integer i;
         try {
             i = Integer.parseInt(args[1]);
         } catch (NumberFormatException ex) {
-            user.sendMessage("");
+            user.sendMessagePrefix("&cEl rango no es un número");
             return;
         }
 
         if (i > Grupo.values().length) {
-            user.sendMessage("");
+            user.sendMessagePrefix("&cEste número es más grande de los rangos que hay");
             return;
         }
         WCUser target = WCServer.getUser(plugin.getServer().getPlayer(args[0]));
         target.getUserData().setGrupo(Grupo.values()[i]);
         new DataManager(target).setGrupo();
-        user.sendMessage("");
+        user.sendMessagePrefix("&3Rango cambiado a &c" + target.getName());
     }
 
     @Override
