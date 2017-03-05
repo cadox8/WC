@@ -67,8 +67,8 @@ public abstract class WCCmd {
         YT(6),
         Builder(7),
         Mod(8),
-        DEV(9),
-        Admin(10),
+        Admin(9),
+        DEV(10),
         Creador(11);
 
         private final int rank;
