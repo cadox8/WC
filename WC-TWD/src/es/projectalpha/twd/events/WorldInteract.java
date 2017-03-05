@@ -5,6 +5,7 @@ import es.projectalpha.twd.WCTWD;
 import es.projectalpha.twd.economy.Economy;
 import es.projectalpha.twd.utils.AllItems;
 import es.projectalpha.wc.core.cmd.WCCmd;
+import es.projectalpha.wc.core.utils.Utils;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -161,14 +162,14 @@ public class WorldInteract implements Listener{
 
     @EventHandler
     public void onPlayerBreak(BlockBreakEvent e) {
-        if (!e.getPlayer().hasPermission("twd.admin")){
+        if (!WCTWD.getPlayer(e.getPlayer()).isOnRank(WCCmd.Grupo.Builder)){
             e.setCancelled(true);
         }
     }
 
     @EventHandler
     public void onPlayerPlace(BlockPlaceEvent e) {
-        if (!e.getPlayer().hasPermission("twd.admin")){
+        if (!WCTWD.getPlayer(e.getPlayer()).isOnRank(WCCmd.Grupo.Builder)){
             e.setCancelled(true);
         }
     }
@@ -178,8 +179,8 @@ public class WorldInteract implements Listener{
         TWDPlayer user = WCTWD.getPlayer(e.getPlayer());
         String format = "{clan} {group} {name} &7: &r{message}";
 
-        format = format.replace("{clan}", "&f" + plugin.getTeams().getTeam(user));
-        format = format.replace("{group}", WCCmd.Grupo.groupColor(user.getUserData().getGrupo()) + user.getUserData().getGrupo().toString());
+        format = format.replace("{clan}", "&f" + plugin.getTeams().getTeam(user) == null ? "" : plugin.getTeams().getTeam(user).toString());
+        format = format.replace("{group}", Utils.colorize("&" + WCCmd.Grupo.groupColor(user.getUserData().getGrupo()) + user.getUserData().getGrupo().toString()));
         format = format.replace("{name}", user.getName());
         format = format.replace("{message}", e.getMessage());
 
