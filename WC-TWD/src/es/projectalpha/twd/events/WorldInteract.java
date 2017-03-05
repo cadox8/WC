@@ -4,6 +4,7 @@ import es.projectalpha.twd.TWDPlayer;
 import es.projectalpha.twd.WCTWD;
 import es.projectalpha.twd.economy.Economy;
 import es.projectalpha.twd.utils.AllItems;
+import es.projectalpha.wc.core.api.WCServer;
 import es.projectalpha.wc.core.cmd.WCCmd;
 import es.projectalpha.wc.core.utils.Utils;
 import org.bukkit.ChatColor;
@@ -42,6 +43,7 @@ public class WorldInteract implements Listener{
 
         if (e.getAction() == Action.RIGHT_CLICK_BLOCK) {
             Block b = e.getClickedBlock();
+            WCServer.log(WCServer.Level.DEBUG, b.toString());
             if (b instanceof Chest) {
                 Chest c = (Chest)b;
                 e.setCancelled(true);
