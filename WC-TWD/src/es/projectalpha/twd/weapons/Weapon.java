@@ -157,7 +157,7 @@ public class Weapon {
     }
 
     public ItemStack toItemStack(){
-        lore.add(ChatColor.RED + "Balas: " + ChatColor.AQUA + maxBullets());
+        //lore.add(ChatColor.RED + "Balas: " + ChatColor.AQUA + maxBullets());
         return new ItemMaker(material).setDisplayName(name).setLores(lore).build();
     }
     //
