@@ -75,7 +75,7 @@ public class Weapon {
         }*/
         
         Snowball snowball = player.getWorld().spawn(player.getEyeLocation(), Snowball.class);
-        snowball.setVelocity(player.getLocation().getDirection().multiply(distance()));
+        snowball.setVelocity(player.getLocation().getDirection().multiply(distance() / 5));
         snowball.setShooter(player);
         snowball.setMetadata("twd", new FixedMetadataValue(WCTWD.getInstance(), "weapon_" + getId()));
 

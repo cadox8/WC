@@ -8,7 +8,6 @@ import es.projectalpha.twd.manager.WorldManager;
 import es.projectalpha.twd.mobs.Mobs;
 import es.projectalpha.twd.task.GameTask;
 import es.projectalpha.twd.teams.Teams;
-import es.projectalpha.twd.weapons.Weapon;
 import es.projectalpha.wc.core.WCCommands;
 import lombok.Getter;
 import org.bukkit.Bukkit;
@@ -17,7 +16,6 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class WCTWD extends JavaPlugin{
 
@@ -31,7 +29,6 @@ public class WCTWD extends JavaPlugin{
     @Getter private Teams teams;
 
     //Utils
-    @Getter private HashMap<TWDPlayer, Weapon> weapon = new HashMap<>();
     @Getter private ArrayList<TWDPlayer> blooding = new ArrayList<>();
 
     public void onEnable(){

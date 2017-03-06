@@ -1,14 +1,13 @@
 package es.projectalpha.twd.events;
 
-import es.projectalpha.twd.WCTWD;
 import es.projectalpha.twd.TWDPlayer;
+import es.projectalpha.twd.WCTWD;
 import es.projectalpha.twd.teams.Teams;
 import es.projectalpha.twd.weapons.Weapon;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
@@ -38,8 +37,6 @@ public class Weapons implements Listener {
             weapon = Weapon.getWeaponByItemStack(e.getItem());
 
             weapon.shoot(p);
-
-            this.plugin.getWeapon().put(player, weapon);
             return;
         }
 
@@ -54,6 +51,55 @@ public class Weapons implements Listener {
     }
 
     @EventHandler
+    public void onProjectileHit(ProjectileHitEvent e){
+        Player p;
+        Player damaged;
+        Monster damagedMob;
+
+        if (e.getEntity() instanceof Egg || e.getEntity() instanceof Snowball) {
+            if (e.getEntity().getShooter() instanceof Player && e.getHitEntity() instanceof Player) {
+                p = (Player) e.getEntity().getShooter();
+                damaged = (Player) e.getHitEntity();
+                Weapon weapon = Weapon.getWeaponByItemStack(p.getInventory().getItemInMainHand());
+
+                if (!isWeapon(e.getEntity(), weapon)){
+                    System.out.println(e.getEntity().getMetadata("twd").toString());
+                    return;
+                }
+                if (teams.sameTeam(WCTWD.getPlayer(p), WCTWD.getPlayer(damaged))) return;
+
+                damaged.setHealth(damaged.getHealth() - weapon.damage());
+            }
+
+            if (e.getEntity().getShooter() instanceof Player && e.getHitEntity() instanceof Monster) {
+                p = (Player) e.getEntity().getShooter();
+                damagedMob = (Monster) e.getHitEntity();
+                Weapon weapon = Weapon.getWeaponByItemStack(p.getInventory().getItemInMainHand());
+
+                if (!isWeapon(e.getEntity(), weapon)){
+                    System.out.println(e.getEntity().getMetadata("twd").toString());
+                    return;
+                }
+
+                switch (weapon.getId()){
+                    case 2:
+                        damagedMob.setHealth(damagedMob.getHealth() - (weapon.damage() + (weapon.damage() * 2)));
+                        break;
+                    case 6:
+                        damagedMob.setHealth(damagedMob.getHealth() - (weapon.damage() + (weapon.damage() * 3)));
+                        break;
+                    case 7:
+                        damagedMob.setHealth(damagedMob.getHealth() - (weapon.damage() + (weapon.damage() * 3.25)));
+                        break;
+                    default:
+                        damagedMob.setHealth(damagedMob.getHealth() - weapon.damage());
+                        break;
+                }
+            }
+        }
+    }
+
+    /*    @EventHandler
     public void onInteractEntity(EntityDamageByEntityEvent e){
         Player p;
 
@@ -76,64 +122,7 @@ public class Weapons implements Listener {
             if (this.plugin.getBlooding().contains(new TWDPlayer(p.getUniqueId()))) return;
             this.plugin.getBlooding().add(new TWDPlayer(p.getUniqueId()));
         }
-    }
-
-    @EventHandler
-    public void onProjectileHit(ProjectileHitEvent e){
-        Player p;
-        Player damaged;
-        Monster damagedMob;
-
-        if (e.getEntity() instanceof Egg || e.getEntity() instanceof Snowball) {
-            if (e.getEntity().getShooter() instanceof Player && e.getHitEntity() instanceof Player) {
-                p = (Player) e.getEntity().getShooter();
-                damaged = (Player) e.getHitEntity();
-
-                if (!this.plugin.getWeapon().keySet().contains(p)) return;
-                Weapon weapon = this.plugin.getWeapon().get(p);
-
-                if (!isWeapon(e.getEntity(), weapon)){
-                    System.out.println(e.getEntity().getMetadata("twd").toString());
-                    return;
-                }
-                if (teams.sameTeam(WCTWD.getPlayer(p), WCTWD.getPlayer(damaged))) return;
-
-                damaged.setHealth(damaged.getHealth() - weapon.damage());
-                this.plugin.getWeapon().remove(p);
-            }
-
-            if (e.getEntity().getShooter() instanceof Player && e.getHitEntity() instanceof Monster) {
-                p = (Player) e.getEntity().getShooter();
-                damagedMob = (Monster) e.getHitEntity();
-
-                if (!this.plugin.getWeapon().keySet().contains(p)) return;
-                Weapon weapon = this.plugin.getWeapon().get(p);
-
-                if (!isWeapon(e.getEntity(), weapon)){
-                    System.out.println(e.getEntity().getMetadata("twd").toString());
-                    return;
-                }
-
-
-                switch (weapon.getId()){
-                    case 2:
-                        damagedMob.setHealth(damagedMob.getHealth() - (weapon.damage() + (weapon.damage() * 2)));
-                        break;
-                    case 6:
-                        damagedMob.setHealth(damagedMob.getHealth() - (weapon.damage() + (weapon.damage() * 3)));
-                        break;
-                    case 7:
-                        damagedMob.setHealth(damagedMob.getHealth() - (weapon.damage() + (weapon.damage() * 3.25)));
-                        break;
-                    default:
-                        damagedMob.setHealth(damagedMob.getHealth() - weapon.damage());
-                        break;
-                }
-
-                this.plugin.getWeapon().remove(p);
-            }
-        }
-    }
+    }*/
 
     private boolean isWeapon(Entity entity, Weapon weapon){
         return entity.getMetadata("twd").get(0).asString().equalsIgnoreCase("weapon_" + weapon.getId());

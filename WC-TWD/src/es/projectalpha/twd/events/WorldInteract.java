@@ -6,8 +6,10 @@ import es.projectalpha.twd.economy.Economy;
 import es.projectalpha.twd.utils.AllItems;
 import es.projectalpha.wc.core.api.WCServer;
 import es.projectalpha.wc.core.cmd.WCCmd;
+import es.projectalpha.wc.core.utils.ItemMaker;
 import es.projectalpha.wc.core.utils.Utils;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
@@ -20,6 +22,7 @@ import org.bukkit.event.block.*;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.ExplosionPrimeEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -109,6 +112,19 @@ public class WorldInteract implements Listener{
     }
 
     @EventHandler
+    public void playerDie(PlayerDeathEvent e){
+        Player p = e.getEntity();
+        Location l = p.getLocation();
+        Economy eco = new Economy(p);
+        double money = eco.getMoney() * 0.04;
+
+        if (eco.getMoney() - money <= 0) return;
+        eco.removeMoney(money);
+
+        l.getWorld().dropItemNaturally(l, new ItemMaker(Material.GOLD_INGOT).setDisplayName("&2" + money + "&6€ de &c" + p.getName()).build());
+    }
+
+    @EventHandler
     public void onMobDie(EntityDeathEvent e){
         AllItems items = new AllItems();
 
@@ -117,6 +133,7 @@ public class WorldInteract implements Listener{
             e.setDroppedExp(0);
 
             if (new Random().nextInt(5) > 3){
+                ((Monster) e).getWorld().dropItemNaturally(((Monster) e).getLocation(), new ItemMaker(Material.EMERALD).setAmount(new Random().nextInt(4) + 1).build());
                 if (new Random().nextBoolean()){
                     ((Monster) e).getWorld().dropItemNaturally(((Monster) e).getLocation(), items.weapons.get(new Random().nextInt(items.weapons.size())));
                 } else {
