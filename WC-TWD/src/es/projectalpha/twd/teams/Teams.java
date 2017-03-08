@@ -87,8 +87,10 @@ public class Teams {
         switch (getTeam(player)){
             case PRISION:
                 if (prision.contains(player2)) return true;
+                return false;
             case WOODBURY:
                 if (woodbury.contains(player2)) return true;
+                return false;
             default:
                 return false;
         }

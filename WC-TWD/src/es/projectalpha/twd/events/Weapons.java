@@ -4,7 +4,6 @@ import es.projectalpha.twd.TWDPlayer;
 import es.projectalpha.twd.WCTWD;
 import es.projectalpha.twd.teams.Teams;
 import es.projectalpha.twd.weapons.Weapon;
-import es.projectalpha.wc.core.api.WCServer;
 import org.bukkit.Material;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
@@ -68,10 +67,9 @@ public class Weapons implements Listener {
                 if (!isWeapon(e.getEntity(), weapon)){
                     return;
                 }
-
                 if (teams.sameTeam(WCTWD.getPlayer(p), WCTWD.getPlayer(damaged))) return;
 
-                damaged.setHealth(damaged.getHealth() - weapon.damage());
+                damaged.damage(weapon.damage());
             }
 
             if (e.getEntity().getShooter() instanceof Player && e.getHitEntity() instanceof Monster) {
@@ -85,18 +83,16 @@ public class Weapons implements Listener {
 
                 switch (weapon.getId()){
                     case 2:
-                        damagedMob.setHealth(damagedMob.getHealth() - (weapon.damage() + (weapon.damage() * 2)));
+                        damagedMob.damage(weapon.damage() + (weapon.damage() * 2));
                         break;
                     case 6:
-                        damagedMob.setHealth(damagedMob.getHealth() - (weapon.damage() + (weapon.damage() * 3)));
+                        damagedMob.damage(weapon.damage() + (weapon.damage() * 3));
                         break;
                     case 7:
-                        damagedMob.setHealth(damagedMob.getHealth() - (weapon.damage() + (weapon.damage() * 3.25)));
+                        damagedMob.damage(weapon.damage() + (weapon.damage() * 3.25));
                         break;
                     default:
-                        //damagedMob.damage(weapon.damage());
-                        WCServer.log(WCServer.Level.DEBUG, weapon.damage() + "");
-                        damagedMob.damage(damagedMob.getMaxHealth());
+                        damagedMob.damage(weapon.damage());
                         break;
                 }
             }

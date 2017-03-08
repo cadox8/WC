@@ -113,8 +113,12 @@ public class WorldInteract implements Listener{
         Player p = e.getEntity();
         Location l = p.getLocation();
         Economy eco = new Economy(p);
-        DecimalFormat df = new DecimalFormat( "0.##" );
-        double money = new Double(df.format(eco.getMoney() * 0.04));
+        DecimalFormat df = new DecimalFormat("0.##");
+        double money = 0;
+
+        try {
+             money = new Double(df.format(eco.getMoney() * 0.04).replace(",", "."));
+        }catch(NumberFormatException ex){}
 
         if (eco.getMoney() - money <= 0) return;
         eco.removeMoney(money);
@@ -200,6 +204,7 @@ public class WorldInteract implements Listener{
 
             new Economy(p).addMoney(money);
             p.sendMessage(ChatColor.GREEN + "Añadidas " + ChatColor.YELLOW + money + ChatColor.GREEN + " esmeraldas");
+            e.getItem().remove();
         }
     }
 
