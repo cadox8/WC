@@ -53,7 +53,7 @@ public class CoreCMD extends WCCmd{
     }
 
     private void toggleMaintenance(WCUser user){
-        plugin.getConfig().set("maintenance", !plugin.isDebug());
+        plugin.getConfig().set("maintenance", !plugin.isMaintenance());
         plugin.saveConfig();
 
         String main = (plugin.isMaintenance()) ? "&aActivado" : "&cDesactivado";
@@ -61,7 +61,7 @@ public class CoreCMD extends WCCmd{
     }
 
     private void togglePruebas(WCUser user){
-        plugin.getConfig().set("pruebas", !plugin.isDebug());
+        plugin.getConfig().set("pruebas", !plugin.isPruebas());
         plugin.saveConfig();
 
         String pruebas = (plugin.isPruebas()) ? "&aActivado" : "&cDesactivado";

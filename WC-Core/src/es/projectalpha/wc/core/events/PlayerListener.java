@@ -121,7 +121,7 @@ public class PlayerListener implements Listener{
     /*
      * Prevenir ver plugins
      */
-    @EventHandler(priority = EventPriority.LOW)
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onCommand(PlayerCommandPreprocessEvent e){
         WCUser p = WCServer.getUser(e.getPlayer());
 
