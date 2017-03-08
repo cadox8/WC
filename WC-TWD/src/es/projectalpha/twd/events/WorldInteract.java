@@ -23,10 +23,7 @@ import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.ExplosionPrimeEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.event.player.*;
 import org.bukkit.event.weather.WeatherChangeEvent;
 import org.bukkit.inventory.ItemStack;
 
@@ -194,15 +191,27 @@ public class WorldInteract implements Listener{
     }
 
     @EventHandler
+    public void onPickUp(PlayerPickupItemEvent e){
+        Player p = e.getPlayer();
+
+        if (e.getItem().getItemStack().getType() == Material.GOLD_INGOT){
+            double money = Double.parseDouble(e.getItem().getItemStack().getItemMeta().getDisplayName().split(" ")[0].replaceAll("€", ""));
+
+            new Economy(p).addMoney(money);
+            p.sendMessage(ChatColor.GREEN + "Añadidas " + ChatColor.YELLOW + money + ChatColor.GREEN + " esmeraldas");
+        }
+    }
+
+    @EventHandler
     public void onChat(AsyncPlayerChatEvent e){
         TWDPlayer user = WCTWD.getPlayer(e.getPlayer());
-        String format = "{clan} {group} {name} &7: &r{message}";
+        String format = "&7{clan}{group} {name} &7: &r{message}";
 
-        format = format.replace("{clan}", "&f" + plugin.getTeams().getTeam(user) == null ? plugin.getTeams().getTeam(user).toString() : "");
+        format = format.replace("{clan}", plugin.getTeams().getTeam(user) == null ? plugin.getTeams().getTeam(user).toString() + " " : "");
         format = format.replace("{group}", Utils.colorize("&" + WCCmd.Grupo.groupColor(user.getUserData().getGrupo()) + user.getUserData().getGrupo().toString()));
         format = format.replace("{name}", user.getName());
         format = format.replace("{message}", e.getMessage());
 
-        e.setFormat(format);
+        e.setFormat(Utils.colorize(format));
     }
 }

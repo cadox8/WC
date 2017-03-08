@@ -28,6 +28,7 @@ public class WoodburyCMD extends WCCmd {
 
     public void run(WCUser user, String label, String[] args) {
         Player p = user.getPlayer();
+        economy = new Economy(p);
 
         if (args.length >= 0) {
             if (economy.isInTeam()) return;

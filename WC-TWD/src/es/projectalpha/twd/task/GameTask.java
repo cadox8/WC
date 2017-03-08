@@ -25,6 +25,12 @@ public class GameTask extends BukkitRunnable{
     }
 
     public void run(){
+        plugin.getServer().getWorld("TWD").getEntities().forEach(e -> {
+            if (e instanceof Zombie){
+                e.setFireTicks(0);
+            }
+        });
+
         Bukkit.getOnlinePlayers().forEach(p -> {
             int thirst = p.getLevel();
 
@@ -43,7 +49,7 @@ public class GameTask extends BukkitRunnable{
                     case EMERALD:
                         economy.addMoney(1);
                         p.getInventory().remove(i);
-                        p.sendMessage(ChatColor.GREEN + "Añadida " + ChatColor.YELLOW + "1" + ChatColor.GREEN + " esmeralda");
+
                         break;
                     case NETHER_STAR:
                         economy.addShinnyShit(1);

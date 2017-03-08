@@ -40,6 +40,7 @@ public class Thirst implements Listener {
                 return;
             }
             p.setLevel(thirst + 256);
+            p.sendMessage(p.getLevel() + " // " + thirst + 256);
         }
     }
 

@@ -4,6 +4,7 @@ import es.projectalpha.twd.TWDPlayer;
 import es.projectalpha.twd.WCTWD;
 import es.projectalpha.twd.teams.Teams;
 import es.projectalpha.twd.weapons.Weapon;
+import es.projectalpha.wc.core.api.WCServer;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -63,9 +64,10 @@ public class Weapons implements Listener {
                 Weapon weapon = Weapon.getWeaponByItemStack(p.getInventory().getItemInMainHand());
 
                 if (!isWeapon(e.getEntity(), weapon)){
-                    System.out.println(e.getEntity().getMetadata("twd").toString());
                     return;
                 }
+                WCServer.log(WCServer.Level.DEBUG, "Contra Player");
+
                 if (teams.sameTeam(WCTWD.getPlayer(p), WCTWD.getPlayer(damaged))) return;
 
                 damaged.setHealth(damaged.getHealth() - weapon.damage());
@@ -77,9 +79,9 @@ public class Weapons implements Listener {
                 Weapon weapon = Weapon.getWeaponByItemStack(p.getInventory().getItemInMainHand());
 
                 if (!isWeapon(e.getEntity(), weapon)){
-                    System.out.println(e.getEntity().getMetadata("twd").toString());
                     return;
                 }
+                WCServer.log(WCServer.Level.DEBUG, "Contra Zolmbie");
 
                 switch (weapon.getId()){
                     case 2:
