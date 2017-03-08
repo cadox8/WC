@@ -131,7 +131,6 @@ public class Weapon {
 
     public static Weapon getWeaponByName(@NonNull String name){
         for (int x = 0; x < weapons.length; x++){
-            System.out.println(x + " " + weapons[x]);
             if (ChatColor.stripColor(weapons[x].getName()).equalsIgnoreCase(ChatColor.stripColor(name))){
                 return getWeaponById(x);
             }

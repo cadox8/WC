@@ -4,7 +4,6 @@ import es.projectalpha.twd.TWDPlayer;
 import es.projectalpha.twd.WCTWD;
 import es.projectalpha.twd.economy.Economy;
 import es.projectalpha.twd.utils.AllItems;
-import es.projectalpha.wc.core.api.WCServer;
 import es.projectalpha.wc.core.cmd.WCCmd;
 import es.projectalpha.wc.core.utils.ItemMaker;
 import es.projectalpha.wc.core.utils.Utils;
@@ -15,6 +14,7 @@ import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
 import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Zombie;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -27,6 +27,7 @@ import org.bukkit.event.player.*;
 import org.bukkit.event.weather.WeatherChangeEvent;
 import org.bukkit.inventory.ItemStack;
 
+import java.text.DecimalFormat;
 import java.util.Random;
 
 public class WorldInteract implements Listener{
@@ -43,7 +44,6 @@ public class WorldInteract implements Listener{
 
         if (e.getAction() == Action.RIGHT_CLICK_BLOCK) {
             Block b = e.getClickedBlock();
-            WCServer.log(WCServer.Level.DEBUG, b.toString());
             if (b instanceof Chest) {
                 Chest c = (Chest)b;
                 e.setCancelled(true);
@@ -113,7 +113,8 @@ public class WorldInteract implements Listener{
         Player p = e.getEntity();
         Location l = p.getLocation();
         Economy eco = new Economy(p);
-        double money = eco.getMoney() * 0.04;
+        DecimalFormat df = new DecimalFormat( "0.##" );
+        double money = new Double(df.format(eco.getMoney() * 0.04));
 
         if (eco.getMoney() - money <= 0) return;
         eco.removeMoney(money);
@@ -125,7 +126,7 @@ public class WorldInteract implements Listener{
     public void onMobDie(EntityDeathEvent e){
         AllItems items = new AllItems();
 
-        if (e instanceof Monster){
+        if (e instanceof Zombie){
             e.getDrops().clear();
             e.setDroppedExp(0);
 
@@ -195,7 +196,7 @@ public class WorldInteract implements Listener{
         Player p = e.getPlayer();
 
         if (e.getItem().getItemStack().getType() == Material.GOLD_INGOT){
-            double money = Double.parseDouble(e.getItem().getItemStack().getItemMeta().getDisplayName().split(" ")[0].replaceAll("€", ""));
+            double money = Double.parseDouble(ChatColor.stripColor(e.getItem().getItemStack().getItemMeta().getDisplayName().split(" ")[0].replaceAll("€", "")));
 
             new Economy(p).addMoney(money);
             p.sendMessage(ChatColor.GREEN + "Añadidas " + ChatColor.YELLOW + money + ChatColor.GREEN + " esmeraldas");
@@ -207,7 +208,7 @@ public class WorldInteract implements Listener{
         TWDPlayer user = WCTWD.getPlayer(e.getPlayer());
         String format = "&7{clan}{group} {name} &7: &r{message}";
 
-        format = format.replace("{clan}", plugin.getTeams().getTeam(user) == null ? plugin.getTeams().getTeam(user).toString() + " " : "");
+        format = format.replace("{clan}", plugin.getTeams().getTeam(user) == null ? "" : plugin.getTeams().getTeam(user).toString() + " ");
         format = format.replace("{group}", Utils.colorize("&" + WCCmd.Grupo.groupColor(user.getUserData().getGrupo()) + user.getUserData().getGrupo().toString()));
         format = format.replace("{name}", user.getName());
         format = format.replace("{message}", e.getMessage());

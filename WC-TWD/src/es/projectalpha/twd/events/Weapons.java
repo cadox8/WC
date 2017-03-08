@@ -5,6 +5,7 @@ import es.projectalpha.twd.WCTWD;
 import es.projectalpha.twd.teams.Teams;
 import es.projectalpha.twd.weapons.Weapon;
 import es.projectalpha.wc.core.api.WCServer;
+import org.bukkit.Material;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -34,6 +35,7 @@ public class Weapons implements Listener {
         if (e.getItem() == null || e.getHand() != EquipmentSlot.HAND) return;
 
         if (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK){
+            if (e.getItem().getType() == Material.GOLD_INGOT) return;
             if (e.getItem() == null || !Weapon.isWeapon(e.getItem()) || Weapon.getWeaponByItemStack(e.getItem()) == null) return;
             weapon = Weapon.getWeaponByItemStack(e.getItem());
 
@@ -66,7 +68,6 @@ public class Weapons implements Listener {
                 if (!isWeapon(e.getEntity(), weapon)){
                     return;
                 }
-                WCServer.log(WCServer.Level.DEBUG, "Contra Player");
 
                 if (teams.sameTeam(WCTWD.getPlayer(p), WCTWD.getPlayer(damaged))) return;
 
@@ -81,7 +82,6 @@ public class Weapons implements Listener {
                 if (!isWeapon(e.getEntity(), weapon)){
                     return;
                 }
-                WCServer.log(WCServer.Level.DEBUG, "Contra Zolmbie");
 
                 switch (weapon.getId()){
                     case 2:
@@ -94,7 +94,9 @@ public class Weapons implements Listener {
                         damagedMob.setHealth(damagedMob.getHealth() - (weapon.damage() + (weapon.damage() * 3.25)));
                         break;
                     default:
-                        damagedMob.setHealth(damagedMob.getHealth() - weapon.damage());
+                        //damagedMob.damage(weapon.damage());
+                        WCServer.log(WCServer.Level.DEBUG, weapon.damage() + "");
+                        damagedMob.damage(damagedMob.getMaxHealth());
                         break;
                 }
             }
