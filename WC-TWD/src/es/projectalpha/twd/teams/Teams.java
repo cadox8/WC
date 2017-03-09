@@ -13,7 +13,7 @@ public class Teams {
     @AllArgsConstructor
     public enum TeamsInfo{
 
-        PRISION(ChatColor.AQUA), WOODBURY(ChatColor.RED);
+        NONE(ChatColor.RESET), PRISION(ChatColor.AQUA), WOODBURY(ChatColor.RED);
 
         @Getter private ChatColor color;
     }
@@ -80,7 +80,7 @@ public class Teams {
     public TeamsInfo getTeam(TWDPlayer player){
         if (prision.contains(player)) return TeamsInfo.PRISION;
         if (woodbury.contains(player)) return TeamsInfo.WOODBURY;
-        return null;
+        return TeamsInfo.NONE;
     }
 
     public boolean sameTeam(TWDPlayer player, TWDPlayer player2){
