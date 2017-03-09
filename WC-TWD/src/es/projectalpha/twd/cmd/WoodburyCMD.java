@@ -52,5 +52,6 @@ public class WoodburyCMD extends WCCmd {
         inv.addItem(new ItemMaker(Material.BLAZE_ROD).setAmount(2).setDisplayName(ChatColor.YELLOW + "Morfina").build());
         inv.addItem(new ItemMaker(Material.SAPLING).setDisplayName(ChatColor.AQUA + "Kit Médico").build());
         inv.addItem(new ItemMaker(Material.PAPER).setDisplayName(ChatColor.RED + "Vendajes").build());
+        inv.addItem(new AllItems().getGanzua());
     }
 }

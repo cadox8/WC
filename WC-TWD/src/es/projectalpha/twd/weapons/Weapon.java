@@ -3,9 +3,9 @@ package es.projectalpha.twd.weapons;
 import es.projectalpha.twd.WCTWD;
 import es.projectalpha.twd.ammo.Ammo;
 import es.projectalpha.twd.ammo.list.None;
-import es.projectalpha.twd.particles.ParticleEffect;
 import es.projectalpha.twd.utils.Parsers;
 import es.projectalpha.twd.weapons.list.*;
+import es.projectalpha.wc.core.particles.ParticleEffect;
 import es.projectalpha.wc.core.utils.ItemMaker;
 import lombok.Getter;
 import lombok.NonNull;
@@ -129,26 +129,15 @@ public class Weapon {
         return weapons[id];
     }
 
-    public static Weapon getWeaponByName(@NonNull String name){
+    public static Weapon getWeaponByItemStack(@NonNull ItemStack itemStack){
+        if (itemStack.getItemMeta().getDisplayName() == null) return null;
+
         for (int x = 0; x < weapons.length; x++) {
-            if (ChatColor.stripColor(weapons[x].getName()).equalsIgnoreCase(ChatColor.stripColor(name))) {
+            if (ChatColor.stripColor(weapons[x].getName()).equalsIgnoreCase(ChatColor.stripColor(itemStack.getItemMeta().getDisplayName()))) {
                 return getWeaponById(x);
             }
         }
         return null;
-    }
-
-    public static Weapon getWeaponByItemStack(@NonNull ItemStack itemStack){
-        if (itemStack.getItemMeta().getDisplayName() == null) return null;
-        return getWeaponByName(itemStack.getItemMeta().getDisplayName());
-    }
-
-    public static boolean isWeapon(@NonNull int id){
-        return getWeaponById(id) != null;
-    }
-
-    public static boolean isWeapon(@NonNull String name){
-        return getWeaponByName(name) != null;
     }
 
     public static boolean isWeapon(@NonNull ItemStack itemStack){
