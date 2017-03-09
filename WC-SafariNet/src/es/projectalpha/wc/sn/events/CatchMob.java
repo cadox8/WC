@@ -91,6 +91,12 @@ public class CatchMob implements Listener{
                             }
                         }
 
+                        //To Fix
+                        if (e.getEntity() instanceof Mule || e.getEntity() instanceof Donkey || e.getEntity() instanceof Llama){
+                            p.sendMessage(ChatColor.RED + "Estos mobs están desactivados debido a un error de Minecraft.");
+                            return;
+                        }
+
                         SNMob mob = new SNMob(e.getHitEntity(), p);
                         mob.writeConfig();
                         mob.givePlayerEgg();
