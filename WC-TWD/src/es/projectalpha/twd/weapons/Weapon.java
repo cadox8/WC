@@ -130,12 +130,12 @@ public class Weapon {
     }
 
     public static Weapon getWeaponByName(@NonNull String name){
-        for (int x = 0; x < weapons.length; x++){
-            if (ChatColor.stripColor(weapons[x].getName()).equalsIgnoreCase(ChatColor.stripColor(name))){
+        for (int x = 0; x < weapons.length; x++) {
+            if (ChatColor.stripColor(weapons[x].getName()).equalsIgnoreCase(ChatColor.stripColor(name))) {
                 return getWeaponById(x);
             }
         }
-        throw new NullPointerException("No existe ningún arma con el nombre " + name);
+        return null;
     }
 
     public static Weapon getWeaponByItemStack(@NonNull ItemStack itemStack){

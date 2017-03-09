@@ -36,7 +36,7 @@ public class Weapons implements Listener {
 
         if (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK){
             if (e.getItem().getType() == Material.GOLD_INGOT) return;
-            if (e.getItem() == null || !Weapon.isWeapon(e.getItem()) || Weapon.getWeaponByItemStack(e.getItem()) == null) return;
+            if (e.getItem() == null || Weapon.getWeaponByItemStack(e.getItem()) == null || !Weapon.isWeapon(e.getItem())) return;
             weapon = Weapon.getWeaponByItemStack(e.getItem());
 
             weapon.shoot(p);
@@ -44,7 +44,7 @@ public class Weapons implements Listener {
         }
 
         if (e.getAction() == Action.LEFT_CLICK_AIR || e.getAction() == Action.LEFT_CLICK_BLOCK){
-            if (e.getItem() == null || !Weapon.isWeapon(e.getItem()) || Weapon.getWeaponByItemStack(e.getItem()) == null) return;
+            if (e.getItem() == null || Weapon.getWeaponByItemStack(e.getItem()) == null || !Weapon.isWeapon(e.getItem())) return;
             weapon = Weapon.getWeaponByItemStack(e.getItem());
 
             if (weapon.getId() == 0) return;
