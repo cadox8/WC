@@ -53,14 +53,17 @@ public class PlayerListener implements Listener{
 
         //
         dataManager = new DataManager(user);
-        if (dataManager.create() && dataManager.setObject("Grupo", WCCmd.Grupo.Craftero.getRank()) &&
-        dataManager.setObject("UUID", user.getUuid().toString()) &&
-        dataManager.setObject("IP", user.getPlayer().getAddress().getHostName()) &&
-        dataManager.setObject("Money", 0.0) && dataManager.setObject("Clan", "")) {
-            plugin.debugLog("Configuración creada para " + user.getName());
-        } else {
-            plugin.debugLog("Configuración no creada para " + user.getName());
-            user.sendMessage("&cPor favor, avisa a un staff para comprobar tu archivo de configuración");
+
+        if (!dataManager.existPlayer()) {
+            if (dataManager.create() && dataManager.setObject("Grupo", WCCmd.Grupo.Craftero.getRank()) &&
+                    dataManager.setObject("UUID", user.getUuid().toString()) &&
+                    dataManager.setObject("IP", user.getPlayer().getAddress().getHostName()) &&
+                    dataManager.setObject("Money", 0.0) && dataManager.setObject("Clan", "")) {
+                plugin.debugLog("Configuración creada para " + user.getName());
+            } else {
+                plugin.debugLog("Configuración no creada para " + user.getName());
+                user.sendMessage("&cPor favor, avisa a un staff para comprobar tu archivo de configuración");
+            }
         }
         //
 

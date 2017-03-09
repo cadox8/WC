@@ -35,8 +35,6 @@ public class DataManager {
     }
 
     public boolean create(){
-        if (existPlayer()) return false;
-
         try {
             return filePlayer.createNewFile();
         }catch(IOException e){
