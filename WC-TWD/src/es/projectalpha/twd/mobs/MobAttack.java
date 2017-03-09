@@ -1,6 +1,6 @@
 package es.projectalpha.twd.mobs;
 
-import es.projectalpha.twd.particles.ParticleEffect;
+import es.projectalpha.wc.core.particles.ParticleEffect;
 import es.projectalpha.wc.core.utils.Utils;
 import org.bukkit.Location;
 import org.bukkit.entity.Giant;

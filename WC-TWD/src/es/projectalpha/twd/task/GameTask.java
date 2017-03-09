@@ -62,6 +62,8 @@ public class GameTask extends BukkitRunnable{
                             p.getInventory().addItem(new AllItems().getPotion1());
                         }
                         break;
+                    case GOLD_INGOT:
+                        p.getInventory().remove(i);
                     default:
                         break;
                 }

@@ -1,8 +1,8 @@
 package es.projectalpha.twd.weapons.list;
 
-import es.projectalpha.twd.particles.ParticleEffect;
-import es.projectalpha.twd.weapons.Weapon;
 import es.projectalpha.twd.ammo.list.Grenades;
+import es.projectalpha.twd.weapons.Weapon;
+import es.projectalpha.wc.core.particles.ParticleEffect;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 
