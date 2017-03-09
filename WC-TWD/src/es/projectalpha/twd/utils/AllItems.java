@@ -34,6 +34,7 @@ public class AllItems {
         weapons.add(new ItemMaker(Material.SPIDER_EYE).build());
         weapons.add(new ItemMaker(Material.ROTTEN_FLESH).build());
         weapons.add(new ItemMaker(Material.WEB).build());
+        weapons.add(ItemMaker.setAmount(getGanzua(), new Random().nextInt(3)));
     }
 
     private void addHealth(){
@@ -61,5 +62,9 @@ public class AllItems {
 
     public ItemStack getPotion2(){
         return new ItemMaker(Material.POTION).setDisplayName(ChatColor.RESET + "Botella Llena").build();
+    }
+
+    public ItemStack getGanzua(){
+        return new ItemMaker(Material.TRIPWIRE_HOOK).setDisplayName(ChatColor.RESET + "Ganzua").build();
     }
 }

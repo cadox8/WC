@@ -44,7 +44,8 @@ public class WorldInteract implements Listener{
     public void onInteract(PlayerInteractEvent e){
         Player p = e.getPlayer();
 
-        if (e.getAction() == Action.RIGHT_CLICK_BLOCK && e.getItem().getType() == Material.AIR) {
+        if (e.getItem() == null) return;
+        if (e.getAction() == Action.RIGHT_CLICK_BLOCK && e.getItem().isSimilar(new AllItems().getGanzua())) {
             Block b = e.getClickedBlock();
             if (b instanceof Chest) {
                 Chest c = (Chest)b;
@@ -55,7 +56,6 @@ public class WorldInteract implements Listener{
             }
         }
 
-        if (e.getItem() == null) return;
         if (e.getAction() == Action.RIGHT_CLICK_BLOCK || e.getAction() == Action.RIGHT_CLICK_AIR) {
             switch (e.getItem().getType()){
                 case PAPER:

@@ -105,7 +105,7 @@ public class Weapon {
         return -1;
     }
     public double distance(){
-        return 0.5;
+        return 1;
     }
     //
 
