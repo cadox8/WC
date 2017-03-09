@@ -43,6 +43,7 @@ public class WCCore extends JavaPlugin {
             debugLog("Cargando Clases y Eventos...");
             register();
             registerEvent();
+            new WCServer();
 
             debugLog("Cargando comandos...");
             WCCommands.load();
@@ -92,8 +93,7 @@ public class WCCore extends JavaPlugin {
     }
 
     public void debugLog(String msg) {
-        if (!isDebug()) return;
-        log(WCServer.Level.DEBUG, msg);
+        WCServer.debugLog(msg);
     }
 
     //Maintenance/Pruebas

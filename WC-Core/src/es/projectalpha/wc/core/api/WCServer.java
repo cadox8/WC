@@ -71,4 +71,9 @@ public class WCServer {
     public static void log(Level level, String msg){
         plugin.getServer().getConsoleSender().sendMessage(Utils.colorize(level.getPrefix() + " &" + level.getPrefix() + msg));
     }
+
+    public static void debugLog(String msg) {
+        if (!plugin.isDebug()) return;
+        log(WCServer.Level.DEBUG, msg);
+    }
 }

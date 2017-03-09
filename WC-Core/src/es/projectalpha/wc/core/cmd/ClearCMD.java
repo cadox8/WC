@@ -16,17 +16,26 @@ public class ClearCMD extends WCCmd{
     @Override
     public void run(WCUser user, String lbl, String[] args) {
         if (args.length < 1) {
-            //user.sendMessage("");
+            user.sendMessagePrefix("&6Has borrado tu inventario");
             int invsize = user.getPlayer().getInventory().getSize() - 5;
             for (int i = 0; i < invsize; i++) {
                 user.getPlayer().getInventory().clear(i);
             }
             return;
         }
+
         WCUser target = WCServer.getUser(plugin.getServer().getPlayer(args[0]));
-        target.sendMessage("");
-        user.sendMessage("");
+
+        if (target == null || !target.isOnline()){
+            user.sendMessagePrefix("&cEL jugador debe estar conectado");
+            return;
+        }
+
+        target.sendMessagePrefix("&6Tu inventario ha sido borrado");
+        user.sendMessagePrefix("&6Has borrado el inventario de &c" + target.getName());
+
         int invsize = user.getPlayer().getInventory().getSize() - 5;
+
         for (int i = 0; i < invsize; i++) {
             target.getPlayer().getInventory().clear(i);
         }

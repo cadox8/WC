@@ -12,10 +12,19 @@ public class HealCMD extends WCCmd{
     public void run(WCUser user, String label, String[] args){
         if (args.length == 0){
             user.getPlayer().setHealth(user.getPlayer().getMaxHealth());
+            user.getPlayer().setFoodLevel(20);
+
+            user.sendMessagePrefix("&6Te has curado");
             return;
         }
         if (args.length == 1){
-            WCServer.getUser(args[0]).getPlayer().setHealth(user.getPlayer().getMaxHealth());
+            WCUser target = WCServer.getUser(args[0]);
+            if (target == null || !target.isOnline()){
+                user.sendMessagePrefix("&cEL jugador debe estar conectado");
+                return;
+            }
+            user.sendMessagePrefix("&6Has curado a &c" + target.getName());
+            target.getPlayer().setHealth(user.getPlayer().getMaxHealth());
         }
     }
 }

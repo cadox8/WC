@@ -23,7 +23,7 @@ public class TeleportCMD extends WCCmd {
             case 1: //del sender a otra persona
                 WCUser target = WCServer.getUser(plugin.getServer().getPlayer(args[0]));
                 if (!target.isOnline() || target == null) {
-                    user.sendMessage("");
+                    user.sendMessagePrefix("&cEL jugador debe estar conectado");
                     return;
                 }
                 user.getPlayer().teleport(target.getPlayer().getLocation(), PlayerTeleportEvent.TeleportCause.COMMAND);
@@ -34,7 +34,7 @@ public class TeleportCMD extends WCCmd {
                 WCUser to = WCServer.getUser(plugin.getServer().getPlayer(args[1]));
 
                 if (!from.isOnline() || from == null || !to.isOnline() || to == null) {
-                    user.sendMessage("");
+                    user.sendMessagePrefix("&cEL jugador debe estar conectado");
                     return;
                 }
 

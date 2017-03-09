@@ -125,26 +125,11 @@ public class PlayerListener implements Listener{
     public void onCommand(PlayerCommandPreprocessEvent e){
         WCUser p = WCServer.getUser(e.getPlayer());
 
-        if (isBannedCMD(e.getMessage())){
+        if (e.getMessage().equalsIgnoreCase("plugins") || e.getMessage().equalsIgnoreCase("pl")){
             p.sendMessage("&cLos plugins de este servidor ha sido creados por los desarrolladores del mismo, es por eso por lo que no tenemos" +
                     "ningún problema en decírtelos: &6WCCore, SafariNet y PvPManager. &cAhora, te invito a que los crees tu mismo, puesto que el código " +
                     "de los plugins sólo lo tenemos nosotros :D");
             e.setCancelled(true);
-        }
-    }
-
-    private boolean isBannedCMD(String cmd){
-        switch (cmd){
-            case "bukkit:help":
-            case "bukkit:?":
-            case "?":
-            case "bukkit:pl":
-            case "bukkit:plugins":
-            case "pl":
-            case "plugins":
-                return true;
-            default:
-                return false;
         }
     }
 }

@@ -40,7 +40,7 @@ public class GamemodeCMD extends WCCmd{
                 default:
                     break;
             }
-            backInventory(user);
+            //backInventory(user);
             user.getPlayer().setGameMode(gameMode);
         }
     }

@@ -3,6 +3,7 @@ package es.projectalpha.wc.core;
 import es.projectalpha.wc.core.api.WCServer;
 import es.projectalpha.wc.core.api.WCUser;
 import es.projectalpha.wc.core.cmd.*;
+import es.projectalpha.wc.core.cmd.tp.*;
 import es.projectalpha.wc.core.utils.Messages;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
@@ -33,11 +34,12 @@ public class WCCommands implements TabCompleter {
 
     public static void load() {
         cmds.add(new AdminChatCMD());
-        cmds.add(new PingCMD());
+        cmds.add(new AfkCMD());
         cmds.add(new AyudaCMD());
-        cmds.add(new DecirCMD());
         cmds.add(new BroadcastCMD());
         cmds.add(new ClearCMD());
+        cmds.add(new CoreCMD());
+        cmds.add(new DecirCMD());
         cmds.add(new EnchantCMD());
         cmds.add(new FakeJoinCMD());
         cmds.add(new FakeLeaveCMD());
@@ -46,12 +48,23 @@ public class WCCommands implements TabCompleter {
         cmds.add(new HealCMD());
         cmds.add(new HelpOPCMD());
         cmds.add(new InvSeeCMD());
-        cmds.add(new SpawnCMD());
-        cmds.add(new WeatherCMD());
-        cmds.add(new AfkCMD());
-        cmds.add(new CoreCMD());
+        cmds.add(new PingCMD());
         cmds.add(new SetGroupCMD());
         cmds.add(new SocialCMD());
+         cmds.add(new SpawnCMD());
+        cmds.add(new WeatherCMD());
+
+        //Teleport
+        cmds.add(new TeleportAcceptCMD());
+        cmds.add(new TeleportAllCMD());
+        cmds.add(new TeleportAskAllCMD());
+        cmds.add(new TeleportAskCMD());
+        cmds.add(new TeleportAskHereCMD());
+        cmds.add(new TeleportCMD());
+        cmds.add(new TeleportDenyCMD());
+        cmds.add(new TeleportHereCMD());
+        cmds.add(new TeleportPosCMD());
+
         //
         ucmds = new WCCommands();
         //

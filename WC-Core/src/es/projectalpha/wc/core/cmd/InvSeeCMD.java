@@ -15,7 +15,7 @@ public class InvSeeCMD extends WCCmd{
     @Override
     public void run(WCUser user, String lbl, String[] args) {
         if (args.length < 1) {
-            user.sendMessage("*invsee.uso");
+            user.sendMessage("&cDebes poner un usuario");
             return;
         }
 
