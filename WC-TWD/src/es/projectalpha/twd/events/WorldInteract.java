@@ -152,6 +152,7 @@ public class WorldInteract implements Listener{
         }
 
         if (e.getEntity() instanceof Giant){
+            w.dropItemNaturally(l, new ItemMaker(Material.NETHER_STALK).setAmount(new Random().nextInt(4) + 1).build());
             if (new Random().nextInt(5) > 3){
                 w.dropItemNaturally(l, new ItemMaker(Material.NETHER_STALK).setAmount(new Random().nextInt(4) + 1).build());
             }

@@ -18,10 +18,10 @@ public class MobAttack {
     private static Random r = new Random();
 
     public static void giantAttacks(Giant boss){
-        int attack = r.nextInt(7) + 1;
+        int attack = r.nextInt(10) + 1;
         List<Player> near = new ArrayList<>();
 
-        boss.getNearbyEntities(10, 10, 10).forEach(en -> {
+        boss.getNearbyEntities(7, 7, 7).forEach(en -> {
             if (en instanceof Player) {
                 near.add((Player) en);
             }
@@ -40,9 +40,10 @@ public class MobAttack {
             case 2:
                 ArrayList<Location> locs = Utils.getCircle(boss.getEyeLocation().add(0, 3, 0), 7, 30);
 
-                locs.forEach(l -> { //Change Color
-                    ParticleEffect.REDSTONE.display(new ParticleEffect.OrdinaryColor(255, 60, 50), boss.getLocation(), 50);
+                ParticleEffect.REDSTONE.display(new ParticleEffect.OrdinaryColor(255, 60, 50), boss.getEyeLocation(), 50);
+                ParticleEffect.REDSTONE.display(new ParticleEffect.OrdinaryColor(255, 60, 50), boss.getLocation(), 50);
 
+                locs.forEach(l -> { //Change Color
                     near.forEach(p -> {
                         ParticleEffect.EXPLOSION_NORMAL.display(new Vector(0, 0, 0), 4, p.getLocation(), 50);
                         p.damage(0.5);
