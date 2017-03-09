@@ -2,6 +2,7 @@ package es.projectalpha.twd.events;
 
 import es.projectalpha.twd.TWDPlayer;
 import es.projectalpha.twd.WCTWD;
+import es.projectalpha.twd.mobs.MobAttack;
 import es.projectalpha.twd.teams.Teams;
 import es.projectalpha.twd.weapons.Weapon;
 import org.bukkit.Material;
@@ -81,6 +82,10 @@ public class Weapons implements Listener {
                     return;
                 }
 
+                if (damagedMob instanceof Giant) {
+                    MobAttack.giantAttacks((Giant) damagedMob);
+                }
+
                 switch (weapon.getId()){
                     case 2:
                         damagedMob.damage(weapon.damage() + (weapon.damage() * 2));
@@ -95,6 +100,10 @@ public class Weapons implements Listener {
                         damagedMob.damage(weapon.damage());
                         break;
                 }
+
+                String name = "Zombie";
+                if (damagedMob.getCustomName() != null || !damagedMob.getCustomName().equalsIgnoreCase("")) name = damagedMob.getCustomName();
+                new TWDPlayer(p).sendActionBar("&6Vida &3" + name + " &c" + damagedMob.getHealth() + "&0/&5" + damagedMob.getMaxHealth());
             }
         }
     }

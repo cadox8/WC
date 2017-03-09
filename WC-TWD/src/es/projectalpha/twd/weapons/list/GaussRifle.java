@@ -29,6 +29,6 @@ public class GaussRifle extends Weapon {
         return 120;
     }
     public double distance(){
-        return 10;
+        return super.distance() + 2;
     }
 }

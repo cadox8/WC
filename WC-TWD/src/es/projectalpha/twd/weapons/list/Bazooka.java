@@ -36,6 +36,6 @@ public class Bazooka extends Weapon {
         return 0.25;
     }
     public double distance(){
-        return 7;
+        return super.distance() + 1.3;
     }
 }

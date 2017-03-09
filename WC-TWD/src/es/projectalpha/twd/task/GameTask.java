@@ -3,6 +3,7 @@ package es.projectalpha.twd.task;
 import es.projectalpha.twd.WCTWD;
 import es.projectalpha.twd.economy.Economy;
 import es.projectalpha.twd.mobs.Mobs;
+import es.projectalpha.twd.utils.AllItems;
 import org.bukkit.*;
 import org.bukkit.entity.Zombie;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -49,7 +50,6 @@ public class GameTask extends BukkitRunnable{
                     case EMERALD:
                         economy.addMoney(1);
                         p.getInventory().remove(i);
-
                         break;
                     case NETHER_STAR:
                         economy.addShinnyShit(1);
@@ -57,7 +57,10 @@ public class GameTask extends BukkitRunnable{
                         p.sendMessage(ChatColor.GREEN + "Añadida " + ChatColor.YELLOW + "1" + ChatColor.GREEN + " nether star");
                         break;
                     case GLASS_BOTTLE:
-                        if (!i.hasItemMeta()) p.getInventory().remove(i);
+                        if (!i.hasItemMeta()) {
+                            p.getInventory().remove(i);
+                            p.getInventory().addItem(new AllItems().getPotion1());
+                        }
                         break;
                     default:
                         break;

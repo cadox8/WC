@@ -27,7 +27,6 @@ public class Thirst implements Listener {
 
         if (type == Material.POTION && item.getDurability() == 0 && p.getInventory().getItemInMainHand().isSimilar(item)){
             p.getInventory().getItemInMainHand().setType(Material.AIR);
-            p.getInventory().addItem(new AllItems().getPotion1());
 
             for (ItemStack i : p.getInventory().getContents()){
                 if (i.getType() == Material.GLASS_BOTTLE){
@@ -35,6 +34,7 @@ public class Thirst implements Listener {
                 }
             }
 
+            p.setLevel(0);
             if (thirst + 256 >= 1000){
                 p.setLevel(1000);
                 return;
@@ -46,8 +46,6 @@ public class Thirst implements Listener {
 
     @EventHandler
     public void onItemRefill(PlayerBucketFillEvent e){
-        Player p = e.getPlayer();
-
         if (e.getBucket() == Material.GLASS_BOTTLE || e.getBucket() == Material.POTION){
             e.setItemStack(new AllItems().getPotion2());
         }

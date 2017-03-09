@@ -29,6 +29,6 @@ public class GaussShotGun extends Weapon {
         return 8;
     }
     public double distance(){
-        return 1;
+        return super.distance() - 0.1;
     }
 }

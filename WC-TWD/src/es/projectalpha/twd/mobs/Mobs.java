@@ -1,6 +1,8 @@
 package es.projectalpha.twd.mobs;
 
 import es.projectalpha.twd.WCTWD;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.EntityType;
@@ -18,8 +20,11 @@ public class Mobs {
     }
 
     //
+    @AllArgsConstructor
     public enum MobType{
-        NORMAL, SPECIAL, BOSS
+        NORMAL(200), SPECIAL(400), BOSS(1);
+
+        @Getter private int health;
     }
     public enum BossType{
         NOPE, GIANT
@@ -36,13 +41,8 @@ public class Mobs {
 
     public void spawnMob(MobType mobType, Location location, BossType bossType){
         World w = location.getWorld();
+
         switch (mobType){
-            case NORMAL:
-                spawnMobNormal(location, w);
-                break;
-            case SPECIAL:
-                spawnMobSpecial(location, w);
-                break;
             case BOSS:
                 switch (bossType){
                     case GIANT:
@@ -50,34 +50,21 @@ public class Mobs {
                         break;
                 }
                 break;
+            default:
+                spawnZombie(location, w, mobType);
         }
     }
 
-    private void spawnMobNormal(Location location, World world){
+    private void spawnZombie(Location location, World world, MobType mobType){
         Zombie zombie = (Zombie) world.spawnEntity(location, EntityType.ZOMBIE);
         boolean baby = new Random().nextBoolean();
 
-        if (baby){
-            zombie.setMaxHealth(200);
-            zombie.setHealth(zombie.getMaxHealth());
+        if (mobType == MobType.NORMAL && baby) zombie.setBaby(true);
 
-            zombie.setBaby(true);
-
-            zombie.teleport(location);
-
-            return;
-        }
-        zombie.setMaxHealth(200);
+        zombie.setMaxHealth(mobType.getHealth());
         zombie.setHealth(zombie.getMaxHealth());
 
-        zombie.teleport(location);
-    }
-
-    private void spawnMobSpecial(Location location, World world){
-        Zombie zombie = (Zombie) world.spawnEntity(location, EntityType.ZOMBIE);
-
-        zombie.setMaxHealth(400);
-        zombie.setHealth(zombie.getMaxHealth());
+        zombie.setFireTicks(0);
 
         zombie.teleport(location);
     }

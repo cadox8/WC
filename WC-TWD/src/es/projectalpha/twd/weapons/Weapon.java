@@ -75,7 +75,7 @@ public class Weapon {
         }*/
         
         Snowball snowball = player.getWorld().spawn(player.getEyeLocation(), Snowball.class);
-        snowball.setVelocity(player.getLocation().getDirection().multiply(2));
+        snowball.setVelocity(player.getLocation().getDirection().multiply(distance()));
         snowball.setShooter(player);
         snowball.setMetadata("twd", new FixedMetadataValue(WCTWD.getInstance(), "weapon_" + getId()));
 
@@ -105,7 +105,7 @@ public class Weapon {
         return -1;
     }
     public double distance(){
-        return 1.5;
+        return 0.5;
     }
     //
 

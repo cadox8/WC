@@ -4,15 +4,17 @@ import es.projectalpha.twd.TWDPlayer;
 import es.projectalpha.twd.WCTWD;
 import es.projectalpha.twd.economy.Economy;
 import es.projectalpha.twd.utils.AllItems;
+import es.projectalpha.wc.core.api.WCServer;
 import es.projectalpha.wc.core.cmd.WCCmd;
 import es.projectalpha.wc.core.utils.ItemMaker;
 import es.projectalpha.wc.core.utils.Utils;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
-import org.bukkit.entity.Monster;
+import org.bukkit.entity.Giant;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Zombie;
 import org.bukkit.event.EventHandler;
@@ -42,7 +44,7 @@ public class WorldInteract implements Listener{
     public void onInteract(PlayerInteractEvent e){
         Player p = e.getPlayer();
 
-        if (e.getAction() == Action.RIGHT_CLICK_BLOCK) {
+        if (e.getAction() == Action.RIGHT_CLICK_BLOCK && e.getItem().getType() == Material.AIR) {
             Block b = e.getClickedBlock();
             if (b instanceof Chest) {
                 Chest c = (Chest)b;
@@ -118,7 +120,9 @@ public class WorldInteract implements Listener{
 
         try {
              money = new Double(df.format(eco.getMoney() * 0.04).replace(",", "."));
-        }catch(NumberFormatException ex){}
+        }catch(NumberFormatException ex){
+            WCServer.log(WCServer.Level.WARNING, "Intentando crear un double con ,");
+        }
 
         if (eco.getMoney() - money <= 0) return;
         eco.removeMoney(money);
@@ -129,18 +133,26 @@ public class WorldInteract implements Listener{
     @EventHandler
     public void onMobDie(EntityDeathEvent e){
         AllItems items = new AllItems();
+        Location l = e.getEntity().getLocation();
+        World w = l.getWorld();
 
-        if (e instanceof Zombie){
-            e.getDrops().clear();
-            e.setDroppedExp(0);
+        e.getDrops().clear();
+        e.setDroppedExp(0);
 
+        if (e.getEntity() instanceof Zombie){
             if (new Random().nextInt(5) > 3){
-                ((Monster) e).getWorld().dropItemNaturally(((Monster) e).getLocation(), new ItemMaker(Material.EMERALD).setAmount(new Random().nextInt(4) + 1).build());
+                w.dropItemNaturally(l, new ItemMaker(Material.EMERALD).setAmount(new Random().nextInt(4) + 1).build());
                 if (new Random().nextBoolean()){
-                    ((Monster) e).getWorld().dropItemNaturally(((Monster) e).getLocation(), items.weapons.get(new Random().nextInt(items.weapons.size())));
+                    w.dropItemNaturally(l, items.weapons.get(new Random().nextInt(items.weapons.size())));
                 } else {
-                    ((Monster) e).getWorld().dropItemNaturally(((Monster) e).getLocation(), items.health.get(new Random().nextInt(items.health.size())));
+                    w.dropItemNaturally(l, items.health.get(new Random().nextInt(items.health.size())));
                 }
+            }
+        }
+
+        if (e.getEntity() instanceof Giant){
+            if (new Random().nextInt(5) > 3){
+                w.dropItemNaturally(l, new ItemMaker(Material.NETHER_STALK).setAmount(new Random().nextInt(4) + 1).build());
             }
         }
     }

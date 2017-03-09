@@ -31,6 +31,6 @@ public class Olympia extends Weapon {
         return 2;
     }
     public double distance(){
-        return 1.9;
+        return super.distance() + 0.3;
     }
 }
