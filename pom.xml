@@ -16,6 +16,9 @@
         <module>WC-PvPManager</module>
         <module>WC-Clans</module>
 
+        <!-- Lobby -->
+        <module>WC-Lobby</module>
+
         <!-- TWD -->
         <module>WC-TWD</module>
 
