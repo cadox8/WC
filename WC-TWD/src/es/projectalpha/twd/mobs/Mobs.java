@@ -64,6 +64,9 @@ public class Mobs {
         zombie.setMaxHealth(mobType.getHealth());
         zombie.setHealth(zombie.getMaxHealth());
 
+        zombie.setCustomName("Zombie");
+        zombie.setCustomNameVisible(false);
+
         zombie.setFireTicks(0);
 
         zombie.teleport(location);

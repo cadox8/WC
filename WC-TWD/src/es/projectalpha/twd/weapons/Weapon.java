@@ -89,7 +89,7 @@ public class Weapon {
             player.removePotionEffect(PotionEffectType.SLOW);
             return;
         }
-        player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 99999, 5));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 99999, 3));
     }
 
     public double damage(){

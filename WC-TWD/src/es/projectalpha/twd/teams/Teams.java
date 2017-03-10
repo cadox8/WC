@@ -1,10 +1,12 @@
 package es.projectalpha.twd.teams;
 
-import es.projectalpha.twd.WCTWD;
 import es.projectalpha.twd.TWDPlayer;
+import es.projectalpha.twd.WCTWD;
+import es.projectalpha.twd.utils.Parsers;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 
 import java.util.ArrayList;
 
@@ -94,5 +96,9 @@ public class Teams {
             default:
                 return false;
         }
+    }
+
+    public Location getTeamLocation(TeamsInfo teamsInfo){
+        return Parsers.stringToLocation(WCTWD.getInstance().getFileManager().getConfig().getString("prision"));
     }
 }

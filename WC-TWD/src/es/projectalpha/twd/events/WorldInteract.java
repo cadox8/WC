@@ -29,6 +29,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.event.weather.WeatherChangeEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffectType;
 
 import java.text.DecimalFormat;
 import java.util.Random;
@@ -141,7 +142,7 @@ public class WorldInteract implements Listener{
         e.setDroppedExp(0);
 
         if (e.getEntity() instanceof Zombie){
-            if (new Random().nextInt(5) > 3){
+            if (new Random().nextInt(5) >= 3){
                 w.dropItemNaturally(l, new ItemMaker(Material.EMERALD).setAmount(new Random().nextInt(4) + 1).build());
                 if (new Random().nextBoolean()){
                     w.dropItemNaturally(l, items.weapons.get(new Random().nextInt(items.weapons.size())));
@@ -152,9 +153,8 @@ public class WorldInteract implements Listener{
         }
 
         if (e.getEntity() instanceof Giant){
-            w.dropItemNaturally(l, new ItemMaker(Material.NETHER_STALK).setAmount(new Random().nextInt(4) + 1).build());
             if (new Random().nextInt(5) > 3){
-                w.dropItemNaturally(l, new ItemMaker(Material.NETHER_STALK).setAmount(new Random().nextInt(4) + 1).build());
+                w.dropItemNaturally(l, new ItemMaker(Material.NETHER_STAR).setAmount(new Random().nextInt(4) + 1).build());
             }
         }
     }
@@ -168,6 +168,9 @@ public class WorldInteract implements Listener{
 
         if (eco.isInTeam()){
             WCTWD.getInstance().getTeams().loadTeam(WCTWD.getPlayer(p));
+            Location l = WCTWD.getInstance().getTeams().getTeamLocation(WCTWD.getInstance().getTeams().getTeam(WCTWD.getPlayer(p)));
+            if (l == null) return;
+            p.teleport(l);
             return;
         }
         p.sendMessage("Pon /prision o /woodbury para entrar en un equipo");
@@ -220,6 +223,13 @@ public class WorldInteract implements Listener{
             p.sendMessage(ChatColor.GREEN + "Añadidas " + ChatColor.YELLOW + money + ChatColor.GREEN + " esmeraldas");
             e.getItem().remove();
         }
+    }
+
+    @EventHandler
+    public void onItemChange(PlayerItemHeldEvent e){
+        Player p = e.getPlayer();
+
+        if (p.hasPotionEffect(PotionEffectType.SLOW)) p.removePotionEffect(PotionEffectType.SLOW);
     }
 
     @EventHandler
