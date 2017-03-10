@@ -63,7 +63,11 @@ public class CuboidRegion {
         double dx = Math.random() * (maxX - minX) + minX;
         double dz = Math.random() * (maxZ - minZ) + minZ;
 
-        return world.getHighestBlockAt(new Location(world, dx, 0, dz)).getLocation();
+        Block b = world.getHighestBlockAt(new Location(world, dx, 0, dz));
+
+        if (b.getType() == Material.LEAVES || b.getType() == Material.LEAVES_2) getRandomLocation();
+
+        return b.getLocation();
     }
 
     @Override

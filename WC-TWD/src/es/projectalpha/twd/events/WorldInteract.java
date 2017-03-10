@@ -5,6 +5,7 @@ import es.projectalpha.twd.WCTWD;
 import es.projectalpha.twd.economy.Economy;
 import es.projectalpha.twd.teams.Teams;
 import es.projectalpha.twd.utils.AllItems;
+import es.projectalpha.twd.weapons.Weapon;
 import es.projectalpha.wc.core.api.WCServer;
 import es.projectalpha.wc.core.cmd.WCCmd;
 import es.projectalpha.wc.core.utils.ItemMaker;
@@ -29,6 +30,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.event.weather.WeatherChangeEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import java.text.DecimalFormat;
@@ -59,6 +61,10 @@ public class WorldInteract implements Listener{
         }
 
         if (e.getAction() == Action.RIGHT_CLICK_BLOCK || e.getAction() == Action.RIGHT_CLICK_AIR) {
+            Weapon weapon = Weapon.getWeaponByItemStack(p.getInventory().getItemInMainHand());
+
+            if (weapon != null) e.setCancelled(true);
+
             switch (e.getItem().getType()){
                 case PAPER:
                     if (!this.plugin.getBlooding().contains(p)) return;
@@ -68,21 +74,18 @@ public class WorldInteract implements Listener{
                     break;
                 case SAPLING:
                     if (p.getMaxHealth() == p.getHealth()) return;
-                    if (p.getHealth() + 4 > p.getMaxHealth()){
+                    if (p.getHealth() + 3 > p.getMaxHealth()){
                         p.setHealth(p.getMaxHealth());
                     } else {
-                        p.setHealth(p.getHealth() + 4);
+                        p.setHealth(p.getHealth() + 3);
                     }
                     p.sendMessage(ChatColor.GREEN + "Me siento mucho mejor :D.");
                     removeItem(p);
                     break;
                 case BLAZE_ROD:
                     if (p.getMaxHealth() == p.getHealth()) return;
-                    if (p.getHealth() + 2 > p.getMaxHealth()){
-                        p.setHealth(p.getMaxHealth());
-                    } else {
-                        p.setHealth(p.getHealth() + 2);
-                    }
+                    p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 100, 2));
+                    p.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 100, 1));
                     p.sendMessage(ChatColor.GREEN + "Me siento mucho mejor :D.");
                     removeItem(p);
                     break;
@@ -92,12 +95,13 @@ public class WorldInteract implements Listener{
 
     private void removeItem(Player p){
         ItemStack i = p.getInventory().getItemInMainHand();
+        int amount = i.getAmount();
 
-        if (i.getAmount() == 1){
+        if (amount == 1){
             i.setType(Material.AIR);
-            return;
+        } else {
+            i.setAmount(amount - 1);
         }
-        i.setAmount(i.getAmount() - 1);
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
