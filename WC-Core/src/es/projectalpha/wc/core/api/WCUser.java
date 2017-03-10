@@ -1,5 +1,7 @@
 package es.projectalpha.wc.core.api;
 
+import com.google.common.io.ByteArrayDataOutput;
+import com.google.common.io.ByteStreams;
 import es.projectalpha.wc.core.WCCore;
 import es.projectalpha.wc.core.cmd.WCCmd;
 import es.projectalpha.wc.core.managers.DataManager;
@@ -177,6 +179,18 @@ public class WCUser {
         message.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, command));
         message.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(Utils.colorize(hover)).create()));
         getPlayer().spigot().sendMessage(message);
+    }
+
+    //Bungee
+    public void sendToServer(String str) {
+        ByteArrayDataOutput out = ByteStreams.newDataOutput();
+        out.writeUTF("Connect");
+        out.writeUTF(str);
+        getPlayer().sendPluginMessage(plugin, "BungeeCord", out.toByteArray());
+    }
+
+    public void sendToLobby() {
+        sendToServer("lobby");
     }
 
     /*

@@ -40,6 +40,10 @@ public class WCCore extends JavaPlugin {
                 }
             }
 
+            debugLog("Conectando con BungeeCord...");
+            getServer().getMessenger().registerOutgoingPluginChannel(instance, "BungeeCord");
+            getServer().getMessenger().registerOutgoingPluginChannel(instance, "WC");
+
             debugLog("Cargando Clases y Eventos...");
             register();
             registerEvent();
