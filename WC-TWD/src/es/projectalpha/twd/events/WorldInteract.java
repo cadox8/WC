@@ -165,6 +165,8 @@ public class WorldInteract implements Listener{
 
         p.setLevel(1000);
 
+        WCTWD.getPlayer(p).noItemsCooldown();
+
         if (eco.isInTeam()){
             WCTWD.getInstance().getTeams().loadTeam(WCTWD.getPlayer(p));
             Location l = WCTWD.getInstance().getTeams().getTeamLocation(WCTWD.getInstance().getTeams().getTeam(WCTWD.getPlayer(p)));
@@ -242,5 +244,7 @@ public class WorldInteract implements Listener{
         format = format.replace("{message}", e.getMessage());
 
         e.setFormat(Utils.colorize(format));
+
+        user.sendMessage(plugin.getTeams().getTeam(user).toString()); //Tests
     }
 }

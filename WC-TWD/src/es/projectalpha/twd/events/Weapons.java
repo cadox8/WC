@@ -129,7 +129,10 @@ public class Weapons implements Listener {
             if (Weapon.getWeaponByItemStack(p.getInventory().getItemInMainHand()) == null) return;
             weapon = Weapon.getWeaponByItemStack(p.getInventory().getItemInMainHand());
 
-            if (weapon == null) return;
+            if (weapon == null) {
+                e.setDamage(0);
+                return;
+            }
 
             if (weapon.getId() != 0) return;
 

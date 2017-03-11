@@ -4,6 +4,7 @@ import es.projectalpha.twd.weapons.Weapon;
 import es.projectalpha.wc.core.api.WCUser;
 import es.projectalpha.wc.core.utils.ItemMaker;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.attribute.Attribute;
 
 import java.util.UUID;
 
@@ -29,5 +30,9 @@ public class TWDPlayer extends WCUser {
 
     public void addAmmoAdmin(int id){
         getPlayer().getInventory().addItem(ItemMaker.setAmount(Weapon.getWeaponById(id).getAmmo().toItemStack(), 64));
+    }
+
+    public void noItemsCooldown(){
+        getPlayer().getAttribute(Attribute.GENERIC_ATTACK_SPEED).setBaseValue(16);
     }
 }
