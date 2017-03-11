@@ -5,7 +5,6 @@ import es.projectalpha.twd.WCTWD;
 import es.projectalpha.twd.economy.Economy;
 import es.projectalpha.twd.teams.Teams;
 import es.projectalpha.twd.utils.AllItems;
-import es.projectalpha.twd.weapons.Weapon;
 import es.projectalpha.wc.core.api.WCServer;
 import es.projectalpha.wc.core.cmd.WCCmd;
 import es.projectalpha.wc.core.utils.ItemMaker;
@@ -61,10 +60,6 @@ public class WorldInteract implements Listener{
         }
 
         if (e.getAction() == Action.RIGHT_CLICK_BLOCK || e.getAction() == Action.RIGHT_CLICK_AIR) {
-            Weapon weapon = Weapon.getWeaponByItemStack(p.getInventory().getItemInMainHand());
-
-            if (weapon != null) e.setCancelled(true);
-
             switch (e.getItem().getType()){
                 case PAPER:
                     if (!this.plugin.getBlooding().contains(p)) return;

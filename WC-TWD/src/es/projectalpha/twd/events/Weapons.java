@@ -5,7 +5,6 @@ import es.projectalpha.twd.WCTWD;
 import es.projectalpha.twd.mobs.MobAttack;
 import es.projectalpha.twd.teams.Teams;
 import es.projectalpha.twd.weapons.Weapon;
-import org.bukkit.Material;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -30,16 +29,15 @@ public class Weapons implements Listener {
     @EventHandler
     public void onInteract(PlayerInteractEvent e){
         Player p = e.getPlayer();
-        TWDPlayer player = new TWDPlayer(p.getUniqueId());
         Weapon weapon;
 
         if (e.getItem() == null || e.getHand() != EquipmentSlot.HAND) return;
 
         if (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK){
-            if (e.getItem().getType() == Material.GOLD_INGOT) return;
             if (e.getItem() == null || Weapon.getWeaponByItemStack(e.getItem()) == null || !Weapon.isWeapon(e.getItem())) return;
             weapon = Weapon.getWeaponByItemStack(e.getItem());
 
+            if (weapon != null) e.setCancelled(true);
             if (weapon == null) return;
 
             weapon.shoot(p);
@@ -50,6 +48,7 @@ public class Weapons implements Listener {
             if (e.getItem() == null || Weapon.getWeaponByItemStack(e.getItem()) == null || !Weapon.isWeapon(e.getItem())) return;
             weapon = Weapon.getWeaponByItemStack(e.getItem());
 
+            if (weapon != null) e.setCancelled(true);
             if (weapon == null) return;
 
             if (weapon.getId() == 0) return;
