@@ -39,9 +39,6 @@ public class TWDCMD extends WCCmd {
                 p.sendMessage(Messages.locationSet(args[0]));
                 WCTWD.getInstance().getFileManager().saveFiles();
             }
-            if (args[0].equalsIgnoreCase("limpiar")){
-                WCTWD.getInstance().getGameTask().getSpawnedZombies().forEach(z -> z.damage(z.getHealth()));
-            }
         }
     }
 }

@@ -44,32 +44,41 @@ public class Mobs {
     }
     //
 
-    public Monster spawnMob(MobType mobType, Location location){
-        return spawnMob(mobType, location, BossType.NONE);
+    public void spawnMob(MobType mobType, Location location){
+        spawnMob(mobType, location, BossType.NONE);
     }
 
-    public Monster spawnMob(Location location, BossType bossType){
-        return spawnMob(MobType.BOSS, location, bossType);
+    public void spawnMob(Location location, BossType bossType){
+        spawnMob(MobType.BOSS, location, bossType);
     }
 
-    public Monster spawnMob(MobType mobType, Location location, BossType bossType){
+    public void spawnMob(MobType mobType, Location location, BossType bossType){
         World w = location.getWorld();
 
         switch (mobType){
             case BOSS:
                 switch (bossType){
                     case GIANT:
-                        return spawnGiant(location, w);
+                        spawnGiant(location, w);
+                        break;
                     case SKELETON:
-                        return spawnSkeleton(location, w);
+                        spawnSkeleton(location, w);
+                        break;
+                    default:
+                        break;
                 }
-
+            case NORMAL:
+                spawnZombie(location, w, mobType);
+                break;
+            case SPECIAL:
+                spawnZombieSpecial(location, w, mobType);
+                break;
             default:
-                return spawnZombie(location, w, mobType);
+                break;
         }
     }
 
-    private Zombie spawnZombie(Location location, World world, MobType mobType){
+    private void spawnZombie(Location location, World world, MobType mobType){
         Zombie zombie = (Zombie) world.spawnEntity(location, EntityType.ZOMBIE);
         boolean baby = new Random().nextBoolean();
 
@@ -84,11 +93,23 @@ public class Mobs {
         zombie.setFireTicks(0);
 
         zombie.teleport(location);
-
-        return zombie;
     }
 
-    private Giant spawnGiant(Location location, World world){
+    public void spawnZombieSpecial(Location location, World world, MobType mobType){
+        ZombieVillager zombie = (ZombieVillager) world.spawnEntity(location, EntityType.ZOMBIE_VILLAGER);
+
+        zombie.setMaxHealth(mobType.getHealth());
+        zombie.setHealth(zombie.getMaxHealth());
+
+        zombie.setCustomNameVisible(false);
+        zombie.setCustomName("Zombie");
+
+        zombie.setFireTicks(0);
+
+        zombie.teleport(location);
+    }
+
+    private void spawnGiant(Location location, World world){
         Giant giant = (Giant) world.spawnEntity(location, EntityType.GIANT);
 
         giant.setMaxHealth(BossType.GIANT.getHealth());
@@ -97,11 +118,9 @@ public class Mobs {
         giant.setCustomName("Zombie Gigante");
 
         giant.teleport(location);
-
-        return giant;
     }
 
-    private Skeleton spawnSkeleton(Location location, World world){
+    private void spawnSkeleton(Location location, World world){
         Skeleton skeleton = (Skeleton) world.spawnEntity(location, EntityType.SKELETON);
 
         skeleton.setMaxHealth(BossType.SKELETON.getHealth());
@@ -115,7 +134,5 @@ public class Mobs {
         skeleton.getEquipment().setItemInMainHand(new ItemMaker(Material.GOLD_AXE).build());
 
         skeleton.teleport(location);
-
-        return skeleton;
     }
 }

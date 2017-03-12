@@ -118,11 +118,11 @@ public class MobAttack {
                 near.forEach(p -> {
                     if (!p.equals(damager)) {
                         WCTWD.getPlayer(p).sendSound(Sound.ENTITY_GENERIC_EXPLODE);
-                        p.damage(0.6);
+                        p.damage(3);
                     }
                 });
                 WCTWD.getPlayer(damager).sendSound(Sound.ENTITY_GENERIC_EXPLODE);
-                damager.damage(0.6);
+                damager.damage(3);
 
                 bs.runTaskLater(plugin, () -> bones.forEach(b -> b.remove()), 40);
                 break;

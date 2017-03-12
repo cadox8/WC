@@ -65,11 +65,10 @@ public class WCTWD extends JavaPlugin{
     }
 
     private void registerCommands(){
-        WCCommands.register(new GaussCMD(), new MoneyCMD(), new PrisionCMD(), new TWDCMD(), new WeaponCMD(), new WoodburyCMD());
+        WCCommands.register(new GaussCMD(), new MoneyCMD(), new PrisionCMD(), new TWDCMD(), new WeaponCMD(), new WoodburyCMD(), new BossCMD());
     }
 
     public void onDisable(){
-        gameTask.getSpawnedZombies().forEach(z -> z.damage(z.getHealth()));
         getServer().getScheduler().cancelTasks(instance);
     }
 

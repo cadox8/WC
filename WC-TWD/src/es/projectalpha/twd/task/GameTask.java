@@ -4,9 +4,7 @@ import es.projectalpha.twd.WCTWD;
 import es.projectalpha.twd.economy.Economy;
 import es.projectalpha.twd.mobs.Mobs;
 import es.projectalpha.twd.utils.AllItems;
-import lombok.Getter;
 import org.bukkit.*;
-import org.bukkit.entity.Monster;
 import org.bukkit.entity.Zombie;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -22,12 +20,9 @@ public class GameTask extends BukkitRunnable{
     private WCTWD plugin;
     private World world;
 
-    @Getter private ArrayList<Monster> spawnedZombies;
-
     public GameTask(WCTWD plugin, World world){
         this.plugin = plugin;
         this.world = world;
-        spawnedZombies = new ArrayList<>();
     }
 
     public void run(){
@@ -88,12 +83,12 @@ public class GameTask extends BukkitRunnable{
             Location location = plugin.getWorldManager().getCuboidRegion().getRandomLocation();
             Mobs.MobType mt;
 
-            if (new Random().nextInt(5) >= 3){
+            if (new Random().nextInt(5) > 3){
                 mt = Mobs.MobType.SPECIAL;
             } else {
                 mt = Mobs.MobType.NORMAL;
             }
-            spawnedZombies.add(plugin.getMobs().spawnMob(mt, location));
+            plugin.getMobs().spawnMob(mt, location);
         }
     }
 }
