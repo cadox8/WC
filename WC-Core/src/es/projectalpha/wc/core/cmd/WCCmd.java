@@ -56,10 +56,7 @@ public abstract class WCCmd {
     }
 
     public String formatedCMD(String... args){
-        String cmd = "&e/";
-
-        for (String s : args) cmd += s;
-        return Utils.colorize(cmd);
+        return "&e/" + Utils.colorize(Utils.buildString(args));
     }
 
     public void userNotOnline(WCUser user){

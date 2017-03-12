@@ -29,16 +29,20 @@ public class KillAllCMD extends WCCmd {
 
             if (entity == null || entity == EntityType.UNKNOWN) return;
 
+            int mobs = worldEntities(user.getPlayer().getWorld(), entity).size();
             worldEntities(user.getPlayer().getWorld(), entity).forEach(e -> e.remove());
+            user.sendMessagePrefix("&6Eliminados &c" + mobs + " &6mobs");
         }
 
         if (args.length == 2){
-            EntityType entity = EntityType.valueOf(args[0]);
-
-            if (entity == null || entity == EntityType.UNKNOWN) return;
-
             if (args[1].equalsIgnoreCase("-n")){
+                EntityType entity = EntityType.valueOf(args[0]);
+
+                if (entity == null || entity == EntityType.UNKNOWN) return;
+
+                int mobs = worldEntities(user.getPlayer().getWorld(), entity).size();
                 worldClassEntities(user.getPlayer().getWorld(), entity).forEach(e -> e.remove());
+                user.sendMessagePrefix("&6Eliminados &c" + mobs + " &6mobs");
             }
         }
     }

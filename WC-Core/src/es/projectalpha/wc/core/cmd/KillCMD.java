@@ -2,6 +2,10 @@ package es.projectalpha.wc.core.cmd;
 
 import es.projectalpha.wc.core.api.WCServer;
 import es.projectalpha.wc.core.api.WCUser;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+
+import java.util.List;
 
 public class KillCMD extends WCCmd {
 
@@ -23,5 +27,10 @@ public class KillCMD extends WCCmd {
             }
             target.getPlayer().damage(target.getPlayer().getHealth());
         }
+    }
+
+    @Override
+    public List<String> onTabComplete(CommandSender cs, Command cmd, String alias, String[] args, String curs, Integer curn) {
+        return null;
     }
 }

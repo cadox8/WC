@@ -128,8 +128,10 @@ public class PlayerListener implements Listener{
     public void onCommand(PlayerCommandPreprocessEvent e){
         WCUser p = WCServer.getUser(e.getPlayer());
 
-        if (e.getMessage().equalsIgnoreCase("plugins") || e.getMessage().equalsIgnoreCase("pl")){
-            p.sendMessage("&cLos plugins de este servidor ha sido creados por los desarrolladores del mismo, es por eso por lo que no tenemos" +
+        if(p.isOnRank(WCCmd.Grupo.DEV)) return;
+
+        if (e.getMessage().startsWith("/?") || e.getMessage().startsWith("/bukkit:") || e.getMessage().startsWith("/pl") || e.getMessage().startsWith("/plugins") || e.getMessage().startsWith("/minecraft:")) {
+            p.sendMessagePrefix("&cLos plugins de este servidor ha sido creados por los desarrolladores del mismo, es por eso por lo que no tenemos" +
                     "ningún problema en decírtelos: &6WCCore, SafariNet y PvPManager. &cAhora, te invito a que los crees tu mismo, puesto que el código " +
                     "de los plugins sólo lo tenemos nosotros :D");
             e.setCancelled(true);
