@@ -69,10 +69,10 @@ public class WorldInteract implements Listener{
                     break;
                 case SAPLING:
                     if (p.getMaxHealth() == p.getHealth()) return;
-                    if (p.getHealth() + 3 > p.getMaxHealth()){
+                    if (p.getHealth() + 6 > p.getMaxHealth()){
                         p.setHealth(p.getMaxHealth());
                     } else {
-                        p.setHealth(p.getHealth() + 3);
+                        p.setHealth(p.getHealth() + 6);
                     }
                     p.sendMessage(ChatColor.GREEN + "Me siento mucho mejor :D.");
                     removeItem(p);
@@ -129,6 +129,10 @@ public class WorldInteract implements Listener{
         eco.removeMoney(money);
 
         l.getWorld().dropItemNaturally(l, new ItemMaker(Material.GOLD_INGOT).setDisplayName("&2" + money + "&6€ de &c" + p.getName()).build());
+
+        Teams.TeamsInfo team = plugin.getTeams().getTeam(WCTWD.getPlayer(p));
+
+        e.setDeathMessage(Utils.colorize(team.getColor() + p.getName() + " &7ha muerto por un &cataque Zombie"));
     }
 
     @EventHandler
@@ -244,7 +248,5 @@ public class WorldInteract implements Listener{
         format = format.replace("{message}", e.getMessage());
 
         e.setFormat(Utils.colorize(format));
-
-        user.sendMessage(plugin.getTeams().getTeam(user).toString()); //Tests
     }
 }

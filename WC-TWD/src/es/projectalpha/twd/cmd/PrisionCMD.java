@@ -31,7 +31,11 @@ public class PrisionCMD extends WCCmd {
         economy = new Economy(p);
 
         if (args.length >= 0) {
-            if (economy.isInTeam()) return;
+            if (economy.isInTeam()) {
+                Teams.TeamsInfo team = WCTWD.getInstance().getTeams().getTeam(WCTWD.getPlayer(user.getPlayer()));
+                user.sendMessagePrefix("&cYa estás en el equipo " + team.getColor() + team.toString());
+                return;
+            }
             fileManager.getPlayer().set(p.getName() + ".team", "prision");
             p.teleport(Parsers.stringToLocation(fileManager.getConfig().getString("prision")));
             fileManager.saveFiles();

@@ -93,7 +93,10 @@ public class Weapons implements Listener {
                 }
 
                 if (damagedMob instanceof Giant) {
-                    MobAttack.giantAttacks((Giant) damagedMob);
+                    MobAttack.giantAttacks((Giant) damagedMob, p);
+                }
+                if (damagedMob instanceof Skeleton) {
+                    MobAttack.skeletonAttacks((Skeleton) damagedMob, p);
                 }
 
                 switch (weapon.getId()){
@@ -118,7 +121,7 @@ public class Weapons implements Listener {
     }
 
     @EventHandler
-    public void onInteractEntity(EntityDamageByEntityEvent e){
+    public void onDamageEntity(EntityDamageByEntityEvent e){
         Player p;
 
         if (e.getDamager() instanceof Player && e.getEntity() instanceof Zombie){
@@ -126,13 +129,11 @@ public class Weapons implements Listener {
             Weapon weapon;
 
             if (p.getInventory().getItemInMainHand() == null || !Weapon.isWeapon(p.getInventory().getItemInMainHand())) return;
-            if (Weapon.getWeaponByItemStack(p.getInventory().getItemInMainHand()) == null) return;
-            weapon = Weapon.getWeaponByItemStack(p.getInventory().getItemInMainHand());
-
-            if (weapon == null) {
+            if (Weapon.getWeaponByItemStack(p.getInventory().getItemInMainHand()) == null) {
                 e.setDamage(0);
                 return;
             }
+            weapon = Weapon.getWeaponByItemStack(p.getInventory().getItemInMainHand());
 
             if (weapon.getId() != 0) return;
 

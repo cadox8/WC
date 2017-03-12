@@ -31,7 +31,11 @@ public class WoodburyCMD extends WCCmd {
         economy = new Economy(p);
 
         if (args.length >= 0) {
-            if (economy.isInTeam()) return;
+            if (economy.isInTeam()) {
+                Teams.TeamsInfo team = WCTWD.getInstance().getTeams().getTeam(WCTWD.getPlayer(user.getPlayer()));
+                user.sendMessagePrefix("&cYa estás en el equipo " + team.getColor() + team.toString());
+                return;
+            }
             fileManager.getPlayer().set(p.getName() + ".team", "woodbury");
             fileManager.saveFiles();
             p.teleport(Parsers.stringToLocation(fileManager.getConfig().getString("woodbury")));

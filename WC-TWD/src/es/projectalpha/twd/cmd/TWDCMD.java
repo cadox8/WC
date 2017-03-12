@@ -1,9 +1,7 @@
 package es.projectalpha.twd.cmd;
 
 import es.projectalpha.twd.WCTWD;
-import es.projectalpha.twd.economy.Economy;
 import es.projectalpha.twd.manager.FileManager;
-import es.projectalpha.twd.mobs.Mobs;
 import es.projectalpha.twd.utils.Parsers;
 import es.projectalpha.wc.core.api.WCUser;
 import es.projectalpha.wc.core.cmd.WCCmd;
@@ -13,7 +11,6 @@ import org.bukkit.entity.Player;
 public class TWDCMD extends WCCmd {
 
     private FileManager fileManager = WCTWD.getInstance().getFileManager();
-    private Economy economy;
 
     public TWDCMD() {
         super("twd_ayuda", Grupo.Craftero, "toa");
@@ -21,7 +18,6 @@ public class TWDCMD extends WCCmd {
 
     public void run(WCUser user, String label, String[] args) {
         Player p = user.getPlayer();
-        economy = new Economy(p);
 
         if (args.length == 0) {
             user.sendDiv();
@@ -43,8 +39,8 @@ public class TWDCMD extends WCCmd {
                 p.sendMessage(Messages.locationSet(args[0]));
                 WCTWD.getInstance().getFileManager().saveFiles();
             }
-            if (args[0].equalsIgnoreCase("boss")){
-                WCTWD.getInstance().getMobs().spawnMob(user.getPlayer().getLocation(), Mobs.BossType.GIANT);
+            if (args[0].equalsIgnoreCase("limpiar")){
+                WCTWD.getInstance().getGameTask().getSpawnedZombies().forEach(z -> z.damage(z.getHealth()));
             }
         }
     }

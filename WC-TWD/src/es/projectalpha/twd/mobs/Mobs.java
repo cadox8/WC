@@ -1,13 +1,14 @@
 package es.projectalpha.twd.mobs;
 
 import es.projectalpha.twd.WCTWD;
+import es.projectalpha.wc.core.utils.ItemMaker;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.World;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Giant;
-import org.bukkit.entity.Zombie;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.entity.*;
 
 import java.util.Random;
 
@@ -24,38 +25,51 @@ public class Mobs {
     public enum MobType{
         NORMAL(200), SPECIAL(400), BOSS(1);
 
-        @Getter private int health;
+        @Getter private double health;
     }
+    @AllArgsConstructor
     public enum BossType{
-        NOPE, GIANT
+        NONE(-1), GIANT(1000), SKELETON(3000);
+
+        @Getter private double health;
+
+        public static BossType parseBoss(String boss){
+            for (BossType b : BossType.values()){
+                if (b.toString().toLowerCase().equalsIgnoreCase(boss)){
+                    return b;
+                }
+            }
+            return NONE;
+        }
     }
     //
 
-    public void spawnMob(MobType mobType, Location location){
-        spawnMob(mobType, location, BossType.NOPE);
+    public Monster spawnMob(MobType mobType, Location location){
+        return spawnMob(mobType, location, BossType.NONE);
     }
 
-    public void spawnMob(Location location, BossType bossType){
-        spawnMob(MobType.BOSS, location, bossType);
+    public Monster spawnMob(Location location, BossType bossType){
+        return spawnMob(MobType.BOSS, location, bossType);
     }
 
-    public void spawnMob(MobType mobType, Location location, BossType bossType){
+    public Monster spawnMob(MobType mobType, Location location, BossType bossType){
         World w = location.getWorld();
 
         switch (mobType){
             case BOSS:
                 switch (bossType){
                     case GIANT:
-                        spawnGiant(location, w);
-                        break;
+                        return spawnGiant(location, w);
+                    case SKELETON:
+                        return spawnSkeleton(location, w);
                 }
-                break;
+
             default:
-                spawnZombie(location, w, mobType);
+                return spawnZombie(location, w, mobType);
         }
     }
 
-    private void spawnZombie(Location location, World world, MobType mobType){
+    private Zombie spawnZombie(Location location, World world, MobType mobType){
         Zombie zombie = (Zombie) world.spawnEntity(location, EntityType.ZOMBIE);
         boolean baby = new Random().nextBoolean();
 
@@ -64,22 +78,44 @@ public class Mobs {
         zombie.setMaxHealth(mobType.getHealth());
         zombie.setHealth(zombie.getMaxHealth());
 
-        zombie.setCustomName("Zombie");
         zombie.setCustomNameVisible(false);
+        zombie.setCustomName("Zombie");
 
         zombie.setFireTicks(0);
 
         zombie.teleport(location);
+
+        return zombie;
     }
 
-    private void spawnGiant(Location location, World world){
-        Giant zombie = (Giant) world.spawnEntity(location, EntityType.GIANT);
+    private Giant spawnGiant(Location location, World world){
+        Giant giant = (Giant) world.spawnEntity(location, EntityType.GIANT);
 
-        zombie.setMaxHealth(1000);
-        zombie.setHealth(zombie.getMaxHealth());
+        giant.setMaxHealth(BossType.GIANT.getHealth());
+        giant.setHealth(giant.getMaxHealth());
 
-        zombie.setCustomName("Zombie Gigante");
+        giant.setCustomName("Zombie Gigante");
 
-        zombie.teleport(location);
+        giant.teleport(location);
+
+        return giant;
+    }
+
+    private Skeleton spawnSkeleton(Location location, World world){
+        Skeleton skeleton = (Skeleton) world.spawnEntity(location, EntityType.SKELETON);
+
+        skeleton.setMaxHealth(BossType.SKELETON.getHealth());
+        skeleton.setHealth(skeleton.getMaxHealth());
+
+        double speed = skeleton.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).getBaseValue();
+        skeleton.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(speed + 0.2);
+
+        skeleton.setCustomName("QuebrantaHuesos");
+
+        skeleton.getEquipment().setItemInMainHand(new ItemMaker(Material.GOLD_AXE).build());
+
+        skeleton.teleport(location);
+
+        return skeleton;
     }
 }

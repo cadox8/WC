@@ -10,7 +10,6 @@ import es.projectalpha.twd.task.GameTask;
 import es.projectalpha.twd.teams.Teams;
 import es.projectalpha.wc.core.WCCommands;
 import lombok.Getter;
-import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -28,6 +27,8 @@ public class WCTWD extends JavaPlugin{
     @Getter private FileManager fileManager;
     @Getter private Teams teams;
 
+    @Getter private GameTask gameTask;
+
     //Utils
     @Getter private ArrayList<TWDPlayer> blooding = new ArrayList<>();
 
@@ -41,7 +42,8 @@ public class WCTWD extends JavaPlugin{
         fileManager.initFiles();
         worldManager.initWorld();
 
-        new GameTask(instance, getServer().getWorld("TWD")).runTaskTimer(this, 0, 20);
+        gameTask = new GameTask(instance, getServer().getWorld("TWD"));
+        gameTask.runTaskTimer(this, 0, 20);
     }
 
     private void registerEvents(){
@@ -67,7 +69,8 @@ public class WCTWD extends JavaPlugin{
     }
 
     public void onDisable(){
-        Bukkit.getScheduler().cancelTasks(instance);
+        gameTask.getSpawnedZombies().forEach(z -> z.damage(z.getHealth()));
+        getServer().getScheduler().cancelTasks(instance);
     }
 
     public static TWDPlayer getPlayer(OfflinePlayer p){

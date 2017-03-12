@@ -33,20 +33,21 @@ public class Teams {
     }
 
     public void loadTeam(TWDPlayer player){
-        String team = plugin.getFileManager().getPlayer().getString(player.getName() + ".team");
-        TeamsInfo teams = TeamsInfo.valueOf(team.toUpperCase());
+        TeamsInfo team = TeamsInfo.valueOf(plugin.getFileManager().getPlayer().getString(player.getName() + ".team").toUpperCase());
 
-        switch (teams){
+        switch (team){
             case PRISION:
                 prision.add(player);
-                player.getPlayer().setDisplayName(teams.getColor() + player.getName());
+                player.getPlayer().setDisplayName(team.getColor() + player.getName());
                 break;
             case WOODBURY:
                 woodbury.add(player);
-                player.getPlayer().setDisplayName(teams.getColor() + player.getName());
+                player.getPlayer().setDisplayName(team.getColor() + player.getName());
+                break;
+            case NONE:
                 break;
             default:
-                throw new NullPointerException("No existe el equipo");
+                player.sendMessagePrefix("&cTu equipo no existe, contacta con un Admin");
         }
     }
 

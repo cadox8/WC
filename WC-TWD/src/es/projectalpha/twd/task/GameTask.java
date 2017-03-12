@@ -4,7 +4,9 @@ import es.projectalpha.twd.WCTWD;
 import es.projectalpha.twd.economy.Economy;
 import es.projectalpha.twd.mobs.Mobs;
 import es.projectalpha.twd.utils.AllItems;
+import lombok.Getter;
 import org.bukkit.*;
+import org.bukkit.entity.Monster;
 import org.bukkit.entity.Zombie;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -20,9 +22,12 @@ public class GameTask extends BukkitRunnable{
     private WCTWD plugin;
     private World world;
 
+    @Getter private ArrayList<Monster> spawnedZombies;
+
     public GameTask(WCTWD plugin, World world){
         this.plugin = plugin;
         this.world = world;
+        spawnedZombies = new ArrayList<>();
     }
 
     public void run(){
@@ -50,6 +55,7 @@ public class GameTask extends BukkitRunnable{
                     case EMERALD:
                         economy.addMoney(1);
                         p.getInventory().remove(i);
+                        p.sendMessage(ChatColor.GREEN + "Añadida " + ChatColor.YELLOW + "1" + ChatColor.GREEN + " esmeralda");
                         break;
                     case NETHER_STAR:
                         economy.addShinnyShit(1);
@@ -87,8 +93,7 @@ public class GameTask extends BukkitRunnable{
             } else {
                 mt = Mobs.MobType.NORMAL;
             }
-
-            plugin.getMobs().spawnMob(mt, location);
+            spawnedZombies.add(plugin.getMobs().spawnMob(mt, location));
         }
     }
 }
