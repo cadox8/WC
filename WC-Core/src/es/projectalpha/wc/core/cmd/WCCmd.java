@@ -55,6 +55,17 @@ public abstract class WCCmd {
         return new ArrayList<>();
     }
 
+    public String formatedCMD(String... args){
+        String cmd = "&e/";
+
+        for (String s : args) cmd += s;
+        return Utils.colorize(cmd);
+    }
+
+    public void userNotOnline(WCUser user){
+        user.sendMessagePrefix("&cEL jugador debe estar conectado");
+    }
+
     @Getter
     @AllArgsConstructor
     public enum Grupo {

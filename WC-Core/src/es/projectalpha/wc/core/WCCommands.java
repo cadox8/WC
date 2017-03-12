@@ -48,10 +48,12 @@ public class WCCommands implements TabCompleter {
         cmds.add(new HealCMD());
         cmds.add(new HelpOPCMD());
         cmds.add(new InvSeeCMD());
+        cmds.add(new KillAllCMD());
+        cmds.add(new KillCMD());
         cmds.add(new PingCMD());
         cmds.add(new SetGroupCMD());
         cmds.add(new SocialCMD());
-         cmds.add(new SpawnCMD());
+        cmds.add(new SpawnCMD());
         cmds.add(new WeatherCMD());
 
         //Teleport

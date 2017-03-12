@@ -24,7 +24,7 @@ public class TeleportAskHereCMD extends WCCmd {
         
         WCUser target = WCServer.getUser(plugin.getServer().getPlayerExact(args[0]));
         if (!target.isOnline()) {
-            user.sendMessage("*userDesconectado");
+            userNotOnline(user);
             return;
         }
         

@@ -20,7 +20,7 @@ public class PingCMD extends WCCmd {
         if (args.length == 1 && user.isOnRank(Grupo.Mod)) {
             Player target = plugin.getServer().getPlayer(args[0]);
             if (target == null) {
-                user.sendMessage("&cEl usuario está desconectado");
+                userNotOnline(user);
                 return;
             }
             user.sendMessagePrefix("Ping de &2" + target.getDisplayName() + "&r: " + format(WCServer.getUser(target).getPing()));

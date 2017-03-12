@@ -16,6 +16,7 @@ public class WeatherCMD extends WCCmd {
     public void run (WCUser user, String lbl, String[] args) {
         World mundo = user.getPlayer().getWorld();
         int parametrosdelluvia = (300 + (new Random()).nextInt(600)) * 20;
+
         switch(args[0].toLowerCase()) {
             case "sun":
             case "sol":

@@ -18,23 +18,23 @@ public class TeleportAcceptCMD extends WCCmd {
         if (WCServer.getTeleportHereRequests().containsKey(user.getUuid())) {
             WCUser target = WCServer.getUser(WCServer.getTeleportHereRequests().get(user.getUuid()));
             if (target == null) {
-                user.sendMessage("");
-            } else {
-                user.getPlayer().teleport(target.getPlayer(), PlayerTeleportEvent.TeleportCause.COMMAND);
-                target.sendMessage("");
-                user.sendMessage("");
-                WCServer.removeTeleportHereRequest(target.getUuid());
+                userNotOnline(user);
+                return;
             }
+
+            user.getPlayer().teleport(target.getPlayer(), PlayerTeleportEvent.TeleportCause.COMMAND);
+            target.sendMessagePrefix("&6Teletransportado a &c" + user.getName());
+            WCServer.removeTeleportHereRequest(target.getUuid());
+
         } else if (!WCServer.getTeleportRequests().containsKey(user.getUuid())) {
-            user.sendMessage("");
+            user.sendMessagePrefix("&cNo tienes peticiones de TP pendientes");
         } else {
             WCUser target = WCServer.getUser(WCServer.getTeleportRequests().get(user.getUuid()));
             if (target == null) {
                 user.sendMessage("");
             } else {
                 target.getPlayer().teleport(user.getPlayer(), PlayerTeleportEvent.TeleportCause.COMMAND);
-                target.sendMessage("");
-                user.sendMessage("");
+                target.sendMessagePrefix("&6Teletransportado a &c" + user.getName());
                 WCServer.removeTeleportRequest(user.getUuid());
             }
         }

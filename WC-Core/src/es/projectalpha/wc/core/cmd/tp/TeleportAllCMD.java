@@ -23,7 +23,7 @@ public class TeleportAllCMD extends WCCmd {
         if (args.length != 0) {
             target = WCServer.getUser(plugin.getServer().getPlayer(args[0]));
             if (!target.isOnline()) {
-                user.sendMessagePrefix("&cEL jugador debe estar conectado");
+                userNotOnline(user);
                 return;
             }
         }
@@ -32,7 +32,7 @@ public class TeleportAllCMD extends WCCmd {
             p.teleport(target.getPlayer().getLocation(), PlayerTeleportEvent.TeleportCause.COMMAND);
         }
 
-        user.sendMessage("");
+        user.sendMessagePrefix("&6Todos los jugadores han sido teletransportados");
     }
     
     @Override

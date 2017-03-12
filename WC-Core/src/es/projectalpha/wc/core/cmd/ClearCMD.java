@@ -2,8 +2,11 @@ package es.projectalpha.wc.core.cmd;
 
 import es.projectalpha.wc.core.api.WCServer;
 import es.projectalpha.wc.core.api.WCUser;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class ClearCMD extends WCCmd{
 
@@ -39,5 +42,10 @@ public class ClearCMD extends WCCmd{
         for (int i = 0; i < invsize; i++) {
             target.getPlayer().getInventory().clear(i);
         }
+    }
+
+    @Override
+    public List<String> onTabComplete(CommandSender cs, Command cmd, String alias, String[] args, String curs, Integer curn) {
+        return null;
     }
 }
