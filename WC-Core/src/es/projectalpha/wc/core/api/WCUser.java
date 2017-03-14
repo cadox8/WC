@@ -113,6 +113,16 @@ public class WCUser {
         }
     }
 
+    public void toggleAFK(){
+        if (WCServer.afkMode.contains(this)) {
+            plugin.getServer().getOnlinePlayers().forEach(p -> WCServer.getUser(p).sendMessagePrefix("&3" + getName() + " &6ya no está afk"));
+            WCServer.afkMode.remove(this);
+        } else {
+            WCServer.afkMode.add(this);
+            plugin.getServer().getOnlinePlayers().forEach(p -> WCServer.getUser(p).sendMessagePrefix("&3" + getName() + " &6está afk"));
+        }
+    }
+
     /*
      * Reflection
      */

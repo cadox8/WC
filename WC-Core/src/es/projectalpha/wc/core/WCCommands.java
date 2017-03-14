@@ -18,9 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * @author cadox8
- *
  */
 
 public class WCCommands implements TabCompleter {
