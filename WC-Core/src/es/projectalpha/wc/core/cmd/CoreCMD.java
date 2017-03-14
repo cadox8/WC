@@ -5,13 +5,13 @@ import es.projectalpha.wc.core.api.WCUser;
 public class CoreCMD extends WCCmd{
 
     public CoreCMD() {
-        super("wccore", Grupo.Craftero, "core");
+        super("wccore", "", "core");
     }
 
     @Override
     public void run(WCUser user, String label, String[] args) {
         if (args.length == 1) {
-            if (!user.isOnRank(Grupo.DEV)) {
+            if (!user.isOnRank("admin")) {
                 def(user);
                 return;
             }

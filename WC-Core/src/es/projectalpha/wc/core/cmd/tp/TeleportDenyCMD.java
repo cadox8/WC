@@ -10,7 +10,7 @@ import java.util.Arrays;
 public class TeleportDenyCMD extends WCCmd {
     
     public TeleportDenyCMD() {
-        super("tpadeny", Grupo.Craftero, Arrays.asList("teleportdeny"));
+        super("tpadeny", "", Arrays.asList("teleportdeny"));
     }
     
     @Override

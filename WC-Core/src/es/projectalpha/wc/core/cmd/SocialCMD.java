@@ -7,7 +7,7 @@ import java.util.Arrays;
 public class SocialCMD extends WCCmd{
 
     public SocialCMD(){
-        super("social", Grupo.Craftero, Arrays.asList("web", "twitter", "facebook", "tienda", "foro"));
+        super("social", "", Arrays.asList("web", "twitter", "facebook", "tienda", "foro"));
     }
 
     public void run(WCUser user, String label, String[] args){

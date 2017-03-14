@@ -7,7 +7,7 @@ import org.bukkit.ChatColor;
 public class SurvivalCMD extends WCCmd {
 
     public SurvivalCMD() {
-        super("survival", Grupo.Craftero, "");
+        super("survival", "", "");
     }
 
     @Override

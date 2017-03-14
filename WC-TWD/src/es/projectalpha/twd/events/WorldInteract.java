@@ -1,12 +1,10 @@
 package es.projectalpha.twd.events;
 
-import es.projectalpha.twd.TWDPlayer;
 import es.projectalpha.twd.WCTWD;
 import es.projectalpha.twd.economy.Economy;
 import es.projectalpha.twd.teams.Teams;
 import es.projectalpha.twd.utils.AllItems;
 import es.projectalpha.wc.core.api.WCServer;
-import es.projectalpha.wc.core.cmd.WCCmd;
 import es.projectalpha.wc.core.utils.ItemMaker;
 import es.projectalpha.wc.core.utils.Utils;
 import org.bukkit.ChatColor;
@@ -205,14 +203,14 @@ public class WorldInteract implements Listener{
 
     @EventHandler
     public void onPlayerBreak(BlockBreakEvent e) {
-        if (!WCTWD.getPlayer(e.getPlayer()).isOnRank(WCCmd.Grupo.Builder)){
+        if (!WCTWD.getPlayer(e.getPlayer()).isOnRank("construir")){
             e.setCancelled(true);
         }
     }
 
     @EventHandler
     public void onPlayerPlace(BlockPlaceEvent e) {
-        if (!WCTWD.getPlayer(e.getPlayer()).isOnRank(WCCmd.Grupo.Builder)){
+        if (!WCTWD.getPlayer(e.getPlayer()).isOnRank("construir")){
             e.setCancelled(true);
         }
     }
@@ -235,18 +233,5 @@ public class WorldInteract implements Listener{
         Player p = e.getPlayer();
 
         if (p.hasPotionEffect(PotionEffectType.SLOW)) p.removePotionEffect(PotionEffectType.SLOW);
-    }
-
-    @EventHandler
-    public void onChat(AsyncPlayerChatEvent e){
-        TWDPlayer user = WCTWD.getPlayer(e.getPlayer());
-        String format = "&7{clan}{group} {name} &7: &r{message}";
-
-        format = format.replace("{clan}", plugin.getTeams().getTeam(user) == Teams.TeamsInfo.NONE ? "" : plugin.getTeams().getTeam(user).toString() + " ");
-        format = format.replace("{group}", Utils.colorize("&" + WCCmd.Grupo.groupColor(user.getUserData().getGrupo()) + user.getUserData().getGrupo().toString()));
-        format = format.replace("{name}", user.getName());
-        format = format.replace("{message}", e.getMessage());
-
-        e.setFormat(Utils.colorize(format));
     }
 }

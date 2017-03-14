@@ -3,12 +3,10 @@ package es.projectalpha.wc.clans.cmd;
 import es.projectalpha.wc.core.api.WCUser;
 import es.projectalpha.wc.core.cmd.WCCmd;
 
-import java.util.Arrays;
-
 public class ClanCMD extends WCCmd {
 
     public ClanCMD() {
-        super("clan", Grupo.Craftero, Arrays.asList(""));
+        super("clan", "");
     }
 
     public void run(WCUser user, String label, String[] args) {

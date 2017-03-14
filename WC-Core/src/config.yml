@@ -10,8 +10,8 @@ maintenance: false
 pruebas: false
 
 #Estilo de mensajes de entrada y salida del servidor. {0} es el jugador
-join: '&7[&2+&7] &6{0}'
-leave: '&7[&c-&7] &6{0}'
+join: '&7[&2+&7] &7{0}'
+leave: '&7[&c-&7] &7{0}'
 
 #El spawn principal del servidor (recomiendo ponerlo)
 spawn: NONE

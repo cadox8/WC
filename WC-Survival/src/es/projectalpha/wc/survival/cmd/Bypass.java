@@ -12,7 +12,7 @@ public class Bypass extends WCCmd{
     private Files files = WCSurvival.getInstance().getFiles();
 
     public Bypass(){
-        super("bypass", Grupo.YT, "");
+        super("bypass", "volarBypass", "");
     }
 
     @Override

@@ -12,12 +12,12 @@ import java.util.List;
 public class PingCMD extends WCCmd {
 
     public PingCMD() {
-        super("ping", Grupo.Craftero, Arrays.asList("pong"));
+        super("ping", "", Arrays.asList("pong"));
     }
 
     @Override
     public void run(WCUser user, String label, String[] args) {
-        if (args.length == 1 && user.isOnRank(Grupo.Mod)) {
+        if (args.length == 1 && user.isOnRank("ping")) {
             Player target = plugin.getServer().getPlayer(args[0]);
             if (target == null) {
                 userNotOnline(user);

@@ -8,7 +8,7 @@ import es.projectalpha.wc.core.cmd.WCCmd;
 public class BossCMD extends WCCmd {
 
     public BossCMD(){
-        super("boss", Grupo.Admin);
+        super("boss", "boss");
     }
 
     @Override

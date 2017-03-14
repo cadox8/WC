@@ -2,8 +2,6 @@ package es.projectalpha.wc.survival.events;
 
 import es.projectalpha.wc.core.api.WCServer;
 import es.projectalpha.wc.core.api.WCUser;
-import es.projectalpha.wc.core.cmd.WCCmd;
-import es.projectalpha.wc.core.managers.DataManager;
 import es.projectalpha.wc.core.utils.Utils;
 import es.projectalpha.wc.survival.FichasMenu;
 import es.projectalpha.wc.survival.WCFichas;
@@ -20,7 +18,10 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.event.player.*;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.util.Vector;
 
@@ -43,7 +44,7 @@ public class PlayerEvent implements Listener{
         fichas.createPlayer();
         plugin.getMainRun().getJoin().put(WCServer.getUser(p), 3600);
 
-        if(!WCSurvival.getPlayer(p).isOnRank(WCCmd.Grupo.YT)){
+        if(!WCSurvival.getPlayer(p).isOnRank("volar")){
             files.getUsers().set("Users." + p.getName() + ".bypass", false);
             files.saveFiles();
         }
@@ -59,7 +60,7 @@ public class PlayerEvent implements Listener{
     public void onDeath(PlayerDeathEvent e){
         Player p = e.getEntity();
 
-        if(WCSurvival.getPlayer(p).isOnRank(WCCmd.Grupo.VIP)) {
+        if(WCSurvival.getPlayer(p).isOnRank("noDrop")) {
             e.setKeepInventory(true);
             e.setKeepLevel(true);
         }
@@ -108,18 +109,5 @@ public class PlayerEvent implements Listener{
             p.setVelocity(new Vector(p.getVelocity().getX(), 1.0D, p.getVelocity().getZ()));
             WCServer.getUser(p).sendSound(Sound.ENTITY_IRONGOLEM_ATTACK);
         }
-    }
-
-    @EventHandler
-    public void onChat(AsyncPlayerChatEvent e){
-        WCUser user = WCSurvival.getPlayer(e.getPlayer());
-        String format = "{clan} {group} {name} &7: &r{message}";
-
-        format = format.replace("{clan}", "&f" + new DataManager(user).getString("Clan"));
-        format = format.replace("{group}", Utils.colorize("&" + WCCmd.Grupo.groupColor(user.getUserData().getGrupo()) + user.getUserData().getGrupo().toString()));
-        format = format.replace("{name}", user.getName());
-        format = format.replace("{message}", e.getMessage());
-
-        e.setFormat(format);
     }
 }

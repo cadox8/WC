@@ -11,7 +11,7 @@ import java.util.List;
 public class ClearCMD extends WCCmd{
 
     public ClearCMD() {
-        super("clear", Grupo.Mod, Arrays.asList("limpiar", "limpia"));
+        super("clear", "clear", Arrays.asList("limpiar", "limpia"));
     }
 
     //TODO: Mensages

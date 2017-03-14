@@ -44,14 +44,12 @@ public class WCCommands implements TabCompleter {
         cmds.add(new FakeJoinCMD());
         cmds.add(new FakeLeaveCMD());
         cmds.add(new FeedCMD());
-        cmds.add(new GamemodeCMD());
         cmds.add(new HealCMD());
         cmds.add(new HelpOPCMD());
         cmds.add(new InvSeeCMD());
         cmds.add(new KillAllCMD());
         cmds.add(new KillCMD());
         cmds.add(new PingCMD());
-        cmds.add(new SetGroupCMD());
         cmds.add(new SocialCMD());
         cmds.add(new SpawnCMD());
         cmds.add(new WeatherCMD());
@@ -126,7 +124,7 @@ public class WCCommands implements TabCompleter {
                 }
                 if (sender instanceof Player) {
                     WCUser p = WCServer.getUser((Player) sender);
-                    if (p.isOnRank(cmdr.getGroup())) {
+                    if (p.isOnRank(cmdr.getPermiso())) {
                         cmdr.run(p, label, args);
                         return;
                     }
@@ -151,7 +149,7 @@ public class WCCommands implements TabCompleter {
         for (WCCmd cmdr : cmds) {
             if (cmdr.getName().equals(label) || cmdr.getAliases().contains(label)) {
                 try {
-                    if ((sender instanceof Player) && (!WCServer.getUser((Player) sender).isOnRank(cmdr.getGroup()))) {
+                    if ((sender instanceof Player) && (!WCServer.getUser((Player) sender).isOnRank(cmdr.getPermiso()))) {
                         return new ArrayList<>();
                     }
                     rtrn = cmdr.onTabComplete(sender, cmd, label, args, args[args.length - 1], args.length - 1);

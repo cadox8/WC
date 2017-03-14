@@ -14,7 +14,7 @@ import java.util.List;
 public class DecirCMD extends WCCmd{
 
     public DecirCMD() {
-        super("decir", Grupo.Craftero, Arrays.asList("w", "m", "msg", "mensaje"));
+        super("decir", "", Arrays.asList("w", "m", "msg", "mensaje"));
     }
 
     @Override

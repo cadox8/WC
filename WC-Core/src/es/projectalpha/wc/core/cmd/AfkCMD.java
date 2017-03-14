@@ -8,7 +8,7 @@ import java.util.Arrays;
 public class AfkCMD extends WCCmd{
 
     public AfkCMD() {
-        super("afk", Grupo.Craftero, Arrays.asList("away", "aefecá", "aefeka", "adefeka"));
+        super("afk", "", Arrays.asList("away", "aefecá", "aefeka", "adefeka"));
     }
 
     @Override

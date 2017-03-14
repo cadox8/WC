@@ -43,7 +43,6 @@ public class WCPvP extends JavaPlugin {
 	}
 
 	public void onDisable(){
-		//TODO: Save Files
         WCCore.getInstance().log("Pvpmanager ha sido descargado");
 	}
 

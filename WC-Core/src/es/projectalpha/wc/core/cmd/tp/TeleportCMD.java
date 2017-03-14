@@ -14,7 +14,7 @@ import java.util.List;
 public class TeleportCMD extends WCCmd {
     
     public TeleportCMD() {
-        super("tp", Grupo.Mod, Arrays.asList("teleport", "tppos", "tploc"));
+        super("tp", "tp", Arrays.asList("teleport", "tppos", "tploc"));
     }
     
     @Override

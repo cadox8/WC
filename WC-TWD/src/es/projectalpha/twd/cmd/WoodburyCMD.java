@@ -23,7 +23,7 @@ public class WoodburyCMD extends WCCmd {
     private Economy economy;
 
     public WoodburyCMD() {
-        super("woodbury", Grupo.Craftero);
+        super("woodbury", "");
     }
 
     public void run(WCUser user, String label, String[] args) {

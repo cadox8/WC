@@ -7,7 +7,7 @@ import es.projectalpha.wc.core.utils.Messages;
 public class FakeJoinCMD extends WCCmd{
 
     public FakeJoinCMD(){
-        super("fakejoin", Grupo.Admin, "fj");
+        super("fakejoin", "admin", "fj");
     }
 
     public void run(WCUser user, String label, String[] args){

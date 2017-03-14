@@ -12,14 +12,14 @@ import java.util.List;
 public class KillAllCMD extends WCCmd {
 
     public KillAllCMD(){
-        super("killall", Grupo.DEV, Arrays.asList("kall"));
+        super("killall", "killall", Arrays.asList("kall"));
     }
 
     @Override
     public void run(WCUser user, String label, String[] args){
         if (args.length == 0){
             user.sendDiv();
-            formatedCMD(label, " <Entity> [-n]", " &7-> &2Elimina las entidades del mundo");
+            formatedCMD(label, "<Entity> [-n]", " &7-> &2Elimina las entidades del mundo");
             user.sendMessage("&3-n &7-> &cParámetro para no comprobar el nombre");
             user.sendDiv();
         }
@@ -27,7 +27,7 @@ public class KillAllCMD extends WCCmd {
         if (args.length == 1){
             EntityType entity = EntityType.valueOf(args[0]);
 
-            if (entity == null || entity == EntityType.UNKNOWN) return;
+            if (entity == null) return;
 
             int mobs = worldEntities(user.getPlayer().getWorld(), entity).size();
             worldEntities(user.getPlayer().getWorld(), entity).forEach(e -> e.remove());
@@ -38,7 +38,7 @@ public class KillAllCMD extends WCCmd {
             if (args[1].equalsIgnoreCase("-n")){
                 EntityType entity = EntityType.valueOf(args[0]);
 
-                if (entity == null || entity == EntityType.UNKNOWN) return;
+                if (entity == null) return;
 
                 int mobs = worldEntities(user.getPlayer().getWorld(), entity).size();
                 worldClassEntities(user.getPlayer().getWorld(), entity).forEach(e -> e.remove());

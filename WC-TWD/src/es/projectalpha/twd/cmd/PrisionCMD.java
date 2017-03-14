@@ -23,7 +23,7 @@ public class PrisionCMD extends WCCmd {
     private Economy economy;
 
     public PrisionCMD() {
-        super("prision", Grupo.Craftero);
+        super("prision", "");
     }
 
     public void run(WCUser user, String label, String[] args) {

@@ -12,7 +12,7 @@ import java.util.UUID;
 public class TeleportAskAllCMD extends WCCmd {
 
     public TeleportAskAllCMD() {
-        super("tpaall", Grupo.Mod, Arrays.asList("teleportaskall"));
+        super("tpaall", "tpall", Arrays.asList("teleportaskall"));
     }
 
     @Override

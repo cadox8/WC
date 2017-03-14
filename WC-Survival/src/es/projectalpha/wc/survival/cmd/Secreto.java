@@ -10,7 +10,7 @@ import java.util.Random;
 public class Secreto extends WCCmd{
 
     public Secreto(){
-        super("secreto", Grupo.Craftero, "");
+        super("secreto", "", "");
     }
 
     @Override

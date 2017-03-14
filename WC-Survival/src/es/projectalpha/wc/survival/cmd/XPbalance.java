@@ -10,7 +10,7 @@ public class XPbalance extends WCCmd{
     private ExperienceManager expManager;
 
     public XPbalance(){
-        super("expbalance", Grupo.Admin, "");
+        super("expbalance", "xpBalance", "");
     }
 
     @Override

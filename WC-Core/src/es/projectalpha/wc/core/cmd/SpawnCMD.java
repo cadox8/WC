@@ -8,7 +8,7 @@ import es.projectalpha.wc.core.utils.Utils;
 public class SpawnCMD extends WCCmd {
 
     public SpawnCMD(){
-        super("spawn", Grupo.Craftero, "");
+        super("spawn", "", "");
     }
 
     @Override
@@ -20,7 +20,7 @@ public class SpawnCMD extends WCCmd {
         }
         if (args.length == 1) {
             if (args[0].equalsIgnoreCase("set")) {
-                if (!user.isOnRank(Grupo.Admin)) return;
+                if (!user.isOnRank("spawn")) return;
                 plugin.getConfig().set("spawn", Utils.locationToString(user.getPlayer().getLocation()));
                 plugin.saveConfig();
 

@@ -10,7 +10,7 @@ import java.util.List;
 public class HealCMD extends WCCmd{
 
     public HealCMD(){
-        super("heal", Grupo.Mod, "curar");
+        super("heal", "heal", "curar");
     }
 
     public void run(WCUser user, String label, String[] args){

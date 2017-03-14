@@ -21,7 +21,7 @@ public class Casino extends WCCmd{
     private WCSurvival wcc = WCSurvival.getInstance();
 
     public Casino(){
-        super("casino", Grupo.Craftero, "");
+        super("casino", "", "");
     }
 
     @Override
@@ -31,7 +31,7 @@ public class Casino extends WCCmd{
             user.sendMessagePrefix(ChatColor.RED + "Espera unos segundos SIN CERRAR EL INVENTARIO y obtendrás el premio");
         }
         if (args.length == 1){
-            if (user.isOnRank(Grupo.DEV)) {
+            if (user.isOnRank("casino")) {
                 if (args[0].equalsIgnoreCase("maquina")) {
                     wcc.getCreando().add(user.getPlayer());
                     user.getPlayer().getInventory().addItem(new ItemMaker(Material.DROPPER).setDisplayName("Casino").build());
@@ -56,7 +56,7 @@ public class Casino extends WCCmd{
         }
         if (args.length == 2){
             if (args[0].equalsIgnoreCase("borrar")){
-                if (user.isOnRank(Grupo.DEV)) {
+                if (user.isOnRank("casino")) {
                     int id;
 
                     if (!Utils.isInt(args[1])) return;
@@ -71,7 +71,7 @@ public class Casino extends WCCmd{
         }
         if (args.length == 3){
             if (args[0].equalsIgnoreCase("ficha")){
-                if (user.isOnRank(Grupo.DEV)) {
+                if (user.isOnRank("casino")) {
                     ItemStack ficha;
                     int amount = Integer.parseInt(args[2]);
 

@@ -7,7 +7,7 @@ import es.projectalpha.wc.core.utils.Messages;
 public class FakeLeaveCMD extends WCCmd{
 
     public FakeLeaveCMD(){
-        super("fakeleave", Grupo.Admin, "fl");
+        super("fakeleave", "admin", "fl");
     }
 
     public void run(WCUser user, String label, String[] args){

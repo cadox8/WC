@@ -7,7 +7,7 @@ import es.projectalpha.wc.core.cmd.WCCmd;
 public class GaussCMD extends WCCmd {
 
     public GaussCMD() {
-        super("gauss", Grupo.Craftero);
+        super("gauss", "");
     }
 
     public void run(WCUser user, String label, String[] args) {

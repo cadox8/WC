@@ -13,7 +13,7 @@ public class TWDCMD extends WCCmd {
     private FileManager fileManager = WCTWD.getInstance().getFileManager();
 
     public TWDCMD() {
-        super("twd_ayuda", Grupo.Craftero, "toa");
+        super("twd_ayuda", "", "toa");
     }
 
     public void run(WCUser user, String label, String[] args) {
@@ -26,7 +26,7 @@ public class TWDCMD extends WCCmd {
         }
 
         if (args.length == 1) {
-            if (!user.isOnRank(Grupo.Admin)) return;
+            if (!user.isOnRank("admin")) return;
             if (args[0].equalsIgnoreCase("prision")) {
                 fileManager.getConfig().set("prision", Parsers.locationToString(p.getLocation()));
                 fileManager.saveFiles();

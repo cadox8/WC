@@ -10,7 +10,7 @@ import org.bukkit.entity.Player;
 public class WeaponCMD extends WCCmd {
 
     public WeaponCMD(){
-        super("weapon", Grupo.Craftero);
+        super("weapon", "");
     }
 
     public void run(WCUser user, String label, String[] args) {

@@ -12,7 +12,7 @@ import java.util.List;
 public class TeleportAskCMD extends WCCmd {
     
     public TeleportAskCMD() {
-        super("tpa", Grupo.Mod, Arrays.asList("teleportask"));
+        super("tpa", "", Arrays.asList("teleportask"));
     }
     
     @Override

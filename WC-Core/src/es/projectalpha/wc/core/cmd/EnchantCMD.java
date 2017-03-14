@@ -9,7 +9,7 @@ import org.bukkit.inventory.ItemStack;
 public class EnchantCMD extends WCCmd{
 
     public EnchantCMD(){
-        super("enchant", Grupo.Admin, "encantar");
+        super("enchant", "admin", "encantar");
     }
 
     public void run(WCUser user, String label, String[] args){

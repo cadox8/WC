@@ -3,13 +3,9 @@ package es.projectalpha.wc.core.api;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import es.projectalpha.wc.core.WCCore;
-import es.projectalpha.wc.core.cmd.WCCmd;
-import es.projectalpha.wc.core.managers.DataManager;
 import es.projectalpha.wc.core.utils.ReflectionAPI;
 import es.projectalpha.wc.core.utils.Utils;
-import lombok.Data;
 import lombok.Getter;
-import lombok.Setter;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
@@ -18,7 +14,6 @@ import org.bukkit.*;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerTeleportEvent;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import java.lang.reflect.Constructor;
@@ -32,7 +27,6 @@ public class WCUser {
     private WCCore plugin = WCCore.getInstance();
 
     @Getter private UUID uuid;
-    @Getter @Setter private UserData userData;
 
     public WCUser(OfflinePlayer p) {
         this(p.getUniqueId());
@@ -40,7 +34,6 @@ public class WCUser {
 
     public WCUser(UUID id) {
         uuid = id;
-        setUserData(new DataManager(this).parseUserData());
     }
 
     public OfflinePlayer getOfflinePlayer() {
@@ -60,9 +53,13 @@ public class WCUser {
     public boolean isOnline() {
         return getOfflinePlayer().isOnline();
     }
-    public boolean isOnRank(WCCmd.Grupo rank) {
+/*    public boolean isOnRank(WCCmd.Grupo rank) {
         return rank.getRank() <= getUserData().getGrupo().getRank();
+    }*/
+    public boolean isOnRank(String permision) {
+        return getPlayer().hasPermission("wcc." + permision);
     }
+
 
     /*
     * Methods
@@ -193,18 +190,8 @@ public class WCUser {
         sendToServer("lobby");
     }
 
-    /*
-    * UserData (Cremita para nosotros)
-    */
-    @Data
-    public static class UserData {
-        WCCmd.Grupo grupo = WCCmd.Grupo.Craftero;
-        Location lastLocation = null;
-        Inventory inventory = null;
-    }
-
     @Override
     public String toString() {
-        return "WCUser{name: " + getName() + ", uuid: " + getUuid() + ", group: + " + getUserData().getGrupo() + "}";
+        return "WCUser{name: " + getName() + ", uuid: " + getUuid() + "}";
     }
 }

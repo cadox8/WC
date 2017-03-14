@@ -10,7 +10,7 @@ import java.util.List;
 public class KillCMD extends WCCmd {
 
     public KillCMD(){
-        super("kill", Grupo.DEV, "matar");
+        super("kill", "kill", "matar");
     }
 
     @Override

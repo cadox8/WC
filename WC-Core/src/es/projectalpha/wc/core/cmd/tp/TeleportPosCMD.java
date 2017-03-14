@@ -10,7 +10,7 @@ import java.util.Arrays;
 public class TeleportPosCMD extends WCCmd {
     
     public TeleportPosCMD() {
-        super("tppos", Grupo.Admin, Arrays.asList("tploc"));
+        super("tppos", "tpapos", Arrays.asList("tploc"));
     }
     
     @Override

@@ -13,7 +13,7 @@ public class MoneyCMD extends WCCmd {
     private Economy eco;
 
     public MoneyCMD() {
-        super("dinero", Grupo.Craftero, Arrays.asList("money", "din"));
+        super("dinero", "", Arrays.asList("money", "din"));
     }
 
     public void run(WCUser user, String label, String[] args) {
@@ -27,25 +27,25 @@ public class MoneyCMD extends WCCmd {
 
         if (args.length == 1) {
             if (args[0].equalsIgnoreCase("give")) {
-                if (!user.isOnRank(Grupo.Admin)) return;
+                if (!user.isOnRank("twdMoney")) return;
                 p.sendMessage(ChatColor.RED + "Para usar este comando, haz /money give <dinero/cbril> <cantidad>");
             }
         }
 
         if (args.length == 2) {
-            if (!user.isOnRank(Grupo.Admin)) return;
+            if (!user.isOnRank("twdMoney")) return;
             p.sendMessage(ChatColor.RED + "Para usar este comando, haz /money give <dinero/cbril> <cantidad>");
         }
 
         if (args.length == 3) {
             if (args[1].equalsIgnoreCase("dinero")) {
-                if (!user.isOnRank(Grupo.Admin)) return;
+                if (!user.isOnRank("twdMoney")) return;
                 eco.setMoney(eco.getMoney() + Double.parseDouble(args[2]));
                 p.sendMessage(ChatColor.GREEN + "Se ha añadido " + ChatColor.YELLOW + args[2] + " esmeraldas a tu cuenta.");
             }
 
             if (args[1].equalsIgnoreCase("cbril")) {
-                if (!user.isOnRank(Grupo.Admin)) return;
+                if (!user.isOnRank("twdMoney")) return;
                 eco.setShinnyShit(eco.getShinnyShit() + Double.parseDouble(args[2]));
                 p.sendMessage(ChatColor.GREEN + "Se ha añadido " + ChatColor.YELLOW + args[2] + " cosas brillantes a tu cuenta.");
             }

@@ -13,16 +13,16 @@ public class VolarCMD extends WCCmd{
     private Files files = WCSurvival.getInstance().getFiles();
 
     public VolarCMD(){
-        super("volar", Grupo.VIP, "");
+        super("volar", "volar", "");
     }
 
     @Override
     public void run(WCUser user, String label, String[] args){
-        if(!user.isOnRank(Grupo.YT)) {
+        if(user.isOnRank("volarLimite")) {
             int ti = (86400 - files.getFl().getInt("MainRun." + user.getName() + ".cooldown")) / 3600;
             DecimalFormat df = new DecimalFormat("0.##");
 
-            if (user.isOnRank(Grupo.Craftero) && !files.getFl().contains("MainRun." + user.getName() + ".limit")) {
+            if (!files.getFl().contains("MainRun." + user.getName() + ".limit")) {
                 files.getFl().set("MainRun." + user.getName() + ".limit", 1800);
                 files.getFl().set("MainRun." + user.getName() + ".cooldown", 0);
                 return;

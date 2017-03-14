@@ -3,7 +3,6 @@ package es.projectalpha.wc.survival.task;
 import es.projectalpha.wc.core.WCCore;
 import es.projectalpha.wc.core.api.WCServer;
 import es.projectalpha.wc.core.api.WCUser;
-import es.projectalpha.wc.core.cmd.WCCmd;
 import es.projectalpha.wc.survival.WCSurvival;
 import es.projectalpha.wc.survival.files.Files;
 import es.projectalpha.wc.survival.utils.ItemMaker;
@@ -65,7 +64,7 @@ public class MainRun extends BukkitRunnable {
 
     private void fly(WCUser p){
         WCCore.getInstance().debugLog("Task Volar");
-        if(!p.isOnRank(WCCmd.Grupo.YT)) return;
+        if(!p.isOnRank("volarBypass")) return;
 
         if(p.getPlayer().isFlying() && files.getFl().getInt("MainRun." + p.getName() + ".time") > 0){
             int t = files.getFl().getInt("MainRun." + p.getName() + ".time");

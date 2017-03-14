@@ -10,7 +10,7 @@ import java.util.List;
 public class FeedCMD extends WCCmd{
 
     public FeedCMD(){
-        super("feed", Grupo.Admin, "alimentar");
+        super("feed", "feed", "alimentar");
     }
 
     public void run(WCUser user, String label, String[] args){

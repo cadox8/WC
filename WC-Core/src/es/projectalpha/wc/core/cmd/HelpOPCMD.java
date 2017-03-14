@@ -8,7 +8,7 @@ import es.projectalpha.wc.core.utils.Utils;
 public class HelpOPCMD extends WCCmd{
 
     public HelpOPCMD() {
-        super("helpop", Grupo.Craftero, "hp");
+        super("helpop", "", "hp");
     }
 
     private final Cooldown temp = new Cooldown(30);
@@ -29,7 +29,7 @@ public class HelpOPCMD extends WCCmd{
     private void hp(WCUser user, String msg){
         plugin.getServer().getOnlinePlayers().forEach(p -> {
             WCUser u = WCServer.getUser(p);
-            if (u.isOnRank(Grupo.Admin)) {
+            if (u.isOnRank("ayuda")) {
                 u.sendMessage("&4AYUDA: &3" + user.getName() + "&r: " + msg);
             }
         });

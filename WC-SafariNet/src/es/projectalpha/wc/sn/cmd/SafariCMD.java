@@ -12,7 +12,7 @@ public class SafariCMD extends WCCmd{
     private PokeEgg egg = new PokeEgg();
 
     public SafariCMD(){
-        super("safarinet", Grupo.DEV, Arrays.asList("safari", "net", "sn"));
+        super("safarinet", "safari", Arrays.asList("safari", "net", "sn"));
     }
 
     public void run(WCUser user, String label, String[] args){

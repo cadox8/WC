@@ -1,17 +1,10 @@
 package es.projectalpha.wc.core.utils;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import es.projectalpha.wc.core.WCCore;
 import es.projectalpha.wc.core.api.WCServer;
 import es.projectalpha.wc.core.api.WCUser;
-import es.projectalpha.wc.core.cmd.WCCmd;
 import org.bukkit.*;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URL;
 import java.util.ArrayList;
 
 public class Utils {
@@ -30,18 +23,9 @@ public class Utils {
     public static void sendAdminMsg(WCUser user, String msg){
         plugin.getServer().getOnlinePlayers().forEach(p -> {
             WCUser u = WCServer.getUser(p);
-            if (u.isOnRank(WCCmd.Grupo.Builder)) {
+            if (u.isOnRank("staff")) {
                 u.sendMessage("&0[&2A&0] &3" + user.getName() + "&r: " + msg);
                 u.sendSound(Sound.BLOCK_ANVIL_HIT);
-            }
-        });
-    }
-
-    public static void sendGeoIPMsg(WCUser user, String msg){
-        plugin.getServer().getOnlinePlayers().forEach(p -> {
-            WCUser u = WCServer.getUser(p);
-            if (u.isOnRank(WCCmd.Grupo.Admin)) {
-                u.sendMessagePrefix("&cGeoIP &3" + user.getName() + "&r: " + msg);
             }
         });
     }
@@ -111,21 +95,5 @@ public class Utils {
 
     public static World getWorld(String name){
         return plugin.getServer().getWorld(name);
-    }
-
-    //ToDo: cambiar
-    public static String getCountry(WCUser user){
-        try {
-            URL url = new URL("http://freegeoip.net/json/" + user.getPlayer().getAddress().getHostName());
-            String result = new BufferedReader(new InputStreamReader(url.openStream())).readLine();
-
-            JsonObject jsonObject = new JsonObject();
-            JsonArray jsonArray = jsonObject.getAsJsonArray(result);
-
-            return jsonArray.get(2).getAsString();
-        }catch (IOException e){
-            plugin.debugLog("La URL especificada no existe");
-        }
-        return "";
     }
 }

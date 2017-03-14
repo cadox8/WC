@@ -12,7 +12,7 @@ import java.util.List;
 public class InvSeeCMD extends WCCmd{
 
     public InvSeeCMD() {
-        super("invsee", Grupo.Mod, Arrays.asList("verinv"));
+        super("invsee", "inv", Arrays.asList("verinv"));
     }
 
     @Override

@@ -14,7 +14,7 @@ public class Cash2xp extends WCCmd{
     private Files files = WCSurvival.getInstance().getFiles();
 
     public Cash2xp(){
-        super("cash2exp", Grupo.Admin, "");
+        super("cash2exp", "cash2xp", "");
     }
 
     @Override

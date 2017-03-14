@@ -14,7 +14,7 @@ import java.util.List;
 public class TeleportAllCMD extends WCCmd {
     
     public TeleportAllCMD() {
-        super("tpall", Grupo.Admin, Arrays.asList("teleportall"));
+        super("tpall", "tpall", Arrays.asList("teleportall"));
     }
     
     @Override
