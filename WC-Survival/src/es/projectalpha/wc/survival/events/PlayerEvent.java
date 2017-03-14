@@ -18,10 +18,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerMoveEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.*;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.util.Vector;
 
@@ -101,13 +98,26 @@ public class PlayerEvent implements Listener{
     @EventHandler
     public void onMove(PlayerMoveEvent e){
         Player p = e.getPlayer();
+        WCUser user = WCSurvival.getPlayer(p);
         Block launch = p.getWorld().getBlockAt(p.getLocation()).getRelative(BlockFace.DOWN);
         Block base = launch.getRelative(BlockFace.DOWN);
+
+        if (!e.getFrom().equals(e.getTo())){
+            if (WCServer.afkMode.contains(user)) user.toggleAFK();
+        }
 
         if(launch.getType() == Material.SPONGE && base.getType() == Material.DIAMOND_BLOCK){
             p.setVelocity(p.getLocation().getDirection().multiply(3));
             p.setVelocity(new Vector(p.getVelocity().getX(), 1.0D, p.getVelocity().getZ()));
             WCServer.getUser(p).sendSound(Sound.ENTITY_IRONGOLEM_ATTACK);
         }
+    }
+
+    @EventHandler
+    public void onTalk(AsyncPlayerChatEvent e){
+        Player p = e.getPlayer();
+        WCUser user = WCSurvival.getPlayer(p);
+
+        if (WCServer.afkMode.contains(user)) user.toggleAFK();
     }
 }

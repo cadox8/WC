@@ -40,19 +40,15 @@ public class MainRun extends BukkitRunnable {
             fly(user);
             items(p);
 
-            if (WCServer.afkMode.contains(user)){
-                join.remove(user);
-            } else {
-                join.put(user, 3600);
-            }
-
-            int time = join.get(user);
-            time--;
-            join.put(user, time);
-            if (join.get(user) == 0){
-                plugin.getEco().depositPlayer(p, 2000);
-                user.sendMessage("Has conseguido 2000$ por estar una hora conectado.");
-                join.put(user, 3600);
+            if (!WCServer.afkMode.contains(user)) {
+                int time = join.get(user);
+                time--;
+                join.put(user, time);
+                if (join.get(user) == 0) {
+                    plugin.getEco().depositPlayer(p, 2000);
+                    user.sendMessage("Has conseguido 2000$ por estar una hora conectado.");
+                    join.put(user, 3600);
+                }
             }
             if (count == 180){
                 count = 0;
