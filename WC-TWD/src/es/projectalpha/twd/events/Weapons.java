@@ -5,6 +5,7 @@ import es.projectalpha.twd.WCTWD;
 import es.projectalpha.twd.mobs.MobAttack;
 import es.projectalpha.twd.teams.Teams;
 import es.projectalpha.twd.weapons.Weapon;
+import org.bukkit.Material;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -34,6 +35,7 @@ public class Weapons implements Listener {
         if (e.getItem() == null || e.getHand() != EquipmentSlot.HAND) return;
 
         if (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK){
+            if (e.getItem().getType() == Material.POTION) return;
             if (e.getItem() == null || Weapon.getWeaponByItemStack(e.getItem()) == null || !Weapon.isWeapon(e.getItem())) return;
             weapon = Weapon.getWeaponByItemStack(e.getItem());
 
