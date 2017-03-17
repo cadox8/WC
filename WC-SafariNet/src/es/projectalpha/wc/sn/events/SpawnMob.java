@@ -28,7 +28,7 @@ public class SpawnMob implements Listener{
         this.plugin.getServer().getPluginManager().registerEvents(this, this.plugin);
     }
 
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
     public void onSpawn(PlayerInteractEvent e){
         Player p = e.getPlayer();
 
