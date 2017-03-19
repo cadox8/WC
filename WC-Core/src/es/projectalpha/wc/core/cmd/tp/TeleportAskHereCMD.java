@@ -12,7 +12,7 @@ import java.util.List;
 public class TeleportAskHereCMD extends WCCmd {
     
     public TeleportAskHereCMD() {
-        super("tpahere", "", Arrays.asList("teleportaskhere"));
+        super("tpahere", "tpahere", Arrays.asList("teleportaskhere"));
     }
     
     @Override

@@ -13,7 +13,7 @@ public class VolarCMD extends WCCmd{
     private Files files = WCSurvival.getInstance().getFiles();
 
     public VolarCMD(){
-        super("volar", "volar", "");
+        super("volar", "volar", "fly");
     }
 
     @Override

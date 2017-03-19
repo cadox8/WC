@@ -18,7 +18,7 @@ public class PvPCMD extends WCCmd {
 	private Manager manager = WCPvP.getInstance().getManager();
 
 	public PvPCMD() {
-		super("pvp", "");
+		super("pvp", "", "pvpm");
 	}
 
 	private void save() {
