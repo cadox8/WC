@@ -17,9 +17,7 @@ public class ColorUtils {
     public ChatColor getRandomColor(){
         ChatColor c = getRandomChatColor();
 
-        if(c == ChatColor.MAGIC || c == ChatColor.STRIKETHROUGH || c == ChatColor.BOLD || c == ChatColor.RESET || c == ChatColor.ITALIC) {
-            return ChatColor.YELLOW;
-        }
+        if(c == ChatColor.MAGIC || c == ChatColor.STRIKETHROUGH || c == ChatColor.BOLD || c == ChatColor.ITALIC) getRandomColor();
         return c;
     }
 }

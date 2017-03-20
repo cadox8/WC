@@ -7,7 +7,7 @@ import org.bukkit.Sound;
 
 import java.util.Arrays;
 
-public class SafariCMD extends WCCmd{
+public class SafariCMD extends WCCmd {
 
     private PokeEgg egg = new PokeEgg();
 

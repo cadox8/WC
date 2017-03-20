@@ -9,7 +9,6 @@ import es.projectalpha.wc.sn.files.Files;
 import es.projectalpha.wc.sn.recipes.PokeEgg;
 import lombok.Getter;
 import net.milkbowl.vault.economy.Economy;
-import org.bukkit.ChatColor;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -25,7 +24,7 @@ public class SafariNet extends JavaPlugin implements Listener{
     private PokeEgg pe = new PokeEgg();
     private Files files = new Files();
 
-    @Getter private String prefix = ChatColor.GRAY + " || " + ChatColor.AQUA + "SafariNet" + ChatColor.GRAY + " || ";
+    @Getter private String prefix = WCCore.getPrefix();
     
     public void onEnable(){
         instance = this;
