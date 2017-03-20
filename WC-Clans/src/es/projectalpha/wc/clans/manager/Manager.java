@@ -1,20 +1,21 @@
 package es.projectalpha.wc.clans.manager;
 
-import es.projectalpha.wc.clans.Clans;
+import es.projectalpha.wc.clans.WCClans;
 import es.projectalpha.wc.clans.files.Files;
-import es.projectalpha.wc.core.api.WCServer;
-import es.projectalpha.wc.core.api.WCUser;
 import es.projectalpha.wc.core.utils.Cooldown;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
-
 public class Manager {
 
-    Clans main;
-    Files files = new Files();
+    private WCClans plugin;
+    private Files files;
 
     private Cooldown joinc = new Cooldown(60);
+
+    public Manager(WCClans instance){
+        this.plugin = instance;
+        this.files = instance.getFiles();
+    }
 
     public boolean hasJoinPetition(Player p){
         return joinc.isCoolingDown(p);
@@ -28,9 +29,5 @@ public class Manager {
         joinc.removeCooldown(p);
     }
 
-    public void sendPlayer(WCUser user){
-        ArrayList<WCUser> users = new ArrayList<>();
-        files.getClans().getStringList(files.getUsers().getString(user.getName() + ".clan") + ".users" ).forEach(s -> users.add(WCServer.getUser(s)));
-        main.userclan.put(files.getUsers().getString(user.getName() + ".clan" ), users);
-    }
+
 }
