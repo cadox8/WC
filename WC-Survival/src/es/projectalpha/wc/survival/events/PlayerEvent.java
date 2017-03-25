@@ -2,6 +2,7 @@ package es.projectalpha.wc.survival.events;
 
 import es.projectalpha.wc.core.api.WCServer;
 import es.projectalpha.wc.core.api.WCUser;
+import es.projectalpha.wc.core.utils.ScoreboardUtil;
 import es.projectalpha.wc.core.utils.Utils;
 import es.projectalpha.wc.survival.FichasMenu;
 import es.projectalpha.wc.survival.WCFichas;
@@ -20,6 +21,7 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.EquipmentSlot;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
 public class PlayerEvent implements Listener{
@@ -45,6 +47,29 @@ public class PlayerEvent implements Listener{
             files.getUsers().set("Users." + p.getName() + ".bypass", false);
             files.saveFiles();
         }
+
+        ScoreboardUtil board = new ScoreboardUtil("&6World&eCrafteros", "wc");
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                if (p == null) cancel();
+
+                board.text(15, "&e-----------------------");
+                board.text(14, "&aBienvenid@ &e" + p.getName());
+                board.text(13, "");
+                board.text(12, "&8>&aPing y Dinero");
+                board.text(11, "&e" + new WCUser(p).getPing() + " &8- &e" + plugin.getEco().getBalance(p));
+                board.text(10, "");
+                board.text(9, "&aMundo:");
+                board.text(8, "&e" + p.getWorld().getName());
+                board.text(7, "");
+                board.text(6, "&aIP &8: &aTS3 &8: &aWeb:");
+                board.text(5, "&eworldcrafteros.net");
+                board.text(4, "&e-----------------------");
+
+                if (p != null) board.build(p);
+            }
+        }.runTaskTimer(plugin, 20l, 20l);
     }
 
     @EventHandler

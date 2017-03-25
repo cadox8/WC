@@ -1,6 +1,7 @@
 package es.projectalpha.wc.core.utils;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
@@ -22,7 +23,7 @@ public class ScoreboardUtil {
     public ScoreboardUtil(String displayName, String score) {
         this.scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
         this.objective = this.scoreboard.registerNewObjective(score, "dummy");
-        this.objective.setDisplayName(displayName);
+        this.objective.setDisplayName(Utils.colorize(displayName));
         this.objective.setDisplaySlot(DisplaySlot.SIDEBAR);
         this.scores = new HashMap<>();
     }
@@ -32,9 +33,10 @@ public class ScoreboardUtil {
     }
 
     public void text(int score, String text) {
+        text = Utils.colorize(text);
         if (scores.containsKey(score)) {
             String textX = scores.get(score);
-            if (!(text.equalsIgnoreCase(textX))) {
+            if (!(ChatColor.stripColor(text).equalsIgnoreCase(textX))) {
                 scoreboard.resetScores(textX);
                 objective.getScore(text).setScore(score);
                 scores.put(score, text);
