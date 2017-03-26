@@ -4,8 +4,10 @@ import es.projectalpha.wc.core.WCCore;
 import es.projectalpha.wc.core.api.WCServer;
 import es.projectalpha.wc.core.api.WCUser;
 import org.bukkit.*;
+import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Utils {
 
@@ -95,5 +97,17 @@ public class Utils {
 
     public static World getWorld(String name){
         return plugin.getServer().getWorld(name);
+    }
+
+    public static List<Player> getOnlinePlayers(){
+        List<Player> players = new ArrayList<>();
+        players.addAll(plugin.getServer().getOnlinePlayers());
+        return players;
+    }
+
+    public static List<WCUser> getOnlineWCUsers(){
+        List<WCUser> players = new ArrayList<>();
+        getOnlinePlayers().forEach(p -> players.add(new WCUser(p)));
+        return players;
     }
 }
