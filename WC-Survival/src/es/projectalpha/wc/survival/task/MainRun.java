@@ -3,12 +3,12 @@ package es.projectalpha.wc.survival.task;
 import es.projectalpha.wc.core.WCCore;
 import es.projectalpha.wc.core.api.WCServer;
 import es.projectalpha.wc.core.api.WCUser;
+import es.projectalpha.wc.core.utils.Utils;
 import es.projectalpha.wc.survival.WCSurvival;
 import es.projectalpha.wc.survival.files.Files;
 import es.projectalpha.wc.survival.utils.ItemMaker;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -34,18 +34,18 @@ public class MainRun extends BukkitRunnable {
     private int count;
 
     public void run() {
-        Bukkit.getOnlinePlayers().forEach(p -> {
-            if(p == null) return;
-            WCUser user = WCSurvival.getPlayer(p);
+        if (Utils.getOnlineWCUsers().isEmpty()) return;
+        Utils.getOnlineWCUsers().forEach(user -> {
             fly(user);
-            items(p);
+            items(user.getPlayer());
 
             if (!WCServer.afkMode.contains(user)) {
+                if (join.containsKey(user)) return;
                 int time = join.get(user);
                 time--;
                 join.put(user, time);
                 if (join.get(user) == 0) {
-                    plugin.getEco().depositPlayer(p, 2000);
+                    plugin.getEco().depositPlayer(user.getPlayer(), 2000);
                     user.sendMessage("Has conseguido 2000$ por estar una hora conectado.");
                     join.put(user, 3600);
                 }
