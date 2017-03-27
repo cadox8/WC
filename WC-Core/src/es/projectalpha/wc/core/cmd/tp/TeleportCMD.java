@@ -63,7 +63,43 @@ public class TeleportCMD extends WCCmd {
                 break;
         }    
     }
-    
+
+    @Override
+    public void run(CommandSender console, String label, String[] args) {
+        switch (args.length) {
+            case 2: //tp de un console a otro
+                WCUser from = WCServer.getUser(plugin.getServer().getPlayer(args[0]));
+                WCUser to = WCServer.getUser(plugin.getServer().getPlayer(args[1]));
+
+                if (!from.isOnline() || from == null || !to.isOnline() || to == null) {
+                    userNotOnline(from);
+                    userNotOnline(to);
+                    return;
+                }
+                from.getPlayer().teleport(to.getPlayer().getLocation(), PlayerTeleportEvent.TeleportCause.COMMAND);
+                break;
+            case 4: //mandar sender a unas coordenadas
+                WCUser user = WCServer.getUser(plugin.getServer().getPlayer(args[3]));
+                Double x, y, z;
+                try {
+                    x = Double.parseDouble(args[0]);
+                    y = Double.parseDouble(args[1]);
+                    z = Double.parseDouble(args[2]);
+                } catch (NumberFormatException e) {
+                    console.sendMessage("");
+                    return;
+                }
+                Location loc = new Location(user.getPlayer().getWorld(), x, y, z);
+
+                user.getPlayer().teleport(loc, PlayerTeleportEvent.TeleportCause.COMMAND);
+                break;
+            default:
+                console.sendMessage("¡");
+                console.sendMessage("¡");
+                break;
+        }
+    }
+
     @Override
     public List<String> onTabComplete(CommandSender cs, Command cmd, String alias, String[] args, String curs, Integer curn) {
         return null;
