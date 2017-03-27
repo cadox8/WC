@@ -25,13 +25,13 @@ public class PlayerListener implements Listener{
         WCUser user = WCServer.getUser(p);
 
         if (plugin.isMaintenance()){
-            if (!user.isOnRank("maintenance")){
+            if (!user.hasPermission("maintenance")){
                 user.getPlayer().kickPlayer(Utils.colorize("&cEl servidor está en mantenimiento, lo sentimos"));
             }
         }
 
         if (plugin.isPruebas()){
-            if (!user.isOnRank("joinTest")){
+            if (!user.hasPermission("joinTest")){
                 user.getPlayer().kickPlayer(Utils.colorize("&cEl servidor está en pruebas, lo sentimos"));
             }
         }
@@ -96,7 +96,7 @@ public class PlayerListener implements Listener{
     public void onCommand(PlayerCommandPreprocessEvent e){
         WCUser p = WCServer.getUser(e.getPlayer());
 
-        if(p.isOnRank("plugins")) return;
+        if(p.hasPermission("plugins")) return;
 
         if (e.getMessage().startsWith("/?") || e.getMessage().startsWith("/bukkit:") || e.getMessage().startsWith("/pl") || e.getMessage().startsWith("/plugins") || e.getMessage().startsWith("/minecraft:")) {
             p.sendMessagePrefix("&cLos plugins de este servidor ha sido creados por los desarrolladores del mismo, es por eso por lo que no tenemos " +

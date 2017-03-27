@@ -11,7 +11,7 @@ public class CoreCMD extends WCCmd{
     @Override
     public void run(WCUser user, String label, String[] args) {
         if (args.length == 1) {
-            if (!user.isOnRank("admin")) {
+            if (!user.hasPermission("admin")) {
                 def(user);
                 return;
             }

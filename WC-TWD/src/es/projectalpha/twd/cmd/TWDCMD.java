@@ -26,7 +26,7 @@ public class TWDCMD extends WCCmd {
         }
 
         if (args.length == 1) {
-            if (!user.isOnRank("admin")) return;
+            if (!user.hasPermission("admin")) return;
             if (args[0].equalsIgnoreCase("prision")) {
                 fileManager.getConfig().set("prision", Parsers.locationToString(p.getLocation()));
                 fileManager.saveFiles();

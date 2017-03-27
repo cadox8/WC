@@ -16,7 +16,7 @@ import java.util.List;
 public abstract class WCCmd {
 
     @Getter private final transient String name;
-    @Getter private transient String permiso = "";
+    @Getter private final transient String permiso;
     @Getter private final transient List<String> aliases;
 
     protected static transient WCCore plugin = WCCore.getInstance();

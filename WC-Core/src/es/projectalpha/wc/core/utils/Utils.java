@@ -25,7 +25,7 @@ public class Utils {
     public static void sendAdminMsg(WCUser user, String msg){
         plugin.getServer().getOnlinePlayers().forEach(p -> {
             WCUser u = WCServer.getUser(p);
-            if (u.isOnRank("staff")) {
+            if (u.hasPermission("staff")) {
                 u.sendMessage("&0[&2A&0] &3" + user.getName() + "&r: " + msg);
                 u.sendSound(Sound.BLOCK_ANVIL_HIT);
             }

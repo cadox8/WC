@@ -203,14 +203,14 @@ public class WorldInteract implements Listener{
 
     @EventHandler
     public void onPlayerBreak(BlockBreakEvent e) {
-        if (!WCTWD.getPlayer(e.getPlayer()).isOnRank("construir")){
+        if (!WCTWD.getPlayer(e.getPlayer()).hasPermission("construir")){
             e.setCancelled(true);
         }
     }
 
     @EventHandler
     public void onPlayerPlace(BlockPlaceEvent e) {
-        if (!WCTWD.getPlayer(e.getPlayer()).isOnRank("construir")){
+        if (!WCTWD.getPlayer(e.getPlayer()).hasPermission("construir")){
             e.setCancelled(true);
         }
     }

@@ -60,7 +60,7 @@ public class PvPCMD extends WCCmd {
 					user.sendMessage(ChatColor.GOLD + "/pvp. " + ChatColor.GREEN + "Sirve para cambiarte el estado del pvp, hay un subcomando, el cual es /pvp <on/off> que hace lo mismo.");
 					user.sendMessage(ChatColor.GOLD + "/pvp status. " + ChatColor.GREEN + "Con este comando puedes ver si tienes el pvp activado o desactivado.");
 					user.sendMessage(ChatColor.GOLD + "/pvp info. " + ChatColor.GREEN + "Este comando te da un poco de información sobre el servidor.");
-					if(user.isOnRank("admin")){
+					if(user.hasPermission("admin")){
 						user.sendMessage("");
 						user.sendMessage(ChatColor.RED + "Comandos de administrador");
 						user.sendMessage("");
@@ -133,7 +133,7 @@ public class PvPCMD extends WCCmd {
 
 		if(args.length == 2){
 			if(args[0].equalsIgnoreCase("inspect")){
-				if(user.isOnRank("pvpInspect")){
+				if(user.hasPermission("pvpInspect")){
 
 					Player pl = Bukkit.getPlayerExact(args[1]);
 
@@ -156,7 +156,7 @@ public class PvPCMD extends WCCmd {
 
 		if(args.length == 3){
 			if(args[0].equalsIgnoreCase("set")){
-				if(!user.isOnRank("pvpSet")){
+				if(!user.hasPermission("pvpSet")){
 					user.sendMessage(Message.noperm);
 					return;
 				}

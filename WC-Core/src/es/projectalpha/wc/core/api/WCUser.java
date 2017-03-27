@@ -53,11 +53,13 @@ public class WCUser {
     public boolean isOnline() {
         return getOfflinePlayer().isOnline();
     }
-/*    public boolean isOnRank(WCCmd.Grupo rank) {
+
+/*    public boolean hasPermission(WCCmd.Grupo rank) {
         return rank.getRank() <= getUserData().getGrupo().getRank();
     }*/
-    public boolean isOnRank(String permision) {
-        return getPlayer().hasPermission("wcc." + permision);
+
+    public boolean hasPermission(String permission) {
+        return getPlayer().hasPermission("wcc." + permission);
     }
 
 
