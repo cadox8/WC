@@ -101,12 +101,14 @@ public class Utils {
 
     public static List<Player> getOnlinePlayers(){
         List<Player> players = new ArrayList<>();
+        if (plugin.getServer().getOnlinePlayers().isEmpty()) return players;
         players.addAll(plugin.getServer().getOnlinePlayers());
         return players;
     }
 
     public static List<WCUser> getOnlineWCUsers(){
         List<WCUser> players = new ArrayList<>();
+        if (getOnlinePlayers().isEmpty()) return players;
         getOnlinePlayers().forEach(p -> players.add(new WCUser(p)));
         return players;
     }
