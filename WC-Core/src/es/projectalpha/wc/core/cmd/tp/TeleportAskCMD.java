@@ -18,7 +18,7 @@ public class TeleportAskCMD extends WCCmd {
     @Override
     public void run(WCUser user, String label, String[] args) {
         if (args.length == 0) {
-            user.sendMessage("");
+            user.sendMessage("&6Para usar el comando haz /tpa <nombre>");
             return;
         }
         
@@ -37,8 +37,8 @@ public class TeleportAskCMD extends WCCmd {
             .filter(u -> WCServer.getTeleportHereRequests().get(u).equals(target.getUuid()))
             .forEach(u -> WCServer.removeTeleportHereRequest(u));
         
-        user.sendMessage("");
-        target.sendMessage("");
+        user.sendMessage("&6Se ha enviado la solicitud de teletransporte a &c" + target.getName() + "&6.");
+        target.sendMessage("&c" + user.getName() + " &6te ha enviado una solucitud de transporte hacia ti. Haz &c/tpaccept &6para aceptarla. Para denegarla, haz &c/tpdeny&6. La solicitud expirará en &c120 segundos&6.");
 
         //Eliminar petición a los 2 minutos
         plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {

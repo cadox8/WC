@@ -31,7 +31,7 @@ public class TeleportAskAllCMD extends WCCmd {
                 .forEach(u -> WCServer.removeTeleportRequest(u)
             );
 
-            target.sendMessage("");
+            target.sendMessage("&c" + user.getName() + " &6te ha enviado una solucitud de transporte hacia él. Haz &c/tpaccept &6para aceptarla. Para denegarla, haz &c/tpdeny&6. La solicitud expirará en &c120 segundos&6.");
 
             targets.add(target.getUuid());
         }
