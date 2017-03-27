@@ -40,14 +40,6 @@ public class PlayerEvent implements Listener{
         Player p = e.getPlayer();
         WCFichas fichas = new WCFichas(p);
 
-        fichas.createPlayer();
-        plugin.getMainRun().getJoin().put(WCServer.getUser(p), 3600);
-
-        if(!WCSurvival.getPlayer(p).isOnRank("volar")){
-            files.getUsers().set("Users." + p.getName() + ".bypass", false);
-            files.saveFiles();
-        }
-
         ScoreboardUtil board = new ScoreboardUtil("&6World&eCrafteros", "wc");
         new BukkitRunnable() {
             @Override
@@ -56,33 +48,41 @@ public class PlayerEvent implements Listener{
 
                 board.text(15, "&e-----------------------");
                 board.text(14, "&aBienvenid@ &e" + p.getName());
-                board.text(13, "");
+                board.text(13, "&e ");
                 board.text(12, "&8>&aPing y Dinero");
                 board.text(11, "&e" + new WCUser(p).getPing() + " &8- &e" + plugin.getEco().getBalance(p));
-                board.text(10, "");
+                board.text(10, "&e ");
                 board.text(9, "&aMundo:");
                 board.text(8, "&e" + p.getWorld().getName());
-                board.text(7, "");
+                board.text(7, "&e ");
                 board.text(6, "&aIP &8: &aTS3 &8: &aWeb:");
                 board.text(5, "&eworldcrafteros.net");
                 board.text(4, "&e-----------------------");
 
                 if (p != null) board.build(p);
             }
-        }.runTaskTimer(plugin, 20l, 20l);
+        }.runTaskTimer(plugin, 0, 20);
+
+        fichas.createPlayer();
+        plugin.getJoin().put(WCServer.getUser(p), 3600);
+
+        if(!WCSurvival.getPlayer(p).hasPermission("volar")){
+            files.getUsers().set("Users." + p.getName() + ".bypass", false);
+            files.saveFiles();
+        }
     }
 
     @EventHandler
     public void onQuit(PlayerQuitEvent e){
         Player p = e.getPlayer();
-        plugin.getMainRun().getJoin().remove(WCServer.getUser(p), 3600);
+        plugin.getJoin().remove(WCServer.getUser(p));
     }
 
     @EventHandler
     public void onDeath(PlayerDeathEvent e){
         Player p = e.getEntity();
 
-        if(WCSurvival.getPlayer(p).isOnRank("noDrop")) {
+        if(WCSurvival.getPlayer(p).hasPermission("noDrop")) {
             e.setKeepInventory(true);
             e.setKeepLevel(true);
         }

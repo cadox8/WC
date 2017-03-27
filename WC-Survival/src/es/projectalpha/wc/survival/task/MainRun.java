@@ -16,19 +16,14 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.HashMap;
-
 public class MainRun extends BukkitRunnable {
 
     private WCSurvival plugin;
     private Files files;
 
-    @Getter private HashMap<WCUser, Integer> join;
-
     public MainRun(WCSurvival plugin){
         this.plugin = plugin;
         files = plugin.getFiles();
-        join = new HashMap<>();
     }
 
     private int count;
@@ -40,14 +35,17 @@ public class MainRun extends BukkitRunnable {
             items(user.getPlayer());
 
             if (!WCServer.afkMode.contains(user)) {
-                if (join.containsKey(user)) return;
-                int time = join.get(user);
+                if (!plugin.getJoin().containsKey(user)) {
+                    plugin.getJoin().put(user, 3600);
+                    return;
+                }
+                int time = plugin.getJoin().get(user);
                 time--;
-                join.put(user, time);
-                if (join.get(user) == 0) {
+                plugin.getJoin().put(user, time);
+                if (plugin.getJoin().get(user) == 0) {
                     plugin.getEco().depositPlayer(user.getPlayer(), 2000);
                     user.sendMessage("Has conseguido 2000$ por estar una hora conectado.");
-                    join.put(user, 3600);
+                    plugin.getJoin().put(user, 3600);
                 }
             }
             if (count == 180){
@@ -60,7 +58,7 @@ public class MainRun extends BukkitRunnable {
 
     private void fly(WCUser p){
         WCCore.getInstance().debugLog("Task Volar");
-        if(!p.isOnRank("volarBypass")) return;
+        if(!p.hasPermission("volarBypass")) return;
 
         if(p.getPlayer().isFlying() && files.getFl().getInt("MainRun." + p.getName() + ".time") > 0){
             int t = files.getFl().getInt("MainRun." + p.getName() + ".time");

@@ -18,7 +18,7 @@ public class VolarCMD extends WCCmd{
 
     @Override
     public void run(WCUser user, String label, String[] args){
-        if(user.isOnRank("volarLimite")) {
+        if(user.hasPermission("volarLimite")) {
             int ti = (86400 - files.getFl().getInt("MainRun." + user.getName() + ".cooldown")) / 3600;
             DecimalFormat df = new DecimalFormat("0.##");
 

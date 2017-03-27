@@ -23,6 +23,7 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class WCSurvival extends JavaPlugin {
 
@@ -37,16 +38,21 @@ public class WCSurvival extends JavaPlugin {
     @Getter private ArrayList<Player> creando = new ArrayList<>();
     @Getter private ArrayList<Location> casinos = new ArrayList<>();
     @Getter private ArrayList<Location> sillas = new ArrayList<>();
+    @Getter private HashMap<WCUser, Integer> join = new HashMap<>();
 
     public void onEnable() {
         instance = this;
-        register();
 
         RegisteredServiceProvider<Economy> economyProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.economy.Economy.class);
         if (economyProvider != null) {
             eco = economyProvider.getProvider();
+        } else {
+            getServer().getPluginManager().disablePlugin(this);
+            WCCore.getInstance().log(WCServer.Level.SEVERE, "No hay Vault");
+            return;
         }
 
+        register();
         files.setupFiles();
         registerCommands();
         registerEvents();

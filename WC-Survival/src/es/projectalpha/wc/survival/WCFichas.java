@@ -36,7 +36,6 @@ public class WCFichas {
 
     public void createPlayer(){
         if (casino.contains(player.getName())){
-            System.out.println("he detectado al jugador, no creo su archivo.");
             return;
         }
 
