@@ -9,6 +9,7 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
@@ -26,7 +27,7 @@ public class IronElevators implements Listener {
     }
     // private Sound elevatorWhoosh = Sound.valueOf(files.getConfig().getString("IronElevators.elevatorWhoosh"));
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGH)
     public void downElevator(PlayerToggleSneakEvent e) {
         Player p = e.getPlayer();
         Block b = p.getLocation().getBlock().getRelative(BlockFace.DOWN);
@@ -53,7 +54,7 @@ public class IronElevators implements Listener {
         }
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGH)
     public void upElevator(PlayerMoveEvent e) {
         Player p = e.getPlayer();
         Block b = e.getTo().getBlock().getRelative(BlockFace.DOWN);
